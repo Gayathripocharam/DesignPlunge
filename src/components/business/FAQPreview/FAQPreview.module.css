@@ -1,0 +1,222 @@
+/* ─────────────────────────────────────────────
+   FAQPreview – Plunge Reveal Cards
+   ───────────────────────────────────────────── */
+
+.container {
+}
+
+/* ── Header ── */
+.header {
+  max-width: 640px;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.title {
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-h);
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+.card:hover {
+  box-shadow: 0 8px 28px rgba(109, 93, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Question face ── */
+.questionFace {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.cardCategory {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cardQuestion {
+  font-family: var(--heading);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Plunge overlay (dark circle reveal) ── */
+.plungeOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 14px;
+  overflow: hidden;
+
+  /* The dark surface */
+  background: var(--surface-dark);
+
+  /* Clip-path circle starts at 0% from the click origin */
+  clip-path: circle(0% at var(--ox) var(--oy));
+  transition: clip-path 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  display: flex;
+  align-items: flex-start;
+  padding: 28px 24px;
+  pointer-events: none;
+}
+
+.cardOpen .plungeOverlay {
+  clip-path: circle(150% at var(--ox) var(--oy));
+  pointer-events: auto;
+}
+
+/* ── Answer face (inside overlay) ── */
+.answerFace {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.15s, transform 0.35s ease 0.15s;
+}
+
+.cardOpen .answerFace {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.answerCategory {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.answerText {
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.closeCue {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* ── Footer CTA ── */
+.footerCta {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.footerCtaText {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.footerCtaLink {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footerCtaLink:hover {
+  color: var(--accent);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: 120px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .plungeOverlay {
+    transition: none;
+  }
+  .answerFace {
+    transition: none;
+  }
+  .card {
+    transition: none;
+  }
+}

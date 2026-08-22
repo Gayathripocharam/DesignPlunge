@@ -1,0 +1,54 @@
+/* ProductSystemVisual – native HTML/CSS diagram */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radii-md);
+  gap: var(--spacing-md);
+}
+
+.box {
+  min-width: 8rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+  font-family: var(--heading);
+  font-size: var(--type-service);
+  color: var(--text-h);
+}
+
+.boxAccent {
+  composes: box;
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+/* subtle up/down motion */
+@media (prefers-reduced-motion: no-preference) {
+  .container {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* fallback if --surface-alt exists */
+@supports (background: var(--surface-alt)) {
+  .container {
+    background: var(--surface-alt);
+  }
+}

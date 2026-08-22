@@ -1,0 +1,363 @@
+.container {
+  width: 100%;
+  background-color: var(--bg);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.introSection {
+  max-width: 700px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.eyebrow {
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin: 0 0 var(--spacing-sm);
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.title {
+  font-size: clamp(42px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-h);
+  letter-spacing: -0.02em;
+}
+
+.anchorStatement {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  text-align: left;
+  max-width: 900px;
+}
+
+.anchorMain {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 500;
+  color: var(--text-h);
+  margin: 0 0 var(--spacing-sm);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.anchorSub {
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--text);
+  opacity: 0.8;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+.accordionContainer {
+  width: 100%;
+}
+
+.horizontalRuleTop,
+.horizontalRuleBottom {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.horizontalRuleBottom {
+  margin-top: -1px;
+}
+
+/* Accordion */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.accordionItem {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+.accordionItem:last-child {
+  border-bottom: none;
+}
+
+.accordionTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(24px, 3vw, 40px) 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.triggerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.triggerRight {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  /* hide on very small screens, show on tablet+ */
+}
+
+@media (max-width: 768px) {
+  .triggerRight {
+    display: none;
+  }
+}
+
+.accordionList:hover .accordionItem:not(:hover):not(.accordionItemActive) .accordionTrigger {
+  opacity: 0.5;
+}
+.accordionItem:not(.accordionItemActive) .accordionTrigger {
+  opacity: 0.7;
+}
+.accordionItemActive .accordionTrigger {
+  opacity: 1;
+}
+
+.itemNum {
+  font-family: var(--typography-mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.accordionItemActive .itemNum {
+  color: var(--accent);
+}
+
+.itemTitle {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 500;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/* Expanded Content */
+.expandedContentWrapper {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.expandedInner {
+  padding-bottom: clamp(32px, 4vw, 48px);
+  padding-left: clamp(40px, 5vw, 64px); /* indent to align with title */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  position: relative;
+}
+
+.itemDesc {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-h);
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 400;
+  max-width: 500px;
+}
+
+.deliverablesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.deliverablesLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.deliverablesList {
+  font-size: 15px;
+  color: var(--text);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Big Background Number */
+.bgNumber {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  font-family: var(--typography-mono);
+  font-size: clamp(120px, 15vw, 200px);
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.04;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Animated Diagram */
+.diagramWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.expandedDiagramWrapper {
+  width: 100%;
+  max-width: 600px;
+  margin-top: var(--spacing-md);
+}
+
+.diagramNode {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-h);
+  opacity: 1;
+  flex-shrink: 0;
+}
+
+.diagramMiddleNode {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-h);
+  opacity: 1;
+  flex-shrink: 0;
+  background-color: var(--bg);
+  padding: 0 16px;
+  z-index: 2;
+}
+
+.diagramLineContainer {
+  flex-grow: 1;
+  position: relative;
+  height: 1px;
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagramLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--border);
+  z-index: 1;
+}
+
+.diagramLineActive {
+  background-color: var(--accent);
+}
+
+.diagramArrowHead {
+  position: absolute;
+  right: -4px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1;
+  margin-top: -1px; /* visual alignment */
+  z-index: 2;
+  background-color: var(--bg);
+  padding-left: 8px;
+}
+
+.diagramArrowHeadActive {
+  color: var(--accent);
+}
+
+/* Result Bridge */
+.footerBridge {
+  margin-top: clamp(88px, 10vw, 112px);
+  padding-top: clamp(88px, 10vw, 112px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.bridgeEyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin: 0 0 var(--spacing-md);
+  font-weight: 600;
+}
+
+.bridgeTitle {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.bridgeAction {
+  display: flex;
+  align-items: flex-end;
+}
+
+.processLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.processLink:hover {
+  opacity: 0.8;
+}
+
+.processArrow {
+  transition: transform 0.2s ease;
+}
+
+.processLink:hover .processArrow {
+  transform: translateX(4px);
+}
+
+@media (min-width: 1024px) {
+  .footerBridge {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .bridgeAction {
+    padding-bottom: 8px; /* align baseline */
+  }
+}

@@ -1,0 +1,3 @@
+/* StudioPage.css – re-uses the shared Services page styles
+   since StudioPage.tsx uses the same plain class names. */
+@import "../services/ServicesPage.css";

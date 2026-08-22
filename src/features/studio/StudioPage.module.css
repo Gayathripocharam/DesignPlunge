@@ -1,0 +1,243 @@
+/* StudioPage.module.css – Design Plunge 2.0 */
+.container {
+  width: 100%;
+  text-align: left;
+}
+
+.hero {
+  padding: clamp(120px, 14vw, 180px) var(--container-padding) clamp(56px, 7vw, 80px);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.eyebrowWrapper {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-family: var(--mono);
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.title {
+  font-size: clamp(44px, 6vw, 68px);
+  color: var(--text-h);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--spacing-lg);
+  max-width: 780px;
+  font-weight: 700;
+  font-family: var(--heading);
+}
+
+.subtitle {
+  color: var(--text);
+  font-size: clamp(17px, 1.8vw, 20px);
+  max-width: 580px;
+  margin: 0;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+
+.heroImageWrapper {
+  margin-top: var(--spacing-xxl);
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border-radius: var(--radii-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.heroImage {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Principles Section ─────────────────── */
+.principlesSection {
+  background-color: var(--surface-alt);
+  padding: clamp(64px, 8vw, 112px) var(--container-padding);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.principlesContainer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.sectionTitle {
+  font-size: clamp(36px, 4.5vw, 52px);
+  margin-top: var(--spacing-xs);
+  margin-bottom: 0;
+  color: var(--text-h);
+  letter-spacing: -0.03em;
+  font-family: var(--heading);
+  font-weight: 700;
+}
+
+/* ── Principles Timeline ────────────────── */
+.principlesTimeline {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* The row of dots connected by a line */
+.timelineTrack {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  margin-bottom: 28px;
+}
+
+/* The horizontal rule that sits behind all dots */
+.timelineTrack::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.trackSlot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.trackDot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--surface-alt);
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.trackDotActive {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(109, 93, 246, 0.15);
+}
+
+/* The 5-column grid of labels */
+.principlesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.principleItem {
+  padding-right: 24px;
+}
+
+.principleItem:last-child {
+  padding-right: 0;
+}
+
+.principleTitle {
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 8px 0;
+  font-family: var(--heading);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.principleDesc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── Team Section ───────────────────────── */
+.teamSection {
+  padding: 0 var(--container-padding) clamp(64px, 8vw, 112px);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-xxl);
+}
+
+.teamCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radii-lg);
+  overflow: hidden;
+  background-color: var(--surface-elevated);
+}
+
+.teamImage {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+}
+
+.teamCard:hover .teamImage { filter: grayscale(0%); }
+
+.teamInfo h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 0 0 4px 0;
+  font-family: var(--heading);
+}
+
+.teamInfo p {
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .principleItem {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+}

@@ -1,0 +1,18 @@
+/* Section primitive spacing */
+.section {
+  width: 100%;
+}
+
+.top-none { padding-top: 0; }
+.bottom-none { padding-bottom: 0; }
+
+.top-medium { padding-top: var(--spacing-section); }
+.bottom-medium { padding-bottom: var(--spacing-section); }
+
+.top-large { padding-top: var(--spacing-gap); }
+.bottom-large { padding-bottom: var(--spacing-gap); }
+
+@media (max-width: 767px) {
+  .top-large { padding-top: var(--spacing-section); }
+  .bottom-large { padding-bottom: var(--spacing-section); }
+}

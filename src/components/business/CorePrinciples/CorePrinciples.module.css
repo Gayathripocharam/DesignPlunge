@@ -1,0 +1,98 @@
+.container {
+  padding: clamp(48px, 6vw, 90px) 0;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+
+.title {
+  font-size: clamp(28px, 3.4vw, 40px);
+  color: var(--text-h);
+  letter-spacing: -0.02em;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.path {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 9px;
+  height: 1px;
+  background: var(--border);
+}
+
+.node {
+  position: relative;
+  text-align: center;
+}
+
+.dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  margin: 0 auto 18px;
+  box-sizing: border-box;
+}
+
+.dotFilled {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.nodeTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 6px;
+}
+
+.nodeDesc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .path {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .line {
+    top: 0;
+    bottom: 0;
+    left: 9px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .node {
+    text-align: left;
+    padding-left: 32px;
+  }
+  .dot,
+  .dotFilled {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    margin: 0;
+  }
+}

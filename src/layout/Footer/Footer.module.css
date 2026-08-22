@@ -1,0 +1,133 @@
+.footer {
+  background-color: #14141A;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-position: 0 0;
+  background-size: 24px 24px;
+  color: #fff;
+  padding: 80px 64px 32px;
+}
+
+.inner {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  max-width: 280px;
+}
+
+.logo {
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.tagline {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.columns {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.column {
+  min-width: 140px;
+}
+
+.colTitle {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 20px;
+}
+
+.column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.column a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.column a:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.bottom {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copy {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.toTop {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.toTop:hover {
+  color: var(--accent-border);
+}
+
+@media (max-width: 760px) {
+  .footer {
+    padding: 56px 24px 28px;
+  }
+  .top {
+    gap: 40px;
+  }
+  .columns {
+    gap: 40px 32px;
+  }
+}

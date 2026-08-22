@@ -1,0 +1,431 @@
+/* ============================================================
+   ServiceShowcase – Editorial service presentation
+   Matches class names in ServiceShowcase.tsx (new implementation).
+   Uses existing design tokens from index.css.
+   ============================================================ */
+
+/* ── Root layout: panel (left) + list (right) ──────────────── */
+
+.showcase {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* ── Panel column (left) ─────────────────────────────────────── */
+
+.panelColumn {
+  display: flex;
+}
+
+.panelFrame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.panelVisualArea {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 38vw, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .panelVisualArea {
+    height: 360px;
+    padding: 20px;
+  }
+}
+
+/* Grain overlay – opacity set inline by depth (t) */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Radial vignette – opacity set inline by depth (t) */
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 35%, rgba(0, 0, 0, 0.9) 130%);
+}
+
+.panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Meta strip below the visual */
+.panelMeta {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.panelIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.panelText {
+  flex: 1;
+}
+
+.panelTitle {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.panelDesc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.panelLink {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-h);
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.panelLink:hover {
+  background: var(--accent);
+  color: #111;
+  transform: translate(2px, -2px);
+}
+
+/* ── List column (right) ─────────────────────────────────────── */
+
+.listColumn {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Depth rail – vertical line with animated dot */
+.depthRail {
+  position: relative;
+  width: 2px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.depthRailLine {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+}
+
+.depthRailDot {
+  position: absolute;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.15);
+}
+
+/* Service list */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.item:first-child {
+  padding-top: 0.25rem;
+}
+
+.itemTop {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+}
+
+.itemNum {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.itemTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  transition: color 0.25s ease;
+}
+
+.itemDepth {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Active state */
+.itemActive .itemTitle {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.itemActive .itemNum {
+  color: var(--accent);
+}
+
+.itemActive .itemDepth {
+  opacity: 1;
+}
+
+/* Story‑style autoplay progress bar */
+.progressTrack {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.06s linear;
+}
+
+/* ── Per‑service visual elements ─────────────────────────────── */
+
+/* Diamond – stacked cards */
+.visualStack {
+  position: relative;
+  width: 140px;
+  height: 100px;
+}
+
+.stackCard {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.stackCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+/* Layout – browser chrome */
+.visualBrowser {
+  width: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.browserBar {
+  display: flex;
+  gap: 5px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.browserBar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.browserBody {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+}
+
+.browserSidebar {
+  width: 34px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.browserContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.browserBlock {
+  height: 10px;
+  border-radius: 3px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.browserGrid {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.browserGrid span {
+  flex: 1;
+  height: 30px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 30%, transparent);
+}
+
+/* Cpu – node graph */
+.visualGraph {
+  width: 220px;
+  height: 160px;
+}
+
+.graphSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.graphLine {
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.graphNode {
+  fill: var(--surface);
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+}
+
+.graphNodeCore {
+  fill: var(--accent);
+}
+
+/* Layers – banded layer stack */
+.visualLayers {
+  position: relative;
+  width: 160px;
+  height: 110px;
+}
+
+.layerBand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 34px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.layerBandTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+/* Dark‑background card override (when t > 0.55) */
+.cardOnDark {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .listColumn {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .panelVisualArea {
+    min-height: 240px;
+  }
+
+  .visualBrowser {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+

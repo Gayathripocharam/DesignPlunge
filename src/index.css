@@ -1,0 +1,254 @@
+/* ============================================================
+   Design Plunge 2.0 – Global Design System
+   Consolidated CSS custom properties + global resets
+   ============================================================ */
+
+/* 1. Google Fonts handled in index.html */
+
+:root {
+  /* ── Colours ──────────────────────────────────────────────── */
+  --bg:               #FAF8F5;   /* warm ivory background */
+  --surface:          #FFFFFF;   /* white cards */
+  --surface-alt:      #FAF8F5;   /* same as bg for subtle contrast */
+  --surface-elevated: #FFFFFF;
+  --surface-dark:     #1F2937;   /* deep charcoal for dark backgrounds */
+  --social-bg:        rgba(250, 248, 245, 0.5);
+  --code-bg:          #FAF8F5;
+
+  --text:             #1F2937;   /* main text */
+  --text-h:           #1F2937;   /* headings */
+  --text-muted:       #6B7280;   /* secondary text */
+  --text-inverse:     #FFFFFF;
+
+  --border:           #ECE8E1;   /* restrained borders */
+  --border-subtle:    rgba(108,93,246,0.08);
+
+  --accent:           #6D5DF6;   /* primary interactive purple */
+  --accent-dark:      #5A4ED0;
+  --accent-gold:      #C9A227;   /* champagne gold */
+  --accent-bg:        rgba(109,93,246,0.08);
+  --accent-border:    rgba(109,93,246,0.3);
+  --accent-gradient:  linear-gradient(135deg, var(--accent) 0%, var(--accent-gold) 100%);
+
+  --success:          #22C55E;
+  --error:            #EF4444;
+
+  --shadow:           0 2px 8px rgba(109,93,246,0.06), 0 8px 24px rgba(109,93,246,0.05);
+  --shadow-lg:        0 8px 32px rgba(109,93,246,0.08), 0 24px 64px rgba(109,93,246,0.05);
+  --shadow-dark:      0 8px 32px rgba(0,0,0,0.4);
+
+  /* ── Layout & Grid ────────────────────────────────────────── */
+  --max-width:         1200px;
+  --container-padding: clamp(20px, 4vw, 64px);
+  --grid-gap:          clamp(16px, 3vw, 32px);
+
+  /* ── Spacing Rhythm ─────────────────────────────────────── */
+  --spacing-xs:        4px;
+  --spacing-sm:        8px;
+  --spacing-md:        16px;
+  --spacing-lg:        24px;
+  --spacing-xl:        32px;
+  --spacing-xxl:       64px;
+  --spacing-section:   80px;
+  --spacing-gap:       120px;
+
+  /* ── Typography sizes ─────────────────────────────────────── */
+  --type-hero:        clamp(3.5rem, 5vw, 4rem);
+  --type-h1:          clamp(3rem, 4.5vw, 3.5rem);
+  --type-h2:          clamp(2.25rem, 3.5vw, 2.75rem);
+  --type-h3:          clamp(1.5rem, 2.5vw, 2rem);
+  --type-service:     clamp(1.25rem, 2vw, 1.5rem);
+
+  --type-body-large:  1.0625rem;
+  --type-body:        0.9375rem;
+  --type-small:       0.8125rem;
+  --type-label:       0.6875rem;
+
+  --leading-tight:      1.05;
+  --leading-heading:    1.15;
+  --leading-body:       1.6;
+  --tracking-tight:    -0.025em;
+  --tracking-normal:    0;
+  --tracking-label:     0.12em;
+
+  /* Aliases */
+  --typography-size-h1:            var(--type-h1);
+  --typography-size-h2:            var(--type-h2);
+  --typography-size-h3:            var(--type-h3);
+  --typography-size-h4:            var(--type-service);
+  --typography-size-bodyLarge:     var(--type-body-large);
+  --typography-size-body:          var(--type-body);
+  --typography-size-small:         var(--type-small);
+  --typography-size-caption:       var(--type-small);
+  --typography-size-label:         var(--type-label);
+
+  /* ── Typography weights ───────────────────────────────────── */
+  --typography-weight-heading:      600;
+  --typography-weight-bold:         600;
+  --typography-weight-body:         400;
+  --typography-weight-label:        500;
+
+  --typography-letterSpacing-heading: -0.02em;
+  --typography-letterSpacing-label:   0.12em;
+
+  /* ── Font families ────────────────────────────────────────── */
+  --heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --sans:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, Consolas, monospace;
+
+  --typography-heading: var(--heading);
+  --typography-mono:    var(--mono);
+
+  /* ── Radii ────────────────────────────────────────────────── */
+  --radii-sm:   4px;
+  --radii-md:   8px;
+  --radii-lg:   16px;
+  --radii-xl:   24px;
+  --radii-full: 9999px;
+
+  /* ── Motion (3 levels) ────────────────────────────────────── */
+  --duration-fast:  0.2s;
+  --duration-base:  0.4s;
+  --duration-slow:  0.8s;
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ── Base ─────────────────────────────────────────────────── */
+  font: var(--typography-weight-body) var(--typography-size-body) / 1.6 var(--sans);
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Resets ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+p {
+  margin: 0;
+}
+
+img, video, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Focus ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radii-sm);
+}
+
+/* ── Root Shell ─────────────────────────────────────────────── */
+#root {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Headings ───────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading);
+  font-weight: var(--typography-weight-heading);
+  color: var(--text-h);
+  letter-spacing: var(--typography-letterSpacing-heading);
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1 { font-size: var(--type-h1); font-weight: var(--typography-weight-bold); letter-spacing: -0.03em; }
+h2 { font-size: var(--type-h2); }
+h3 { font-size: var(--type-h3); }
+h4 { font-size: var(--type-service); }
+
+/* ── Code ───────────────────────────────────────────────────── */
+code, .counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: var(--radii-sm);
+  color: var(--text-h);
+}
+
+code {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* ── Layout Utilities ───────────────────────────────────────── */
+.container {
+  width: min(100% - 48px, 1280px);
+  margin-inline: auto;
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: min(100% - 32px, 1280px);
+  }
+}
+
+/* 12-column editorial grid */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+}
+
+.section {
+  padding-block: clamp(32px, 5vw, var(--spacing-section));
+}
+
+.section-gap {
+  margin-bottom: clamp(48px, 6vw, var(--spacing-gap));
+}
+
+/* ── Accessibility ──────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px; padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Smooth scroll ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ── Section Markers & Dividers ─────────────────────────────── */
+.section-marker {
+  font-size: var(--type-label);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.section-marker-num {
+  font-weight: var(--typography-weight-bold);
+  margin-right: 0.5rem;
+}
+
+.section-divider {
+  border-top: 1px solid var(--border);
+  margin: var(--spacing-lg) 0;
+}

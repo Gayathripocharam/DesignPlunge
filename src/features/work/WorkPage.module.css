@@ -1,0 +1,151 @@
+.heroContent {
+  /* Let Section handle outer padding */
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin: 0 0 16px;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-h);
+  margin: 0 0 20px;
+  max-width: 16ch;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 52ch;
+}
+
+
+.list {
+  border-top: 1px solid var(--border);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 24px);
+  padding: clamp(18px, 2.4vw, 24px) 4px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.rowNum {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.thumb {
+  width: 100px;
+  height: 72px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rowText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rowTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-h);
+  transition: color 0.2s ease;
+}
+
+.rowDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowArrow {
+  font-size: 16px;
+  color: var(--text-h);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.row:hover .rowTitle {
+  color: var(--accent);
+}
+
+.row:hover .rowArrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.plungeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.plungeImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plungeTint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 6, 13, 0.75), rgba(8, 6, 13, 0.92));
+}
+
+.plungeLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #f8f7f3;
+}
+
+@media (max-width: 560px) {
+  .rowDesc {
+    display: none;
+  }
+  .thumb {
+    width: 72px;
+    height: 54px;
+  }
+}

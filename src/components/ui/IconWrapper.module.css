@@ -1,0 +1,7 @@
+// src/components/ui/IconWrapper.module.css
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--text-h);
+  transition: color var(--duration-fast) var(--ease-out);
+}

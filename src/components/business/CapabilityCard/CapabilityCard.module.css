@@ -1,0 +1,98 @@
+.capCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.capCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -14px rgba(20, 20, 26, 0.16);
+  border-color: var(--accent-border);
+}
+
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+}
+.corner::before {
+  width: 100%;
+  height: 1.5px;
+  top: 0;
+  left: 0;
+}
+.corner::after {
+  width: 1.5px;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.tl { top: 10px; left: 10px; }
+.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+.br { bottom: 10px; right: 10px; transform: scale(-1, -1); }
+.capCard:hover .corner {
+  opacity: 1;
+}
+
+.capIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 19px;
+}
+
+.capNum {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.55;
+}
+
+.capTitle {
+  font-family: var(--heading);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.capTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}

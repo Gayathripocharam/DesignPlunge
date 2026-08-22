@@ -1,0 +1,223 @@
+/* ── Mono label ────────────────────────────────────────────────────── */
+.mono {
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ── Outer wrapper ─────────────────────────────────────────────────── */
+.railWrap {
+  margin-top: 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 40px 44px;
+}
+
+.railLabel {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* ── Rail container ────────────────────────────────────────────────── */
+.rail {
+  position: relative;
+}
+
+/* Fixed heights keep the 50 % based math correct */
+.railLg {
+  height: 440px;
+}
+.railCompact {
+  height: 380px;
+}
+
+/* ── Horizontal track ──────────────────────────────────────────────── */
+.railTrack {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+}
+
+/* ── Stage row ─────────────────────────────────────────────────────── */
+.railRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 100%;
+}
+
+/* ── Each stage column ─────────────────────────────────────────────── */
+.railStage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+/* ── Dot on the track ──────────────────────────────────────────────── */
+.railDot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1.5px var(--accent);
+  z-index: 3;
+}
+
+/* ── Vertical stem connecting dot → card ───────────────────────────── */
+.railStage::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 28px;
+  background: var(--border);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+/* Odd stages: card above → stem goes up from midline */
+.railStage:nth-child(odd)::after {
+  bottom: 50%;
+}
+/* Even stages: card below → stem goes down from midline */
+.railStage:nth-child(even)::after {
+  top: 50%;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────── */
+.railCard {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 16px -6px rgba(20, 20, 26, 0.10);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Odd → card sits ABOVE the midline */
+.railStage:nth-child(odd) .railCard {
+  bottom: calc(50% + 28px);
+}
+/* Even → card sits BELOW the midline */
+.railStage:nth-child(even) .railCard {
+  top: calc(50% + 28px);
+}
+
+/* ── Icon block (lavender square) ──────────────────────────────────── */
+.railIcon {
+  border-radius: 12px;
+  background: #ece9f7; /* lavender soft – matches the screenshot */
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Text ──────────────────────────────────────────────────────────── */
+.railTitle {
+  font-family: var(--heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.railDesc {
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ══ SIZE VARIANT: lg  (hero pipeline, 4 stages) ════════════════════ */
+.railLg .railCard {
+  width: 200px;
+  padding: 24px 18px 26px;
+  gap: 0;
+}
+.railLg .railIcon {
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.railLg .railTitle {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.railLg .railDesc {
+  font-size: 13px;
+}
+
+/* ══ SIZE VARIANT: compact (service flow, 5 stages) ════════════════ */
+.railCompact .railCard {
+  width: 160px;
+  padding: 20px 14px 22px;
+  gap: 0;
+}
+.railCompact .railIcon {
+  width: 52px;
+  height: 52px;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.railCompact .railTitle {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.railCompact .railDesc {
+  font-size: 12px;
+}
+
+/* ── Flow output tags ──────────────────────────────────────────────── */
+.flowOutputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.tag {
+  font-size: 11px;
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .railLg,
+  .railCompact {
+    height: auto;
+    min-width: 600px;
+  }
+  .railWrap {
+    overflow-x: auto;
+    padding: 32px 20px;
+  }
+}

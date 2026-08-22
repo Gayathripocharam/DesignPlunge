@@ -1,0 +1,242 @@
+/* ServiceOverview – editorial styling */
+
+.container {
+  background-color: var(--bg);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxl);
+}
+
+.header {
+  text-align: left;
+  margin-bottom: var(--spacing-lg);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: var(--type-label);
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin: 0;
+  color: var(--text);
+}
+
+.title {
+  font-family: var(--heading);
+  font-weight: var(--typography-weight-heading);
+  font-size: var(--type-h1);
+  line-height: 1.1;
+  color: var(--text-h);
+  margin: 0;
+}
+
+/* Subtitle/intro paragraph */
+.sub {
+  font-size: var(--type-body);
+  color: var(--text);
+  margin-top: var(--spacing-sm);
+  max-width: 48rem;
+}
+
+/* Intro & visual two‑column layout */
+.introAndVisual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.intro {}
+
+.visual {
+  justify-self: end;
+}
+
+/* Bridge (static bottom) */
+.bridge {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  font-size: var(--type-body);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.bridgeTop {
+  font-weight: var(--typography-weight-bold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.bridgeBottom {
+  opacity: 0.8;
+}
+
+/* Arrow rotation on row hover */
+.itemRow:hover .rowArrow {
+  transform: rotate(-45deg);
+}
+
+/* Ensure arrowWrapper includes rowArrow class */
+.rowArrow {
+  transition: transform 0.2s ease;
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 767px) {
+  .introAndVisual {
+    grid-template-columns: 1fr;
+  }
+  .visual {
+    justify-self: start;
+  }
+  .bridge {
+    font-size: var(--type-small);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.itemLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease;
+}
+
+.itemLink:hover {
+  background-color: var(--accent-bg);
+}
+
+.itemLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.itemLink:hover .itemRow {
+  transform: translateX(4px);
+}
+
+.itemNumber {
+  font-family: var(--mono);
+  font-size: var(--typography-size-bodyLarge);
+  color: var(--accent);
+  opacity: 0.8;
+  min-width: 2.5rem;
+  text-align: right;
+}
+
+.iconWrapper {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.itemLink:hover .iconWrapper {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.itemTitle {
+  font-family: var(--heading);
+  font-weight: var(--typography-weight-heading);
+  font-size: var(--type-service);
+  color: var(--text-h);
+  margin: 0;
+}
+
+.itemLink:hover .itemTitle {
+  color: var(--accent);
+}
+
+.itemText {
+  font-size: var(--typography-size-body);
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.arrowWrapper {
+  color: var(--text);
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.itemLink:hover .arrowWrapper {
+  opacity: 1;
+  color: var(--accent);
+  /* No translate, rotation handled by .rowArrow */
+}
+
+/* Mobile – stack layout */
+@media (max-width: 767px) {
+  .itemRow {
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+  }
+
+  .arrowWrapper {
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+
+/* Reduced motion – disable transitions */
+@media (prefers-reduced-motion: reduce) {
+  .itemRow,
+  .iconWrapper,
+  .arrowWrapper {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Section marker above heading */
+.marker {
+  font-size: var(--type-label);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.markerNumber {
+  font-weight: var(--typography-weight-bold);
+  margin-right: 0.5rem;
+}
+
+/* Full-width divider between sections */
+.sectionDivider {
+  border-top: 1px solid var(--border);
+  margin: var(--spacing-lg) 0;
+}
+
