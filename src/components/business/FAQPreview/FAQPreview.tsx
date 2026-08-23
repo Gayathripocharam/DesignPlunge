@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { track } from "@/analytics";
 import { Section } from "@/components/ui/Section";
 import styles from "./FAQPreview.module.css";
 
@@ -73,6 +74,7 @@ interface FAQPreviewProps {
 export const FAQPreview: React.FC<FAQPreviewProps> = ({ variant }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  const location = useLocation();
 
   const displayFaqs =
     variant === 'services'
@@ -135,7 +137,11 @@ export const FAQPreview: React.FC<FAQPreviewProps> = ({ variant }) => {
 
         <div className={styles.footerCta}>
           <p className={styles.footerCtaText}>Still have a question?</p>
-          <Link to="/contact" className={styles.footerCtaLink}>
+          <Link 
+            to="/contact" 
+            className={styles.footerCtaLink}
+            onClick={() => track("cta_click", { ctaId: "faq-footer", ctaLabel: "Talk to us about your project", page: location.pathname })}
+          >
             Talk to us about your project &rarr;
           </Link>
         </div>

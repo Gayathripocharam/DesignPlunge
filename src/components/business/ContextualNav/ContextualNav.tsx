@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { track } from "@/analytics";
 import styles from "./ContextualNav.module.css";
 
 interface Step {
@@ -28,6 +29,7 @@ interface ContextualNavProps {
   subtitle?: string;
   buttonText?: string;
   to?: string;
+  ctaId?: string;
   spacingTop?: "none" | "medium" | "large";
   spacingBottom?: "none" | "medium" | "large";
 }
@@ -38,9 +40,11 @@ export const ContextualNav: React.FC<ContextualNavProps> = ({
   subtitle = "Tell us what you're building, improving, or trying to automate.\nWe'll review the context and come back with clear next steps.",
   buttonText = "START A PROJECT \u2192",
   to = "/contact",
+  ctaId = "contextual-nav",
   spacingTop = "medium",
   spacingBottom = "medium"
 }) => {
+  const location = useLocation();
   return (
     <section className={`${styles.container} ${styles[`pt-${spacingTop}`]} ${styles[`pb-${spacingBottom}`]}`}>
       <div className={styles.glow} aria-hidden="true" />
@@ -61,7 +65,11 @@ export const ContextualNav: React.FC<ContextualNavProps> = ({
           )}
           <p className={styles.forWho}>FOR STARTUPS, PRODUCT TEAMS &amp; GROWING BUSINESSES.</p>
 
-          <Link to={to} className={styles.cta}>
+          <Link 
+            to={to} 
+            className={styles.cta}
+            onClick={() => track("cta_click", { ctaId, ctaLabel: buttonText.replace(" \u2192", ""), page: location.pathname })}
+          >
             {buttonText}
           </Link>
           <p className={styles.noCommitment}>No commitment &middot; Just a first conversation</p>

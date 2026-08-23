@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { track } from '@/analytics';
 import styles from './ServiceSection.module.css';
 import type { Service } from '@/content/services';
 import { VisualMetaphor } from '@/components/business/ServiceOverview/VisualMetaphors';
@@ -27,6 +28,7 @@ const visualVariant = {
 
 const ServiceSection: React.FC<ServiceSectionProps> = ({ service, index }) => {
   const isReverse = index % 2 === 1;
+  const location = useLocation();
 
   return (
     <motion.div
@@ -53,7 +55,11 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ service, index }) => {
         )}
 
         <motion.div variants={item}>
-          <Link to="/contact" className={styles.link}>
+          <Link 
+            to="/contact" 
+            className={styles.link}
+            onClick={() => track("cta_click", { ctaId: `service-${service.slug}`, ctaLabel: "Start a conversation", page: location.pathname })}
+          >
             Start a conversation →
           </Link>
         </motion.div>

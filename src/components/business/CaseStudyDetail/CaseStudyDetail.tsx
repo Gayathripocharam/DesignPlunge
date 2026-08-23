@@ -7,7 +7,7 @@ import { useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { getCaseStudyBySlug, allCaseStudies } from "@/content/casestudies";
 import { ContextualNav } from "@/components/business/ContextualNav/ContextualNav";
-import { trackEvent } from "@/lib/analytics";
+import { track } from "@/analytics";
 import styles from "./CaseStudyDetail.module.css";
 
 import aiOpsImg from "@/assets/illustrations/ai-operations.jpg";
@@ -33,9 +33,9 @@ export const CaseStudyDetail: React.FC = () => {
 
   useEffect(() => {
     if (study?.title) {
-      trackEvent("case_study_view", { study: study.title });
+      track("case_study_view", { caseStudySlug: study.slug, caseStudyTitle: study.title });
     }
-  }, [study?.title]);
+  }, [study?.title, study?.slug]);
 
   if (!study) {
     return <Navigate to="/work" replace />;

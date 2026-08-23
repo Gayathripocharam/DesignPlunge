@@ -6,7 +6,7 @@ import { Footer } from "@/layout/Footer";
 import { PageWrapper } from "../PageWrapper";
 import { ScrollProgress } from "../ScrollProgress";
 import { PageTransition } from "../PageTransition";
-import { trackPageView } from "@/lib/analytics";
+import { track } from "@/analytics";
 
 /**
  * Root layout component that provides global UI such as navigation, footer,
@@ -17,7 +17,7 @@ export const Shell: React.FC = () => {
   const location = useLocation();
 
   React.useEffect(() => {
-    trackPageView(location.pathname);
+    track("page_view", { page: location.pathname, referrer: document.referrer || undefined });
   }, [location.pathname]);
 
   return (

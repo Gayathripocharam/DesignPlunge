@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { track } from '@/analytics';
 import styles from './ServicesCTA.module.css';
 
-const ServicesCTA: React.FC = () => (
+const ServicesCTA: React.FC = () => {
+  const location = useLocation();
+  return (
   <motion.div
     className={styles.cta}
     initial={{ opacity: 0, y: 32 }}
@@ -21,7 +24,11 @@ const ServicesCTA: React.FC = () => (
         review the context and come back with clear next steps — no commitment needed.
       </p>
       <div className={styles.actions}>
-        <Link to="/contact" className={styles.primaryBtn}>
+        <Link 
+          to="/contact" 
+          className={styles.primaryBtn}
+          onClick={() => track("cta_click", { ctaId: "services-cta-block", ctaLabel: "Start a conversation", page: location.pathname })}
+        >
           Start a conversation →
         </Link>
         <Link to="/work" className={styles.secondaryBtn}>
@@ -30,6 +37,7 @@ const ServicesCTA: React.FC = () => (
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 export default ServicesCTA;

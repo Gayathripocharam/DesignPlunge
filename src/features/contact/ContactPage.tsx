@@ -5,14 +5,14 @@ import { SEO } from '@/components/seo/SEO';
 import { organizationLD } from '@/seo/structuredData';
 import { Section } from "@/components/ui/Section";
 import styles from "./ContactPage.module.css";
-import { trackEvent } from "@/lib/analytics";
+import { track } from "@/analytics";
 import { ContactForm } from "./components/ContactForm/ContactForm";
 
 export const ContactPage: React.FC = () => {
   const endpointConfigured = !!import.meta.env.VITE_FORMSPREE_ID;
 
   useEffect(() => {
-    trackEvent("contact_start");
+    track("contact_page_view", { page: "/contact" });
   }, []);
 
   return (
@@ -94,7 +94,7 @@ export const ContactPage: React.FC = () => {
                     <a 
                       href="mailto:hello@designplunge.com" 
                       className={styles.scheduleLink}
-                      onClick={() => trackEvent("booking_click")}
+                      onClick={() => track("cta_click", { ctaId: "contact-email", ctaLabel: "Email us", page: "/contact" })}
                     >
                       Email us &rarr;
                     </a>

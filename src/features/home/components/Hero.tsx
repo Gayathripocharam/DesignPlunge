@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Heading } from "@/components/ui/Heading";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { trackEvent } from "@/lib/analytics";
+import { track } from "@/analytics";
 import styles from "./Hero.module.css";
 
 export const Hero: React.FC = () => {
@@ -101,7 +101,7 @@ export const Hero: React.FC = () => {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    trackEvent("hero_cta_click");
+                    track("cta_click", { ctaId: "hero-start-project", ctaLabel: "Start a Project", page: "/" });
                     navigate("/contact");
                   }}
                 >

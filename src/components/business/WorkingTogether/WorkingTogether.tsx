@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { track } from "@/analytics";
 import { Section } from "@/components/ui/Section";
 import styles from "./WorkingTogether.module.css";
 
 import { engagementPrinciples } from '@/content/studio';
 
 export const WorkingTogether: React.FC = () => {
+  const location = useLocation();
   return (
     <Section id="working-together" background="var(--surface)" className={styles.container}>
       <div className={styles.inner}>
@@ -65,7 +67,13 @@ export const WorkingTogether: React.FC = () => {
 
             <div className={styles.closingStatement}>
               <p>The result isn't just a finished product. It's a team that understands why it exists, how it works, and where it goes next.</p>
-              <Link to="/services" className={styles.closingLink}>See how we work &rarr;</Link>
+              <Link 
+                to="/services" 
+                className={styles.closingLink}
+                onClick={() => track("cta_click", { ctaId: "working-together-services", ctaLabel: "See how we work", page: location.pathname })}
+              >
+                See how we work &rarr;
+              </Link>
             </div>
           </div>
 

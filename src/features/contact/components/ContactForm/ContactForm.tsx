@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { track } from '@/analytics';
 import styles from './ContactForm.module.css';
 
 const projectTypes = [
@@ -50,8 +51,17 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<Status>('idle');
   const [shake, setShake] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  function handleInteraction() {
+    if (!hasStarted) {
+      setHasStarted(true);
+      track('contact_form_start', { page: '/contact', formId: 'contact' });
+    }
+  }
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
+    handleInteraction();
     setForm((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
   }
@@ -61,6 +71,7 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
 
     if (!endpointConfigured) {
       setStatus('error');
+      track('contact_form_error', { page: '/contact', formId: 'contact', errorCode: 'unknown' });
       return;
     }
 
@@ -69,6 +80,7 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
       setErrors(nextErrors);
       setShake(true);
       setTimeout(() => setShake(false), 400);
+      track('contact_form_error', { page: '/contact', formId: 'contact', errorCode: 'validation' });
       return;
     }
 
@@ -85,11 +97,14 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
       
       if (response.ok) {
         setStatus('success');
+        track('contact_form_submit', { page: '/contact', formId: 'contact' });
       } else {
         setStatus('error');
+        track('contact_form_error', { page: '/contact', formId: 'contact', errorCode: 'provider' });
       }
     } catch {
       setStatus('error');
+      track('contact_form_error', { page: '/contact', formId: 'contact', errorCode: 'network' });
     }
   }
 
@@ -109,6 +124,7 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
           onClick={() => {
             setForm(initialState);
             setStatus('idle');
+            setHasStarted(false);
           }}
         >
           Send another
@@ -118,7 +134,7 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
   }
 
   return (
-    <form className={`${styles.form} ${shake ? styles.shake : ''}`} onSubmit={handleSubmit} noValidate>
+    <form className={`${styles.form} ${shake ? styles.shake : ''}`} onSubmit={handleSubmit} onClick={handleInteraction} noValidate>
       {status === 'error' && (
         <div className={styles.errorBanner}>
           <i className="fa-regular fa-triangle-exclamation" aria-hidden="true" />
