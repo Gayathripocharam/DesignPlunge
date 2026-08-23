@@ -18,14 +18,23 @@ export const businessAutomationPlatform: CaseStudy = {
     status: 'CONCEPT'
   },
   
+  hypothesis: 'Give operations teams a visual way to create and understand automations while retaining the developer-level control needed for complex workflows.',
+  demonstrates: [
+    'Workflow architecture',
+    'Automation UX',
+    'Developer/user boundary design',
+    'Backend systems thinking',
+    'AI/automation opportunity identification'
+  ],
+  
   context: {
-    problem: 'Many businesses attempt to automate complex processes using fragile scripts, messy spreadsheets, or disconnected tools, resulting in shadow IT and constant maintenance overhead.',
+    problem: 'Businesses attempt to automate using fragile scripts and messy spreadsheets, causing silent breaks and shadow IT.',
     audience: 'Operations teams, IT administrators, and business process managers.',
     whyItMatters: 'Fragile automations break silently, causing business disruption. A centralized platform ensures reliability, auditability, and scalability for mission-critical workflows.',
   },
   
   approach: {
-    idea: 'A visual, node-based workflow builder that allows non-technical users to create robust automation flows, combined with a powerful developer API for complex custom integrations.',
+    idea: 'A visual, node-based workflow builder combined with a powerful developer API for complex custom integrations.',
     principles: [
       'Visual logic: Make complex branching logic understandable at a glance.',
       'Developer escape hatches: Always provide a way to drop into code when the UI is insufficient.',
@@ -59,7 +68,7 @@ export const businessAutomationPlatform: CaseStudy = {
     }
   ],
 
-  whatNext: 'Adding predictive workflow suggestions based on historical API usage patterns.',
+
 
   relatedServices: ['ai-automation', 'web-engineering'],
   seo: {

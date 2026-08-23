@@ -18,6 +18,15 @@ export const productAnalyticsDashboard: CaseStudy = {
     status: 'CONCEPT'
   },
   
+  hypothesis: 'Help product teams answer common product questions without requiring every stakeholder to interpret raw analytics or depend on SQL-heavy workflows.',
+  demonstrates: [
+    'Information visualization',
+    'Progressive disclosure',
+    'Data-heavy UX',
+    'Product thinking',
+    'Decision-oriented interface design'
+  ],
+  
   context: {
     problem: 'Product teams often rely heavily on data analysts to write SQL or configure complex dashboards just to interpret basic usage metrics.',
     audience: 'Product managers, designers, and non-technical stakeholders.',
@@ -25,7 +34,7 @@ export const productAnalyticsDashboard: CaseStudy = {
   },
   
   approach: {
-    idea: 'Empower product managers to self-serve insights without SQL or data engineering skills through a highly constrained, progressive-disclosure interface.',
+    idea: 'Empower product managers to self-serve insights through a highly constrained, progressive-disclosure interface designed around product questions.',
     principles: [
       'Progressive disclosure: Show high-level health metrics first.',
       'Opinionated defaults: Pre-configure the most common product metrics.',
@@ -59,7 +68,7 @@ export const productAnalyticsDashboard: CaseStudy = {
     }
   ],
   
-  whatNext: 'Exploring natural language querying for complex metric analysis.',
+
 
   relatedServices: ['product-design', 'web-engineering', 'design-systems'],
   seo: {

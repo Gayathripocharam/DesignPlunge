@@ -18,14 +18,22 @@ export const aiOperationsPlatform: CaseStudy = {
     status: 'CONCEPT'
   },
   
+  hypothesis: 'Give AI operations teams a unified view of deployment health, model status, and operational signals so they can identify issues without switching between disconnected tools.',
+  demonstrates: [
+    'Complex information architecture',
+    'AI product UX',
+    'Operational dashboards',
+    'Systems thinking'
+  ],
+  
   context: {
-    problem: 'Operations teams often work across disconnected tools and repetitive workflows when managing complex AI deployments, leading to fragmented monitoring and deployment bottlenecks.',
+    problem: 'AI deployment workflows become fragmented across monitoring, deployment, and operational tools.',
     audience: 'Enterprise AI teams and MLOps engineers.',
     whyItMatters: 'As organizations scale their AI initiatives, the lack of centralized visibility creates operational risk and slows down the time-to-production for new models.',
   },
   
   approach: {
-    idea: 'A centralized workspace that brings operational intelligence, model health monitoring, and deployment automation into one unified system.',
+    idea: 'A dashboard-first workspace centered on visibility and actionable system state.',
     principles: [
       'Visibility first: Surface anomalies before they become outages.',
       'Actionable density: Provide high-information density without visual clutter.',
@@ -59,7 +67,7 @@ export const aiOperationsPlatform: CaseStudy = {
     }
   ],
   
-  whatNext: 'Integrating active learning feedback loops directly into the operational dashboard.',
+
   
   artifacts: [
     'System Architecture Diagram',

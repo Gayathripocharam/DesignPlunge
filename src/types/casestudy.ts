@@ -21,6 +21,9 @@ export interface CaseStudy {
     status: string;
   };
 
+  hypothesis?: string;
+  demonstrates?: string[];
+
   context: {
     problem: string;
     audience?: string;

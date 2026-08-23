@@ -131,7 +131,7 @@ export const CaseStudyDetail: React.FC = () => {
               <div className={styles.sectionInner}>
                 <div className={styles.sectionHeader}>
                   <span className={styles.sectionNumber}>01</span>
-                  <h2 className={styles.sectionTitle}>WHAT WE WANTED TO SOLVE</h2>
+                  <h2 className={styles.sectionTitle}>THE PROBLEM</h2>
                 </div>
                 <div className={styles.sectionContent}>
                   <p>{study.context.problem}</p>
@@ -147,14 +147,31 @@ export const CaseStudyDetail: React.FC = () => {
           </section>
         )}
 
-        {/* ── 02. Approach ── */}
-        {study.approach && (
+        {/* ── 02. The Hypothesis ── */}
+        {study.hypothesis && (
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionInner}>
                 <div className={styles.sectionHeader}>
                   <span className={styles.sectionNumber}>02</span>
-                  <h2 className={styles.sectionTitle}>HOW WE THOUGHT ABOUT IT</h2>
+                  <h2 className={styles.sectionTitle}>THE HYPOTHESIS</h2>
+                </div>
+                <div className={styles.sectionContent}>
+                  <p>{study.hypothesis}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 03. Approach ── */}
+        {study.approach && (
+          <section className={styles.section}>
+            <div className="container">
+              <div className={styles.sectionInner}>
+                <div className={styles.sectionHeader}>
+                  <span className={styles.sectionNumber}>03</span>
+                  <h2 className={styles.sectionTitle}>THE APPROACH</h2>
                 </div>
                 <div className={styles.sectionContent}>
                   <p>{study.approach.idea}</p>
@@ -256,16 +273,20 @@ export const CaseStudyDetail: React.FC = () => {
           </section>
         )}
 
-        {/* ── 06. What We'd Build Next ── */}
-        {study.whatNext && (
+        {/* ── 06. Capabilities Demonstrated ── */}
+        {study.demonstrates && study.demonstrates.length > 0 && (
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionInner}>
                 <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>WHAT WE'D BUILD NEXT</h2>
+                  <h2 className={styles.sectionTitle}>CAPABILITIES DEMONSTRATED</h2>
                 </div>
                 <div className={styles.sectionContent}>
-                  <p className={styles.whatNextText}>{study.whatNext}</p>
+                  <ul className={styles.principlesList}>
+                    {study.demonstrates.map((cap, idx) => (
+                      <li key={idx}>{cap}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
