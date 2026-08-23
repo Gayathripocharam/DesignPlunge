@@ -74,7 +74,7 @@ const servicesFaqs: FAQ[] = [
 interface PlungeCardProps {
   faq: FAQ;
   isOpen: boolean;
-  onToggle: (e: React.MouseEvent) => void;
+  onToggle: (e: React.MouseEvent | React.KeyboardEvent) => void;
   originX: number;
   originY: number;
 }
@@ -98,7 +98,7 @@ const PlungeCard: React.FC<PlungeCardProps> = ({
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onToggle(e as unknown as React.MouseEvent);
+          onToggle(e);
         }
       }}
       aria-expanded={isOpen}
@@ -145,7 +145,7 @@ export const FAQPreview: React.FC<FAQPreviewProps> = ({ variant }) => {
         : faqs;
 
   const handleToggle = useCallback(
-    (index: number, e: React.MouseEvent) => {
+    (index: number, e: React.MouseEvent | React.KeyboardEvent) => {
       if (openIndex === index) {
         setOpenIndex(null);
         return;
@@ -155,9 +155,11 @@ export const FAQPreview: React.FC<FAQPreviewProps> = ({ variant }) => {
       ) as HTMLElement | null;
       if (card) {
         const rect = card.getBoundingClientRect();
+        const clientX = 'clientX' in e ? e.clientX : rect.left + rect.width / 2;
+        const clientY = 'clientY' in e ? e.clientY : rect.top + rect.height / 2;
         setOrigin({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
+          x: clientX - rect.left,
+          y: clientY - rect.top,
         });
       }
       setOpenIndex(index);

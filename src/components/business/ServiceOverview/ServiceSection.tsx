@@ -62,7 +62,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ service, index }) => {
       {/* ── Visual ── */}
       <motion.div className={styles.visual} variants={visualVariant}>
         <div className={styles.visualPanel}>
-          <VisualMetaphor type={service.visualKey as any} />
+          <VisualMetaphor type={service.visualKey} />
         </div>
       </motion.div>
     </motion.div>

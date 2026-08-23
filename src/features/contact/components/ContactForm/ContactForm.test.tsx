@@ -3,8 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ContactForm } from './ContactForm';
 
+import { type Mock } from 'vitest';
+
 // Mock fetch globally
-globalThis.fetch = vi.fn() as any;
+globalThis.fetch = vi.fn();
 
 describe('ContactForm', () => {
   beforeEach(() => {
@@ -65,12 +67,12 @@ describe('ContactForm', () => {
     const { nameInput, emailInput, messageInput, submitButton } = setup();
     const user = userEvent.setup();
 
-    let resolveFetch: any;
+    let resolveFetch!: (value: unknown) => void;
     const fetchPromise = new Promise((res) => {
       resolveFetch = res;
     });
 
-    (globalThis.fetch as any).mockReturnValueOnce(fetchPromise);
+    (globalThis.fetch as Mock).mockReturnValueOnce(fetchPromise);
 
     await user.type(nameInput, 'Jane Doe');
     await user.type(emailInput, 'jane@example.com');
@@ -108,7 +110,7 @@ describe('ContactForm', () => {
     const { nameInput, emailInput, messageInput, submitButton } = setup();
     const user = userEvent.setup();
 
-    (globalThis.fetch as any).mockRejectedValueOnce(new Error('Network error'));
+    (globalThis.fetch as Mock).mockRejectedValueOnce(new Error('Network error'));
 
     await user.type(nameInput, 'Jane Doe');
     await user.type(emailInput, 'jane@example.com');

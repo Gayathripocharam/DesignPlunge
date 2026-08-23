@@ -2,8 +2,10 @@ import React from "react";
 import { LayoutDashboard, Users, BarChart3, Settings } from "lucide-react";
 import styles from "./VisualMetaphors.module.css";
 
+export type VisualMetaphorType = "digital-products" | "web-applications" | "ai-systems" | "design-systems";
+
 interface VisualMetaphorProps {
-  type: "digital-products" | "web-applications" | "ai-systems" | "design-systems";
+  type: VisualMetaphorType;
 }
 
 export const VisualMetaphor: React.FC<VisualMetaphorProps> = ({ type }) => {

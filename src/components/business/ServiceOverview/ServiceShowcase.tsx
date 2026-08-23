@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { Diamond, Layout, Cpu, Layers, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "./ServiceShowcase.module.css";
-import { VisualMetaphor } from "./VisualMetaphors";
+import { VisualMetaphor, type VisualMetaphorType } from "./VisualMetaphors";
 
 import type { CanonicalService } from "@/content/services";
 
@@ -115,7 +115,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
                 className={styles.panel}
                 style={{ x: parallaxX, y: parallaxY }}
               >
-                <VisualMetaphor type={activeService.id as any} />
+                <VisualMetaphor type={activeService.id as VisualMetaphorType} />
               </motion.div>
             </AnimatePresence>
           </motion.div>
