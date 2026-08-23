@@ -11,7 +11,7 @@ export const Container: React.FC<ContainerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={`container ${className}`} {...rest}>
+    <div className={`container-max ${className}`} {...rest}>
       {children}
     </div>
   );

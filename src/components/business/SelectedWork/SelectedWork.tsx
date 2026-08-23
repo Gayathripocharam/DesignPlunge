@@ -183,26 +183,28 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
                     <span className={styles.rowArrow}>&rarr;</span>
                   </Link>
 
-                  {/* Mobile inline preview */}
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className={styles.mobilePreview}
-                      >
-                        <img src={project.image} alt={title} loading="lazy" className={styles.mobilePreviewImg} />
-                        <Link 
-                          to={`/work/${project.slug}`} 
-                          onClick={(e) => handleClick(e, project)} 
-                          className={styles.mobilePreviewLink}
+                  {/* Mobile inline preview — only on touch/small screens */}
+                  {typeof window !== "undefined" && window.innerWidth <= 768 && (
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className={styles.mobilePreview}
                         >
-                          View Project &rarr;
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                          <img src={project.image} alt={title} loading="lazy" className={styles.mobilePreviewImg} />
+                          <Link
+                            to={`/work/${project.slug}`}
+                            onClick={(e) => handleClick(e, project)}
+                            className={styles.mobilePreviewLink}
+                          >
+                            View Project &rarr;
+                          </Link>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
                 </div>
               );
             })}

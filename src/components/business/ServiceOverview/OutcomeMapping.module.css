@@ -1,0 +1,22 @@
+.mapping {
+  display: grid;
+  gap: 1rem;
+  background: var(--bg);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-radius: 0.5rem;
+}
+
+.cell {
+  font-family: var(--font-base, "Inter", sans-serif);
+  font-size: 0.95rem;
+  color: var(--color-text);
+}

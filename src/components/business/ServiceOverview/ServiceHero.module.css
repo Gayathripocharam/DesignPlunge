@@ -1,0 +1,26 @@
+/* ServiceHero.module.css */
+.hero {
+  text-align: center;
+  padding: 6rem 1rem;
+  background: var(--bg);
+}
+.title {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+}
+.meta {
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}

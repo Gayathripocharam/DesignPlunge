@@ -1,0 +1,43 @@
+/* Premium CTA styling with glassmorphism */
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: var(--bg-gradient, linear-gradient(135deg, #1e1e2f, #2a2a3c));
+  border-radius: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.title {
+  font-family: var(--font-hero, "Outfit", sans-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.description {
+  font-family: var(--font-base, "Inter", sans-serif);
+  font-size: 1rem;
+  color: var(--color-muted);
+  max-width: 40rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}

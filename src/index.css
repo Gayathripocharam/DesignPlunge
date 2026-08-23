@@ -3,6 +3,7 @@
    Consolidated CSS custom properties + global resets
    ============================================================ */
 
+@import "./design/utilities.css";
 /* 1. Google Fonts handled in index.html */
 
 :root {

@@ -1,0 +1,58 @@
+.section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 4rem 0;
+  flex-wrap: wrap;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Ensure visual and content stack on small screens */
+@media (max-width: 767px) {
+  .section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .visual, .content {
+    max-width: 100%;
+    flex: none;
+  }
+}
+
+.visual {
+  flex: 1;
+  max-width: 45%;
+}
+
+.content {
+  flex: 1;
+}
+
+.num {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.meta {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}

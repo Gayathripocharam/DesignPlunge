@@ -503,6 +503,36 @@
   .row {
     flex-wrap: wrap;
   }
+  .mobilePreview {
+    display: block;
+  }
+}
+
+.mobilePreview {
+  display: none;
+  overflow: hidden;
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+.mobilePreviewImg {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.mobilePreviewLink {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
 /* Section marker above heading */

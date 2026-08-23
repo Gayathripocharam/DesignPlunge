@@ -191,13 +191,12 @@ export const Outcomes: React.FC<OutcomesProps> = ({ spacingTop = "medium", spaci
           </p>
         </div>
 
-        {/* Cards grid */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: 20,
-            maxWidth: 960,
+            width: "100%",
             marginBottom: 56,
           }}
         >
