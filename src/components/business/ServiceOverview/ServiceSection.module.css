@@ -1,58 +1,106 @@
+/* ServiceSection.module.css – full-section, premium service layout */
+
 .section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: center;
+  padding: clamp(4rem, 8vw, 8rem) 0;
+  border-top: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Reverse layout for odd-indexed sections */
+.reverse {
+  direction: rtl;
+}
+
+.reverse > * {
+  direction: ltr;
+}
+
+/* Number badge */
+.num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin: 0 0 1rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin: 4rem 0;
-  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.reverse {
-  flex-direction: row-reverse;
+.num::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
 }
 
-/* Ensure visual and content stack on small screens */
-@media (max-width: 767px) {
-  .section {
-    flex-direction: column;
-    text-align: center;
-  }
-  .visual, .content {
-    max-width: 100%;
-    flex: none;
-  }
-}
-
-.visual {
-  flex: 1;
-  max-width: 45%;
-}
-
-.content {
-  flex: 1;
-}
-
-.num {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  margin-bottom: 0.5rem;
-}
-
+/* Service title */
 .title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
+  font-family: var(--heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-h);
+  margin: 0 0 1.25rem;
 }
 
+/* Description */
 .desc {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.85;
+  margin: 0 0 2rem;
+  max-width: 46ch;
 }
 
-.meta {
-  font-size: 0.875rem;
-  color: var(--color-accent);
+/* Capability tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+/* Visual side */
+.visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .reverse {
+    direction: ltr;
+  }
+
+  .visual {
+    order: -1;
+  }
 }

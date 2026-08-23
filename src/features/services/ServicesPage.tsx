@@ -1,7 +1,5 @@
 import React from "react";
 import { SEO } from "@/components/seo/SEO";
-// import { motion } from "framer-motion"; // removed unused import
-// import { fadeUp, staggerContainer } from "@/design/animations"; // removed unused imports
 import styles from "./ServicesPage.module.css";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -13,6 +11,9 @@ import ProblemToProductBridge from "@/components/business/ServiceOverview/Proble
 import OutcomeMapping from "@/components/business/ServiceOverview/OutcomeMapping";
 import ServicesCTA from "@/components/business/ServiceOverview/ServicesCTAComp";
 
+// Alternate background between bg and surface for each service section
+const sectionBgs = ["var(--bg)", "var(--surface)", "var(--bg)", "var(--surface)"];
+
 export const ServicesPage: React.FC = () => (
   <>
     <SEO
@@ -21,49 +22,56 @@ export const ServicesPage: React.FC = () => (
       canonical="/services"
     />
     <div className={styles.container}>
-      {/* Hero Section */}
+
+      {/* ── Hero ── */}
       <Section background="var(--bg)" spacingTop="large" spacingBottom="none">
         <Container>
           <ServiceHero />
         </Container>
       </Section>
 
-      {/* Editorial Index */}
-      <Section background="var(--bg)" spacingTop="none" spacingBottom="large">
+      {/* ── Quick-nav index ── */}
+      <Section background="var(--surface)" spacingTop="medium" spacingBottom="medium">
         <Container>
           <ServicesIndex services={services} />
         </Container>
       </Section>
 
-      {/* Service Sections (Alternating) */}
-      <Section background="var(--surface)" spacingTop="medium" spacingBottom="medium">
-        <Container>
-          {services.map((service, idx) => (
-            <ServiceSection key={service.id} service={service} index={idx} />
-          ))}
-        </Container>
-      </Section>
+      {/* ── Individual service sections – each on its own alternating background ── */}
+      {services.map((service, idx) => (
+        <Section
+          key={service.id}
+          background={sectionBgs[idx % sectionBgs.length]}
+          spacingTop="none"
+          spacingBottom="none"
+        >
+          <Container>
+            <ServiceSection service={service} index={idx} />
+          </Container>
+        </Section>
+      ))}
 
-      {/* Process Bridge */}
-      <Section background="var(--bg)" spacingTop="none" spacingBottom="none">
+      {/* ── Process bridge ── */}
+      <Section background="var(--surface)" spacingTop="large" spacingBottom="large">
         <Container>
           <ProblemToProductBridge />
         </Container>
       </Section>
 
-      {/* Outcome Mapping */}
-      <Section background="var(--bg)" spacingTop="none" spacingBottom="large">
+      {/* ── Outcome mapping ── */}
+      <Section background="var(--bg)" spacingTop="large" spacingBottom="large">
         <Container>
           <OutcomeMapping />
         </Container>
       </Section>
 
-      {/* CTA Section */}
-      <Section background="var(--bg)" spacingTop="none" spacingBottom="large">
+      {/* ── CTA ── */}
+      <Section background="var(--surface)" spacingTop="large" spacingBottom="large">
         <Container>
           <ServicesCTA />
         </Container>
       </Section>
+
     </div>
   </>
 );

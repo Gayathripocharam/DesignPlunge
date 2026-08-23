@@ -1,26 +1,74 @@
-/* ServiceHero.module.css */
+/* ServiceHero.module.css – premium editorial hero */
 .hero {
-  text-align: center;
-  padding: 6rem 1rem;
-  background: var(--bg);
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  position: relative;
 }
-.title {
-  font-family: var(--font-primary);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-.lead {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 48rem;
-  margin: 0 auto 2rem;
-}
-.meta {
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  color: var(--color-accent);
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--heading);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-h);
+  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 16ch;
+}
+
+.lead {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--text);
+  opacity: 0.85;
+  max-width: 52ch;
+  margin: 0 0 clamp(2rem, 3.5vw, 3rem);
+}
+
+.metaRail {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.metaItem {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.5rem 1.5rem 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.metaItem:not(:first-child)::before {
+  content: '·';
+  color: var(--border);
+  font-size: 1.1rem;
+  margin-right: 0.75rem;
 }
