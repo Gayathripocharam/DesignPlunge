@@ -1,16 +1,35 @@
-/* ServiceSection.module.css – full-section, premium service layout */
+/* ─── ServiceSection ─────────────────────────────────────────── */
 
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 6vw, 7rem);
+  gap: clamp(4rem, 7vw, 8rem);
   align-items: center;
-  padding: clamp(4rem, 8vw, 8rem) 0;
+  padding: clamp(5rem, 9vw, 9rem) 0;
   border-top: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
 
 .section:last-child {
   border-bottom: 1px solid var(--border);
+}
+
+/* Ghost number in background */
+.section::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -0.2em;
+  right: -0.05em;
+  font-family: var(--heading);
+  font-size: clamp(8rem, 18vw, 20rem);
+  font-weight: 800;
+  color: var(--text-muted);
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
 }
 
 /* Reverse layout for odd-indexed sections */
@@ -22,16 +41,22 @@
   direction: ltr;
 }
 
-/* Number badge */
+/* ── Content ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .num {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 3px;
   color: var(--accent);
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .num::before {
@@ -42,32 +67,31 @@
   background: var(--accent);
 }
 
-/* Service title */
 .title {
   font-family: var(--heading);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: clamp(2.25rem, 3.8vw, 3.25rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.08;
   color: var(--text-h);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
 }
 
-/* Description */
 .desc {
   font-size: clamp(1rem, 1.4vw, 1.1rem);
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text);
-  opacity: 0.85;
-  margin: 0 0 2rem;
-  max-width: 46ch;
+  opacity: 0.82;
+  margin: 0 0 2.25rem;
+  max-width: 44ch;
 }
 
-/* Capability tags */
+/* Tags */
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 2.5rem;
 }
 
 .tag {
@@ -75,32 +99,84 @@
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text-muted);
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 6px 12px;
+  padding: 5px 12px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Visual side */
+.tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Link */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: gap 0.25s ease;
+}
+
+.link:hover {
+  gap: 14px;
+}
+
+/* ── Visual panel ── */
 .visual {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Responsive */
-@media (max-width: 860px) {
+.visualPanel {
+  width: 100%;
+  background: var(--surface-elevated, var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(2rem, 3.5vw, 3.5rem);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08),
+    0 8px 32px rgba(0,0,0,0.12),
+    0 0 0 1px rgba(255,255,255,0.03) inset;
+  overflow: hidden;
+  position: relative;
+}
+
+/* subtle glow in top corner of panel */
+.visualPanel::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
   .section {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
   }
 
   .reverse {
     direction: ltr;
   }
 
-  .visual {
-    order: -1;
+  .visualPanel {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
   }
 }
