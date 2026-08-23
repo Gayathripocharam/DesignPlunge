@@ -14,7 +14,6 @@ interface SelectedWorkProps {
   spacingBottom?: 'none' | 'medium' | 'large';
 }
 
-const depthFor = (index: number, total: number) => Math.round((index / Math.max(total - 1, 1)) * 120);
 
 interface PlungeState {
   href: string;
@@ -114,7 +113,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
           >
             {projects.map((project, i) => {
               const title = variant === 'services' ? project.shortTitle : project.title;
-              const desc = variant === 'services' ? (project.thinking ?? project.description) : project.tagline;
+
               const isHovered = hovered?.slug === project.slug;
 
               return (
@@ -137,11 +136,21 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
                     className={`${styles.row} ${isHovered ? styles.rowActive : ""}`}
                     style={{ '--row-index': i } as React.CSSProperties}
                   >
-                    <span className={styles.rowNum}>{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className={styles.rowTitle}>{title}</h3>
-                    <span className={styles.rowDesc}>{desc}</span>
-                    <span className={styles.rowDepth}>{depthFor(i, projects.length)}m</span>
-                    <span className={styles.rowArrow}>&rarr;</span>
+                    <div className={styles.rowNum}>{String(i + 1).padStart(2, "0")}</div>
+                    <div className={styles.rowMain}>
+                      <div className={styles.rowBadge}>{project.label}</div>
+                      <h3 className={styles.rowTitle}>{title}</h3>
+                      <p className={styles.rowProblem}>{project.problem}</p>
+                      <div className={styles.rowCapabilities}>
+                        {project.demonstrates.slice(0, 3).map((cap, idx) => (
+                          <span key={idx} className={styles.capTag}>{cap}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={styles.rowAction}>
+                      <span className={styles.exploreText}>Explore Concept</span>
+                      <span className={styles.rowArrow}>&rarr;</span>
+                    </div>
                   </Link>
 
                 </div>

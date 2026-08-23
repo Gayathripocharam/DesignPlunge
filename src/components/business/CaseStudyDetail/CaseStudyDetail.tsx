@@ -148,7 +148,7 @@ export const CaseStudyDetail: React.FC = () => {
         )}
 
         {/* ── 02. The Hypothesis ── */}
-        {study.hypothesis && (
+        {study.type === 'concept' && study.hypothesis && (
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionInner}>
@@ -274,7 +274,7 @@ export const CaseStudyDetail: React.FC = () => {
         )}
 
         {/* ── 06. Capabilities Demonstrated ── */}
-        {study.demonstrates && study.demonstrates.length > 0 && (
+        {study.type === 'concept' && study.demonstrates && study.demonstrates.length > 0 && (
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionInner}>
@@ -312,8 +312,9 @@ export const CaseStudyDetail: React.FC = () => {
         {/* ── CTA ── */}
         <ContextualNav 
           label="LET'S BUILD" 
-          title={<>Ready to build<br/>something similar?</>}
-          subtitle="Start a Project &rarr;"
+          title="Working through a similar product problem?"
+          subtitle=""
+          buttonText="Let's talk about the approach &rarr;"
           to="/contact" 
         />
       </div>

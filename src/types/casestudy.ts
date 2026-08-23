@@ -1,9 +1,7 @@
 export type CaseStudyType = "concept" | "client";
 
-export interface CaseStudy {
+export interface BaseCaseStudy {
   slug: string;
-  type: CaseStudyType;
-
   title: string;
   subtitle?: string; // e.g. "Selected Product Concept"
   category: string;
@@ -20,9 +18,6 @@ export interface CaseStudy {
     disciplines: string;
     status: string;
   };
-
-  hypothesis?: string;
-  demonstrates?: string[];
 
   context: {
     problem: string;
@@ -53,15 +48,6 @@ export interface CaseStudy {
 
   whatNext?: string; // What we'd build next
   artifacts?: string[];
-
-  // Optional client-specific fields (for future use)
-  client?: string;
-  industry?: string;
-  challenge?: string;
-  outcomes?: string[];
-  metrics?: { label: string; value: string }[];
-  testimonial?: { quote: string; author: string; role: string };
-
   relatedServices?: string[]; // service slugs
   
   seo: {
@@ -69,3 +55,24 @@ export interface CaseStudy {
     description: string;
   };
 }
+
+export interface ConceptCaseStudy extends BaseCaseStudy {
+  type: "concept";
+  hypothesis: string;
+  demonstrates: string[];
+}
+
+export interface ClientCaseStudy extends BaseCaseStudy {
+  type: "client";
+  actualImplementation: string;
+  measuredOutcome: string;
+  evidence: string[];
+  
+  client?: string;
+  industry?: string;
+  challenge?: string;
+  metrics?: { label: string; value: string }[];
+  testimonial?: { quote: string; author: string; role: string };
+}
+
+export type CaseStudy = ConceptCaseStudy | ClientCaseStudy;

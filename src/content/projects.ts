@@ -16,6 +16,8 @@ export interface Project {
   image: string;
   /** Badge label shown above the title, e.g. "SELECTED PRODUCT CONCEPT" */
   label: string;
+  problem: string;
+  demonstrates: string[];
 }
 
 export const projects: Project[] = [
@@ -28,6 +30,8 @@ export const projects: Project[] = [
     thinking: 'Making complex operational work easier to understand and act on.',
     image: aiOpsImg,
     label: 'SELECTED PRODUCT CONCEPT',
+    problem: 'AI deployment workflows become fragmented across monitoring, deployment, and operational tools.',
+    demonstrates: ['Complex information architecture', 'AI product UX', 'Operational dashboards'],
   },
   {
     slug: 'product-analytics-dashboard',
@@ -38,6 +42,8 @@ export const projects: Project[] = [
     thinking: 'Bringing clarity to complex data through intuitive visualization.',
     image: productDashImg,
     label: 'SELECTED PRODUCT CONCEPT',
+    problem: 'Product teams often rely heavily on data analysts to write SQL or configure complex dashboards just to interpret basic usage metrics.',
+    demonstrates: ['Information visualization', 'Progressive disclosure', 'Data-heavy UX'],
   },
   {
     slug: 'business-automation-platform',
@@ -48,6 +54,8 @@ export const projects: Project[] = [
     thinking: 'Connecting legacy systems to create seamless business processes.',
     image: autoPlatformImg,
     label: 'SELECTED PRODUCT CONCEPT',
+    problem: 'Businesses attempt to automate using fragile scripts and messy spreadsheets, causing silent breaks and shadow IT.',
+    demonstrates: ['Workflow architecture', 'Automation UX', 'Backend systems thinking'],
   },
 ];
 
