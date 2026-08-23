@@ -104,9 +104,20 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
 
   useEffect(() => {
     if (!plunge) return;
-    const id = setTimeout(() => navigate(plunge.href), PLUNGE_DURATION);
+    const id = setTimeout(() => {
+      navigate(plunge.href);
+      // Safety: always clear plunge after navigation attempt so overlay never sticks
+      setTimeout(() => setPlunge(null), 300);
+    }, PLUNGE_DURATION);
     return () => clearTimeout(id);
   }, [plunge, navigate]);
+
+  // Escape key dismisses a stuck plunge overlay
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setPlunge(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = containerRef.current?.getBoundingClientRect();
