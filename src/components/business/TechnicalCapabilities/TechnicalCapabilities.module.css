@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.inner {
+  width: 100%;
+}
+
+.header {
+  max-width: 640px;
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+}
+
+.title {
+  font-family: var(--heading);
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(24px, 3vw, 32px);
+  height: 100%;
+}
+
+.cardHeader {
+  margin-bottom: clamp(1.5rem, 2vw, 2rem);
+}
+
+.cardEyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+
+.cardTitle {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.cardBody {
+  margin-bottom: clamp(2rem, 3vw, 2.5rem);
+  flex-grow: 1;
+}
+
+.solveEyebrow, .techEyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+}
+
+.solveText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+
+.cardFooter {
+  border-top: 1px solid var(--border);
+  padding-top: clamp(16px, 2vw, 20px);
+  margin-top: auto;
+}
+
+.techText {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  margin: 0;
+}

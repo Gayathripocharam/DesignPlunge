@@ -8,6 +8,7 @@ import { SelectedWork } from "@/components/business/SelectedWork/SelectedWork";
 import { Outcomes } from "@/components/business/Outcomes/Outcomes";
 import { HowWeWork } from "@/components/business/HowWeWork/HowWeWork";
 import { WhyDesignPlunge } from "@/components/business/WhyDesignPlunge/WhyDesignPlunge";
+import { TechnicalCapabilities } from "@/components/business/TechnicalCapabilities/TechnicalCapabilities";
 import { WorkingTogether } from "@/components/business/WorkingTogether/WorkingTogether";
 import { FAQPreview } from "@/components/business/FAQPreview/FAQPreview";
 import { ContextualNav } from "@/components/business/ContextualNav/ContextualNav";
@@ -30,9 +31,10 @@ export const Home: React.FC = () => {
         <WhatWeBuild spacingTop="large" spacingBottom="none" />
         <SelectedWork spacingTop="medium" spacingBottom="none" />
         <Outcomes spacingTop="medium" spacingBottom="none" />
+        <WhyDesignPlunge />
+        <TechnicalCapabilities />
         <HowWeWork spacingTop="medium" spacingBottom="none" />
         <WorkingTogether />
-        <WhyDesignPlunge />
         <FAQPreview />
         <ContextualNav 
           spacingTop="large"
