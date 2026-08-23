@@ -31,40 +31,22 @@
   margin: 24px 0;
 }
 
-/* Base structural sizing */
+/* Base structural sizing — use natural heights, no % */
 .visualDigital {
-  width: 88%;
-  height: 86%;
+  width: 100%;
+  min-height: 280px;
 }
 .visualWeb {
-  width: 82%;
-  height: 76%;
-  margin: auto;
+  width: 100%;
+  min-height: 280px;
   box-sizing: border-box;
 }
 .visualAI {
-  width: 88%;
-  height: 70%;
-  margin: auto;
+  width: 100%;
 }
 .visualDesign {
-  width: 82%;
-  height: 86%;
-  margin: auto;
-}
-
-@media (max-width: 1024px) {
-  .visualDigital, .visualWeb, .visualAI, .visualDesign {
-    width: 90%;
-    height: 82%;
-  }
-}
-
-@media (max-width: 768px) {
-  .visualDigital, .visualWeb, .visualAI, .visualDesign {
-    width: 94%;
-    height: 86%;
-  }
+  width: 100%;
+  min-height: 240px;
 }
 
 /* Digital Products visual */
@@ -226,7 +208,7 @@
 .waBody {
   display: grid;
   grid-template-columns: 22% 1fr;
-  height: calc(100% - 48px);
+  min-height: 220px;
 }
 
 .waSidebar {
