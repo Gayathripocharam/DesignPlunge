@@ -6,43 +6,43 @@ import { Section } from "@/components/ui/Section";
 const outcomesList = [
   {
     num: "01",
-    title: "Clarity",
+    title: "Move faster.",
     icon: Target,
     iconBg: "#EFEAFE",
     iconColor: "#7C5CFC",
-    from: "Idea",
-    to: "Direction",
-    desc: "We turn ambiguous ideas into a clear product direction before expensive development begins.",
+    from: "Handoff",
+    to: "Integration",
+    desc: "Production-ready design and engineering reduce unnecessary handoffs and friction.",
   },
   {
     num: "02",
-    title: "Confidence",
+    title: "Scale with confidence.",
     icon: ShieldCheck,
     iconBg: "#FCEAF6",
     iconColor: "#EC4899",
-    from: "Assumption",
-    to: "Validation",
-    desc: "We help teams test important product decisions before committing heavily to production.",
+    from: "Complexity",
+    to: "System",
+    desc: "Systems and architecture designed to evolve, rather than accumulate more complexity.",
   },
   {
     num: "03",
-    title: "Scale",
+    title: "Make products easier to use.",
     icon: Layers,
     iconBg: "#EAF1FE",
     iconColor: "#5B8DEF",
-    from: "Product",
-    to: "System",
-    desc: "We ensure your architecture can evolve without needing a complete rewrite later.",
+    from: "Friction",
+    to: "Clarity",
+    desc: "Clearer flows and intuitive UX that reduce friction for your users.",
   },
   {
     num: "04",
-    title: "Leverage",
+    title: "Use AI where it matters.",
     icon: Zap,
     iconBg: "#EFEAFE",
     iconColor: "#7C5CFC",
     from: "Manual work",
     to: "Automation",
-    desc: "We identify repetitive workflows and implement intelligent systems to handle them.",
+    desc: "Integrate automation and intelligence into workflows where it produces real leverage.",
   },
 ];
 
@@ -170,9 +170,9 @@ export const Outcomes: React.FC<OutcomesProps> = ({ spacingTop = "medium", spaci
               letterSpacing: "-0.02em",
             }}
           >
-            What changes when we{" "}
+            What we help you{" "}
             <span style={{ color: "var(--accent)" }}>
-              build together
+              achieve
             </span>
             .
           </h2>
@@ -186,8 +186,7 @@ export const Outcomes: React.FC<OutcomesProps> = ({ spacingTop = "medium", spaci
               maxWidth: 480,
             }}
           >
-            The goal isn't to build more software. It's to make better product
-            decisions — and turn them into systems that create lasting value.
+            The goal isn't just to ship more code. It's to build a product that your users love and your team can easily scale.
           </p>
         </div>
 

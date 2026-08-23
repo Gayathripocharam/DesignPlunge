@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
     <>
       <SEO 
         title="Design Plunge — Product Strategy & Design Studio" 
-        description="We are a digital product studio building software that matters. We combine strategy, design, and engineering." 
+        description="Design Plunge helps B2B SaaS teams, AI product teams, enterprise platforms, and growing startups turn complex product problems into clear, scalable digital experiences." 
         canonical="/" 
         structuredData={structuredData}
       />
@@ -37,9 +37,9 @@ export const Home: React.FC = () => {
         <ContextualNav 
           spacingTop="large"
           spacingBottom="large"
-          title="READY TO TURN THE IDEA INTO SOMETHING REAL?" 
-          subtitle="Tell us what you're building, improving, or trying to automate. We'll review the context and come back with clear next steps." 
-          buttonText="Start a Project →" 
+          title="Have a complex product problem?" 
+          subtitle="Tell us what you're trying to solve. We'll help you understand the right approach, what it will take to build, and where to start." 
+          buttonText="Talk through the problem →" 
           to="/contact" 
         />
       </main>

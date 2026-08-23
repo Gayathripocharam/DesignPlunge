@@ -36,9 +36,9 @@ interface ContextualNavProps {
 
 export const ContextualNav: React.FC<ContextualNavProps> = ({
   label = "LET'S BUILD",
-  title = <>Ready to turn the idea<br />into something real?</>,
-  subtitle = "Tell us what you're building, improving, or trying to automate.\nWe'll review the context and come back with clear next steps.",
-  buttonText = "START A PROJECT \u2192",
+  title = "Have a complex product problem?",
+  subtitle = "Tell us what you're trying to solve. We'll help you understand the right approach, what it will take to build, and where to start.",
+  buttonText = "Talk through the problem \u2192",
   to = "/contact",
   ctaId = "contextual-nav",
   spacingTop = "medium",

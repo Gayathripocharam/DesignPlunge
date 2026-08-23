@@ -88,24 +88,24 @@ export const Hero: React.FC = () => {
 
               <motion.div variants={fadeUp}>
                 <Heading level="h1" className={styles.headline}>
-                  We turn complex ideas into digital products people actually{" "}
-                  <span className={styles.headlineAccent}>use.</span>
+                  Complex products shouldn't be this hard to{" "}
+                  <span className={styles.headlineAccent}>build.</span>
                 </Heading>
               </motion.div>
 
               <motion.p variants={fadeUp} className={styles.supportingText}>
-                Product strategy, UX/UI, engineering and AI automation — from first concept to production.
+                Design Plunge helps B2B SaaS teams, AI product teams, enterprise platforms, and growing startups turn complex product problems into clear, scalable digital experiences.
               </motion.p>
 
               <motion.div variants={fadeUp} className={styles.ctaGroup}>
                 <Button
                   variant="primary"
                   onClick={() => {
-                    track("cta_click", { ctaId: "hero-start-project", ctaLabel: "Start a Project", page: "/" });
+                    track("cta_click", { ctaId: "hero-start-project", ctaLabel: "Talk through the problem", page: "/" });
                     navigate("/contact");
                   }}
                 >
-                  Start a Project →
+                  Talk through the problem →
                 </Button>
                 <Button variant="secondary" onClick={scrollToWork}>
                   Explore Our Work
@@ -113,8 +113,7 @@ export const Hero: React.FC = () => {
               </motion.div>
 
               <motion.div variants={fadeUp} className={styles.supportingCapabilities}>
-                <p className={styles.targetAudience}>For startups, product teams &amp; growing businesses</p>
-                <p className={styles.capabilityDots}>PRODUCT STRATEGY &middot; UX/UI &middot; ENGINEERING &middot; AI AUTOMATION</p>
+                <p className={styles.targetAudience}>Strategy, UX/UI, design systems, engineering, and AI — brought together instead of handed off between teams.</p>
               </motion.div>
             </div>
 

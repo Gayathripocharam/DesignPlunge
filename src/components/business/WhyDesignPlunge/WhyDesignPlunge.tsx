@@ -23,11 +23,10 @@ export const WhyDesignPlunge: React.FC = () => {
           </p>
           <p className={styles.eyebrow}>WHY DESIGN PLUNGE</p>
           <h2 className={styles.title}>
-            We don't treat strategy, design and engineering as separate stages.
+            Why products become difficult to evolve
           </h2>
           <p className={styles.intro}>
-            We bring them together early so decisions are made with the product, user and
-            technology in mind.
+            Complex UX, legacy systems, and the disconnect between design and engineering slow teams down. We fix the disconnect.
           </p>
         </div>
 

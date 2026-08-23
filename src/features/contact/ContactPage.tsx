@@ -37,10 +37,10 @@ export const ContactPage: React.FC = () => {
                 CONTACT
               </motion.p>
               <motion.h1 variants={fadeUp} className={styles.title}>
-                Have something worth building?
+                Let's talk about the problem.
               </motion.h1>
               <motion.p variants={fadeUp} className={styles.subtitle}>
-                Tell us what you're trying to build, improve, or automate.
+                Tell us what you're building, improving, or trying to automate. We'll review the context and come back with clear next steps.
               </motion.p>
             </motion.div>
           </div>

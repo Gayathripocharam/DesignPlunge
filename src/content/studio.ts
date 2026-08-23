@@ -46,36 +46,28 @@ export interface WhyPrinciple {
 
 export const whyPrinciples: WhyPrinciple[] = [
   {
-    title: 'Product thinking',
-    subtitle: 'Start with the problem, users and business context.',
-    flow: ['PROBLEM', 'USER', 'PRODUCT'],
-    meansTitle: 'WHAT THIS MEANS',
-    meansDesc: 'We start by understanding the problem before deciding what to build.',
-    tags: ['Problem definition', 'User needs', 'Product direction'],
-  },
-  {
-    title: 'Design + engineering',
-    subtitle: 'Design decisions stay connected to technical reality.',
+    title: 'Design and engineering drift apart.',
+    subtitle: 'One team, not a handoff. We build integrated systems.',
     flow: ['DESIGN', 'ENGINEERING'],
     meansTitle: 'WHAT THIS MEANS',
     meansDesc: 'Design decisions stay connected to technical reality from the beginning.',
-    tags: ['UX architecture', 'UI systems', 'Technical validation'],
+    tags: ['Integrated teams', 'Fewer handoffs', 'Faster iteration'],
   },
   {
-    title: 'Purposeful AI',
-    subtitle: 'Use AI where it creates meaningful leverage — not because it\'s fashionable.',
-    flow: ['HUMAN', 'AI', 'OUTCOME'],
-    meansTitle: 'WHAT THIS MEANS',
-    meansDesc: 'We use AI where it creates measurable leverage rather than adding complexity.',
-    tags: ['Automation', 'AI workflows', 'Intelligent features'],
-  },
-  {
-    title: 'Long-term systems',
-    subtitle: 'Build foundations that remain useful after launch.',
+    title: 'Legacy architecture slows you down.',
+    subtitle: 'We architect for scale and evolution, not just the immediate launch.',
     flow: ['PRODUCT', 'SYSTEM', 'SCALE'],
     meansTitle: 'WHAT THIS MEANS',
-    meansDesc: 'We build foundations that remain useful as the product evolves.',
-    tags: ['Architecture', 'Design systems', 'Documentation'],
+    meansDesc: 'We build foundations that remain useful and adaptable as the product evolves.',
+    tags: ['Architecture', 'Design systems', 'Maintainability'],
+  },
+  {
+    title: 'AI is hyped, but hard to integrate responsibly.',
+    subtitle: 'AI as an accelerant. We use it where it creates meaningful leverage, not just for the sake of it.',
+    flow: ['HUMAN', 'AI', 'OUTCOME'],
+    meansTitle: 'WHAT THIS MEANS',
+    meansDesc: 'We identify where AI can actually reduce friction or automate work effectively.',
+    tags: ['Automation', 'Practical AI', 'Intelligent workflows'],
   },
 ];
 
