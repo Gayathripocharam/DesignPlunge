@@ -5,64 +5,14 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useVelocity, useTra
 import { Section } from "@/components/ui/Section";
 import styles from "./SelectedWork.module.css";
 
-import aiOpsImg from "@/assets/illustrations/ai-operations.jpg";
-import productDashImg from "@/assets/illustrations/product-dashboard.jpg";
-import autoPlatformImg from "@/assets/illustrations/automation-platform.jpg";
+import { projects } from '@/content/projects';
+import type { Project } from '@/content/projects';
 
 interface SelectedWorkProps {
-  variant?: "home" | "services";
-  spacingTop?: "none" | "medium" | "large";
-  spacingBottom?: "none" | "medium" | "large";
+  variant?: 'home' | 'services';
+  spacingTop?: 'none' | 'medium' | 'large';
+  spacingBottom?: 'none' | 'medium' | 'large';
 }
-
-interface Project {
-  slug: string;
-  image: string;
-  home: { label: string; title: string; desc: string };
-  services: { title: string; thinking: string };
-}
-
-const projects: Project[] = [
-  {
-    slug: "ai-operations-platform",
-    image: aiOpsImg,
-    home: {
-      label: "SELECTED PRODUCT CONCEPT",
-      title: "AI Operations Platform",
-      desc: "Simplifying complex operational workflows through intelligent automation.",
-    },
-    services: {
-      title: "AI operations platform",
-      thinking: "Making complex operational work easier to understand and act on.",
-    },
-  },
-  {
-    slug: "product-analytics-dashboard",
-    image: productDashImg,
-    home: {
-      label: "SELECTED PRODUCT CONCEPT",
-      title: "Product Analytics",
-      desc: "Bringing clarity to complex data through intuitive visualization.",
-    },
-    services: {
-      title: "Product analytics dashboard",
-      thinking: "Bringing clarity to complex data through intuitive visualization.",
-    },
-  },
-  {
-    slug: "business-automation-platform",
-    image: autoPlatformImg,
-    home: {
-      label: "SELECTED PRODUCT CONCEPT",
-      title: "Automation Platform",
-      desc: "Connecting legacy systems to create seamless business processes.",
-    },
-    services: {
-      title: "Business automation platform",
-      thinking: "Connecting legacy systems to create seamless business processes.",
-    },
-  },
-];
 
 const depthFor = (index: number, total: number) => Math.round((index / Math.max(total - 1, 1)) * 120);
 
@@ -135,7 +85,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
       href: `/work/${project.slug}`,
       slug: project.slug,
       image: project.image,
-      title: variant === "services" ? project.services.title : project.home.title,
+      title: variant === 'services' ? project.shortTitle : project.title,
       x: rect.left + 60,
       y: rect.top + rect.height / 2,
     });
@@ -163,8 +113,8 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
             onMouseLeave={() => setHovered(null)}
           >
             {projects.map((project, i) => {
-              const title = variant === "services" ? project.services.title : project.home.title;
-              const desc = variant === "services" ? project.services.thinking : project.home.desc;
+              const title = variant === 'services' ? project.shortTitle : project.title;
+              const desc = variant === 'services' ? (project.thinking ?? project.description) : project.tagline;
               const isHovered = hovered?.slug === project.slug;
 
               return (
@@ -213,7 +163,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ variant = "home", sp
                   <div className={styles.floatPreviewContent}>
                     <span className={styles.floatPreviewLabel}>Selected Concept</span>
                     <span className={styles.floatPreviewTitle}>
-                      {variant === "services" ? hovered.services.title : hovered.home.title}
+                      {variant === 'services' ? hovered.shortTitle : hovered.title}
                     </span>
                     <span className={styles.floatPreviewCta}>View Project &nearr;</span>
                   </div>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
+import { organizationLD, creativeWorkLD, caseStudyBreadcrumbs } from '@/seo/structuredData';
 import { motion } from "framer-motion";
 import { useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -66,7 +67,12 @@ export const CaseStudyDetail: React.FC = () => {
       <SEO 
         title={`${study.title} — Design Plunge`} 
         description={study.description} 
-        canonical={`/work/${study.slug}`}
+        canonical={`/work/${study.slug}`} 
+        structuredData={[
+          organizationLD(),
+          creativeWorkLD(study),
+          caseStudyBreadcrumbs(study.slug, study.title),
+        ]}
       />
 
       <div className={styles.page}>

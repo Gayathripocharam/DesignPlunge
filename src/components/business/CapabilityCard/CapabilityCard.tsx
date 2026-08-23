@@ -1,13 +1,14 @@
-import type { CanonicalService } from '@/content/services';
+import type { Service } from '@/content/services';
 import styles from './CapabilityCard.module.css';
+import { Link } from 'react-router-dom';
 
 interface CapabilityCardProps {
-  capability: CanonicalService;
+  capability: Service;
   onSelect?: (targetId: string) => void;
 }
 
 export function CapabilityCard({ capability, onSelect }: CapabilityCardProps) {
-  const { index, iconFa, title, tags, detail } = capability;
+  const { id, iconFa, title, tags, detail } = capability;
 
   return (
     <div
@@ -22,10 +23,10 @@ export function CapabilityCard({ capability, onSelect }: CapabilityCardProps) {
       <span className={`${styles.corner} ${styles.bl}`} />
       <span className={`${styles.corner} ${styles.br}`} />
 
-      <div className={styles.capNum}>N.{index}</div>
-      <div className={styles.capIcon}>
+      <div className={styles.capNum}>N.{id}</div>
+      <Link to={`/services/${capability.slug}`} className={styles.exploreLink}>
         <i className={iconFa} aria-hidden="true" />
-      </div>
+      </Link>
       <div className={styles.capTitle}>{title}</div>
       <div className={styles.capTags}>
         {tags.map((tag) => (

@@ -5,7 +5,7 @@ import styles from "./ServiceOverview.module.css";
 import { ServiceShowcase } from "./ServiceOverview/ServiceShowcase";
 import { Section } from "@/components/ui/Section";
 
-import { canonicalServices } from "@/content/services";
+import { services } from "@/content/services";
 
 export interface ServiceOverviewProps {
   spacingTop?: "none" | "medium" | "large";
@@ -37,7 +37,7 @@ export const ServiceOverview: React.FC<ServiceOverviewProps> = ({
         </p>
       </motion.div>
 
-      <ServiceShowcase services={canonicalServices} />
+      <ServiceShowcase services={services} />
 
       <div className={styles.bridge}>
         <div className={styles.bridgeTop}>FROM PROBLEM&nbsp;&nbsp;→&nbsp;&nbsp;TO PRODUCT</div>

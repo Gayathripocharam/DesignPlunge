@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './ServicesIndex.module.css';
-import type { Service } from '@/data/servicesData';
+import type { Service } from '@/content/services';
 
 interface ServicesIndexProps {
   services: Service[];

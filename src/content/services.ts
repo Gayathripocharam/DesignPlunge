@@ -1,27 +1,33 @@
 import type { RailStage, ServiceDetailData } from '../components/types';
 
-export interface CanonicalService {
-  id: string; // e.g. 'digital-products'
-  slug: string; // e.g. '/services/product-design'
-  index: string; // '01'
+export type ServiceSlug =
+  | 'digital-products'
+  | 'web-applications'
+  | 'ai-systems'
+  | 'design-systems';
+
+export interface Service {
+  id: string; // '01'
+  slug: ServiceSlug; // 'digital-products'
   title: string;
   shortTitle: string; // Used in cards, e.g. 'Product design'
   description: string;
-  tags: string[]; // ['Strategy', 'UX', 'UI']
+  tags: string[]; // Used in detail page
+  metadata: string[]; // Used in overview page
   iconFa: string; // FontAwesome icon class
   iconLucide: string; // Lucide icon name or internal identifier (e.g. 'Diamond')
   detail: ServiceDetailData; // The deep content for the detail page
 }
 
-export const canonicalServices: CanonicalService[] = [
+export const services: Service[] = [
   {
-    id: 'digital-products',
-    slug: '/services/product-design',
-    index: '01',
+    id: '01',
+    slug: 'digital-products',
     title: 'Digital product design',
     shortTitle: 'Product design',
     description: 'End-to-end product design and engineering.',
     tags: ['Strategy', 'UX', 'UI'],
+    metadata: ['PRODUCT STRATEGY', 'UX / UI', 'PROTOTYPING', 'ENGINEERING'],
     iconFa: 'fa-regular fa-compass',
     iconLucide: 'Diamond',
     detail: {
@@ -44,17 +50,17 @@ export const canonicalServices: CanonicalService[] = [
         { name: 'Founders', icon: 'fa-regular fa-rocket', hint: 'Validating concepts' },
         { name: 'Product Leaders', icon: 'fa-regular fa-chart-line-up', hint: 'Scaling platforms' },
       ],
-      next: { current: 1, total: 4, title: 'See how we build web applications', link: '/services/web-engineering' },
+      next: { current: 1, total: 4, title: 'See how we build web applications', link: '/services/web-applications' },
     }
   },
   {
-    id: 'web-applications',
-    slug: '/services/web-engineering',
-    index: '02',
+    id: '02',
+    slug: 'web-applications',
     title: 'Web engineering',
     shortTitle: 'Web engineering',
     description: 'Scalable, high-performance web platforms.',
     tags: ['Frontend', 'Backend', 'Systems'],
+    metadata: ['ARCHITECTURE', 'FRONTEND', 'BACKEND', 'INTEGRATIONS'],
     iconFa: 'fa-regular fa-code',
     iconLucide: 'Layout',
     detail: {
@@ -75,17 +81,17 @@ export const canonicalServices: CanonicalService[] = [
       bestFor: [
         { name: 'CTOs', icon: 'fa-regular fa-laptop-code', hint: 'Modernizing tech stacks' },
       ],
-      next: { current: 2, total: 4, title: 'Explore AI automation', link: '/services/ai-automation' },
+      next: { current: 2, total: 4, title: 'Explore AI automation', link: '/services/ai-systems' },
     }
   },
   {
-    id: 'ai-systems',
-    slug: '/services/ai-automation',
-    index: '03',
+    id: '03',
+    slug: 'ai-systems',
     title: 'AI & automation',
     shortTitle: 'AI & automation',
     description: 'Intelligent automation and integrations.',
     tags: ['Workflows', 'Integrations', 'Intelligence'],
+    metadata: ['AI WORKFLOWS', 'AUTOMATION', 'RAG', 'AGENTS'],
     iconFa: 'fa-regular fa-sparkles',
     iconLucide: 'Cpu',
     detail: {
@@ -110,13 +116,13 @@ export const canonicalServices: CanonicalService[] = [
     }
   },
   {
-    id: 'design-systems',
-    slug: '/services/design-systems',
-    index: '04',
+    id: '04',
+    slug: 'design-systems',
     title: 'Design systems',
     shortTitle: 'Design systems',
     description: 'Scalable UI foundations and component architecture.',
     tags: ['UI', 'Tokens', 'Architecture'],
+    metadata: ['TOKENS', 'COMPONENTS', 'PATTERNS', 'PRODUCT UI'],
     iconFa: 'fa-regular fa-layer-group',
     iconLucide: 'Layers',
     detail: {
@@ -137,7 +143,7 @@ export const canonicalServices: CanonicalService[] = [
       bestFor: [
         { name: 'Design Teams', icon: 'fa-regular fa-pen-ruler', hint: 'Unifying output' },
       ],
-      next: { current: 4, total: 4, title: 'Back to Product Design', link: '/services/product-design' },
+      next: { current: 4, total: 4, title: 'Back to Product Design', link: '/services/digital-products' },
     }
   },
 ];
@@ -149,6 +155,8 @@ export const pipelineStages: RailStage[] = [
   { icon: 'fa-regular fa-sparkles', title: 'AI',          desc: 'Workflows, integrations, intelligence' },
 ];
 
-export function getServiceBySlug(slug: string): CanonicalService | undefined {
-  return canonicalServices.find(s => s.slug === `/services/${slug}` || s.slug === slug || s.id === slug);
+export function getServiceBySlug(slug: string): Service | undefined {
+  // Strip '/services/' prefix if accidentally provided
+  const normalizedSlug = slug.replace(/^\/services\//, '');
+  return services.find(s => s.slug === normalizedSlug);
 }

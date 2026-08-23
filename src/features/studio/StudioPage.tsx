@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./StudioPage.module.css";
+import { organizationLD } from '@/seo/structuredData';
 import { Section } from "@/components/ui/Section";
 import { StudioHero } from "../../components/business/StudioHero/StudioHero";
 import { CorePrinciples } from "../../components/business/CorePrinciples/CorePrinciples";
@@ -17,15 +18,7 @@ import { SEO } from "@/components/seo/SEO";
  *   StudioHero → CorePrinciples → WhyDesignPlunge → HowWeWork → WorkingTogether → Team
  */
 
-interface TeamMember {
-  name: string;
-  role: string;
-}
-
-const team: TeamMember[] = [
-  { name: "Gayathri", role: "Product & Design" },
-  { name: "Pocha", role: "Engineering & AI" },
-];
+import { team } from '../../content/studio';
 
 export const StudioPage: React.FC = () => (
   <>
@@ -33,6 +26,7 @@ export const StudioPage: React.FC = () => (
       title="Studio — Design Plunge"
       description="Design Plunge is a digital product studio combining strategy, design, engineering, and AI."
       canonical="/studio"
+      structuredData={[organizationLD()]}
     />
     {/* Hero */}
     <StudioHero />

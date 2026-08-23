@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './ServiceSection.module.css';
-import type { Service } from '@/data/servicesData';
+import type { Service } from '@/content/services';
 import { VisualMetaphor } from '@/components/business/ServiceOverview/VisualMetaphors';
 
 interface ServiceSectionProps {
@@ -62,7 +62,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ service, index }) => {
       {/* ── Visual ── */}
       <motion.div className={styles.visual} variants={visualVariant}>
         <div className={styles.visualPanel}>
-          <VisualMetaphor type={service.visualKey} />
+          <VisualMetaphor type={service.slug} />
         </div>
       </motion.div>
     </motion.div>

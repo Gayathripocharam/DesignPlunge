@@ -1,49 +1,21 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, PenTool, Users, Code2, Rocket } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Search, PenTool, Users, Code2, Rocket } from 'lucide-react';
+
 import { Section } from "@/components/ui/Section";
 import styles from "./HowWeWork.module.css";
 
-interface Step {
-  title: string;
-  desc: string;
-  tags: string[];
-  icon: LucideIcon;
-}
+import { processSteps } from '@/content/studio';
+import type { LucideIcon } from 'lucide-react';
 
-const steps: Step[] = [
-  {
-    title: "Discover",
-    desc: "Understand the business, users and constraints.",
-    tags: ["Problem definition", "Requirements", "Opportunity map"],
-    icon: Search,
-  },
-  {
-    title: "Define",
-    desc: "Turn ambiguity into a clear product direction.",
-    tags: ["Personas", "User flows", "Scope"],
-    icon: PenTool,
-  },
-  {
-    title: "Design",
-    desc: "Create and validate the experience.",
-    tags: ["UX flows", "UI system", "Prototype"],
-    icon: Users,
-  },
-  {
-    title: "Build",
-    desc: "Turn the validated design into production software.",
-    tags: ["Frontend", "Backend", "Integrations"],
-    icon: Code2,
-  },
-  {
-    title: "Launch",
-    desc: "Ship, measure and improve.",
-    tags: ["Deployment", "QA", "Handoff"],
-    icon: Rocket,
-  },
-];
+// Icon mapping stays in the component — content files must not import UI libraries
+const iconMap: Record<string, LucideIcon> = {
+  discover: Search,
+  define: PenTool,
+  design: Users,
+  build: Code2,
+  launch: Rocket,
+};
 
 const panelVariants = {
   enter: { opacity: 0, y: 16 },
@@ -61,8 +33,8 @@ export interface HowWeWorkProps {
 
 export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spacingBottom = "medium" }) => {
   const [active, setActive] = useState(0);
-  const step = steps[active];
-  const Icon = step.icon;
+  const step = processSteps[active];
+  const Icon = iconMap[step.id] ?? Search;
 
   return (
     <Section id="how-we-work" background="var(--bg)" spacingTop={spacingTop} spacingBottom={spacingBottom} className={styles.container}>
@@ -77,7 +49,7 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spa
 
         <div className={styles.stepperFrame}>
           <div className={styles.stepBar}>
-            {steps.map((s, i) => (
+            {processSteps.map((s, i) => (
               <button
                 key={s.title}
                 type="button"
@@ -94,7 +66,7 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spa
           <div className={styles.progressTrack}>
             <motion.div
               className={styles.progressFill}
-              animate={{ width: `${((active + 1) / steps.length) * 100}%` }}
+              animate={{ width: `${((active + 1) / processSteps.length) * 100}%` }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             />
           </div>

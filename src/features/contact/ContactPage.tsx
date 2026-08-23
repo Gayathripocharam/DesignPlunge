@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/design/animations";
-import { SEO } from "@/components/seo/SEO";
+import { SEO } from '@/components/seo/SEO';
+import { organizationLD } from '@/seo/structuredData';
 import { Section } from "@/components/ui/Section";
 import styles from "./ContactPage.module.css";
 import { trackEvent } from "@/lib/analytics";
@@ -20,6 +21,7 @@ export const ContactPage: React.FC = () => {
         title="Start a Project — Design Plunge" 
         description="Tell us what you're trying to build, improve, or automate." 
         canonical="/contact"
+        structuredData={[organizationLD()]}
       />
 
       <div className={styles.page}>

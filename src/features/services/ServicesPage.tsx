@@ -3,13 +3,14 @@ import { SEO } from "@/components/seo/SEO";
 import styles from "./ServicesPage.module.css";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { services } from "@/data/servicesData";
+import { services } from "@/content/services";
 import ServiceHero from "@/components/business/ServiceOverview/ServiceHero";
 import ServicesIndex from "@/components/business/ServiceOverview/ServicesIndex";
 import ServiceSection from "@/components/business/ServiceOverview/ServiceSection";
 import ProblemToProductBridge from "@/components/business/ServiceOverview/ProblemToProductBridge";
 import OutcomeMapping from "@/components/business/ServiceOverview/OutcomeMapping";
 import ServicesCTA from "@/components/business/ServiceOverview/ServicesCTAComp";
+import { organizationLD } from '@/seo/structuredData';
 
 // Alternate background between bg and surface for each service section
 const sectionBgs = ["var(--bg)", "var(--surface)", "var(--bg)", "var(--surface)"];
@@ -20,6 +21,7 @@ export const ServicesPage: React.FC = () => (
       title="Services — Design Plunge"
       description="Product strategy, design, engineering and AI automation — connected from first decision to final build."
       canonical="/services"
+      structuredData={[organizationLD()]}
     />
     <div className={styles.container}>
 

@@ -3,32 +3,7 @@ import { Link } from "react-router-dom";
 import { Section } from "@/components/ui/Section";
 import styles from "./WorkingTogether.module.css";
 
-const principles = [
-  {
-    num: "01",
-    title: "DISCOVER TOGETHER",
-    desc: "We define the problem before we rush toward a solution.",
-    deliverables: ["Research", "Problem framing", "Requirements", "Opportunity mapping"]
-  },
-  {
-    num: "02",
-    title: "DESIGN WITH ENGINEERING",
-    desc: "Ideas are tested against technical reality early.",
-    deliverables: ["UX flows", "Prototypes", "Technical exploration", "Design decisions"]
-  },
-  {
-    num: "03",
-    title: "BUILD IN THE OPEN",
-    desc: "You see progress while the product is taking shape.",
-    deliverables: ["Working builds", "Regular reviews", "Fast feedback", "Shared decisions"]
-  },
-  {
-    num: "04",
-    title: "LAUNCH WITH A FOUNDATION",
-    desc: "The goal isn't simply to ship. It's to leave something useful behind.",
-    deliverables: ["Production-ready product", "Design system", "Documentation", "Next-step roadmap"]
-  }
-];
+import { engagementPrinciples } from '@/content/studio';
 
 export const WorkingTogether: React.FC = () => {
   return (
@@ -56,7 +31,7 @@ export const WorkingTogether: React.FC = () => {
             {/* Right Column */}
             <div className={styles.rightCol}>
               <div className={styles.list}>
-                {principles.map((item, index) => (
+                {engagementPrinciples.map((item, index) => (
                   <div key={index} className={styles.row} tabIndex={0} role="group" aria-label={item.title}>
                     <div className={styles.rowNum}>{item.num}</div>
                     <div className={styles.rowContent}>

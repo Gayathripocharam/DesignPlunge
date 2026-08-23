@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
+import { services } from "@/content/services";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -30,10 +31,9 @@ export const Footer: React.FC = () => {
             <div className={styles.column}>
               <span className={styles.colTitle}>Services</span>
               <ul>
-                <li><Link to="/services/product-design">Product Design</Link></li>
-                <li><Link to="/services/web-engineering">Web Engineering</Link></li>
-                <li><Link to="/services/ai-automation">AI &amp; Automation</Link></li>
-                <li><Link to="/services/design-systems">Design Systems</Link></li>
+                {services.map(s => (
+                  <li key={s.slug}><Link to={`/services/${s.slug}`}>{s.shortTitle}</Link></li>
+                ))}
               </ul>
             </div>
             <div className={styles.column}>

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import styles from "./ServiceShowcase.module.css";
 import { VisualMetaphor, type VisualMetaphorType } from "./VisualMetaphors";
 
-import type { CanonicalService } from "@/content/services";
+import type { Service } from "@/content/services";
 
 interface ServiceShowcaseProps {
-  services: CanonicalService[];
+  services: Service[];
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -115,7 +115,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
                 className={styles.panel}
                 style={{ x: parallaxX, y: parallaxY }}
               >
-                <VisualMetaphor type={activeService.id as VisualMetaphorType} />
+                <VisualMetaphor type={activeService.slug as VisualMetaphorType} />
               </motion.div>
             </AnimatePresence>
           </motion.div>
@@ -125,7 +125,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
               <p className={styles.panelTitle}>{activeService.title}</p>
               <p className={styles.panelDesc}>{activeService.description}</p>
             </div>
-            <Link to={activeService.slug} className={styles.panelLink} aria-label={`View ${activeService.title}`}>
+            <Link to={`/services/${activeService.slug}`} className={styles.panelLink} aria-label={`View ${activeService.title}`}>
               <ArrowRight size={18} strokeWidth={1.5} />
             </Link>
           </div>

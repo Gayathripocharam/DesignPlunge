@@ -1,6 +1,7 @@
 import React from "react";
 import { SEO } from "@/components/seo/SEO";
 import { Hero } from "@/features/home/components/Hero";
+import { organizationLD, websiteLD } from '@/seo/structuredData';
 
 import { ServiceOverview as WhatWeBuild } from "@/components/business/ServiceOverview";
 import { SelectedWork } from "@/components/business/SelectedWork/SelectedWork";
@@ -13,12 +14,14 @@ import { ContextualNav } from "@/components/business/ContextualNav/ContextualNav
 import styles from "./Home.module.css";
 
 export const Home: React.FC = () => {
+  const structuredData = [organizationLD(), websiteLD()];
   return (
     <>
       <SEO 
         title="Design Plunge — Product Strategy & Design Studio" 
         description="We are a digital product studio building software that matters. We combine strategy, design, and engineering." 
         canonical="/" 
+        structuredData={structuredData}
       />
       
       <main className={styles.homeContainer}>

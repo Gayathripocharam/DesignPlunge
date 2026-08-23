@@ -1,51 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/ui/Section";
+import { whyPrinciples } from '@/content/studio';
 import styles from "./WhyDesignPlunge.module.css";
-
-interface Principle {
-  title: string;
-  subtitle: string;
-  flow: string[];
-  meansTitle: string;
-  meansDesc: string;
-  tags: string[];
-}
-
-const principles: Principle[] = [
-  {
-    title: "Product thinking",
-    subtitle: "Start with the problem, users and business context.",
-    flow: ["PROBLEM", "USER", "PRODUCT"],
-    meansTitle: "WHAT THIS MEANS",
-    meansDesc: "We start by understanding the problem before deciding what to build.",
-    tags: ["Problem definition", "User needs", "Product direction"],
-  },
-  {
-    title: "Design + engineering",
-    subtitle: "Design decisions stay connected to technical reality.",
-    flow: ["DESIGN", "ENGINEERING"],
-    meansTitle: "WHAT THIS MEANS",
-    meansDesc: "Design decisions stay connected to technical reality from the beginning.",
-    tags: ["UX architecture", "UI systems", "Technical validation"],
-  },
-  {
-    title: "Purposeful AI",
-    subtitle: "Use AI where it creates meaningful leverage — not because it's fashionable.",
-    flow: ["HUMAN", "AI", "OUTCOME"],
-    meansTitle: "WHAT THIS MEANS",
-    meansDesc: "We use AI where it creates measurable leverage rather than adding complexity.",
-    tags: ["Automation", "AI workflows", "Intelligent features"],
-  },
-  {
-    title: "Long-term systems",
-    subtitle: "Build foundations that remain useful after launch.",
-    flow: ["PRODUCT", "SYSTEM", "SCALE"],
-    meansTitle: "WHAT THIS MEANS",
-    meansDesc: "We build foundations that remain useful as the product evolves.",
-    tags: ["Architecture", "Design systems", "Documentation"],
-  },
-];
 
 const panelVariants = {
   enter: { opacity: 0, y: 16 },
@@ -55,7 +12,7 @@ const panelVariants = {
 
 export const WhyDesignPlunge: React.FC = () => {
   const [active, setActive] = useState(0);
-  const item = principles[active];
+  const item = whyPrinciples[active];
 
   return (
     <Section id="why-design-plunge" background="var(--bg)" className={styles.container}>
@@ -76,7 +33,7 @@ export const WhyDesignPlunge: React.FC = () => {
 
         <div className={styles.stepperFrame}>
           <div className={styles.stepBar}>
-            {principles.map((p, i) => (
+            {whyPrinciples.map((p, i) => (
               <button
                 key={p.title}
                 type="button"
@@ -93,7 +50,7 @@ export const WhyDesignPlunge: React.FC = () => {
           <div className={styles.progressTrack}>
             <motion.div
               className={styles.progressFill}
-              animate={{ width: `${((active + 1) / principles.length) * 100}%` }}
+              animate={{ width: `${((active + 1) / whyPrinciples.length) * 100}%` }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             />
           </div>

@@ -3,41 +3,14 @@ import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/design/animations";
-import { Section } from "@/components/ui/Section";
 import { SEO } from "@/components/seo/SEO";
+import { Section } from "@/components/ui/Section";
+import { organizationLD } from '@/seo/structuredData';
 import styles from "./WorkPage.module.css";
 
-import aiOpsImg from "@/assets/illustrations/ai-operations.jpg";
-import productDashImg from "@/assets/illustrations/product-dashboard.jpg";
-import autoPlatformImg from "@/assets/illustrations/automation-platform.jpg";
+import { projects } from '@/content/projects';
+import type { Project } from '@/content/projects';
 
-interface Project {
-  slug: string;
-  image: string;
-  title: string;
-  desc: string;
-}
-
-const projects: Project[] = [
-  {
-    slug: "ai-operations-platform",
-    image: aiOpsImg,
-    title: "AI Operations Platform",
-    desc: "A concept exploring how repetitive operational work could be consolidated into one intelligent workspace.",
-  },
-  {
-    slug: "product-analytics-dashboard",
-    image: productDashImg,
-    title: "Product Analytics Dashboard",
-    desc: "A concept exploring how product signals can become clearer decisions rather than just more charts.",
-  },
-  {
-    slug: "business-automation-platform",
-    image: autoPlatformImg,
-    title: "Business Automation Platform",
-    desc: "A concept exploring how to bridge disconnected enterprise systems without complete rewrites.",
-  },
-];
 
 interface PlungeState {
   href: string;
@@ -93,6 +66,7 @@ export const WorkPage: React.FC = () => {
         title="Work — Design Plunge"
         description="A collection of product concepts exploring complex problems through design, engineering and automation."
         canonical="/work"
+        structuredData={[organizationLD()]}
       />
       <Section background="var(--bg)" spacingTop="large" spacingBottom="none">
         <motion.div 
@@ -131,7 +105,7 @@ export const WorkPage: React.FC = () => {
                   </span>
                   <span className={styles.rowText}>
                     <span className={styles.rowTitle}>{project.title}</span>
-                    <span className={styles.rowDesc}>{project.desc}</span>
+                    <span className={styles.rowDesc}>{project.description}</span>
                   </span>
                   <span className={styles.rowArrow}>&rarr;</span>
                 </Link>

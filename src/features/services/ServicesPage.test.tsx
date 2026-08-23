@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import ServicesPage from './ServicesPage';
-import { services } from '@/data/servicesData';
+import { services } from '@/content/services';
 import { describe, it, expect } from 'vitest';
 
 const renderWithProviders = (ui: React.ReactElement) => {

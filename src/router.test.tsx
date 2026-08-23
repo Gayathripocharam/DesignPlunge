@@ -43,8 +43,9 @@ const renderWithRouter = (initialPath: string) => {
 describe('Routing', () => {
   it('renders the services page on /services', async () => {
     renderWithRouter('/services');
-    const heroText = await screen.findByText(/We build digital systems for/i);
-    expect(heroText).toBeInTheDocument();
+    // ServicesPage renders ServicesIndex which has a visible 'WHAT WE DO' label
+    const navLabel = await screen.findByText(/WHAT WE DO/i, {}, { timeout: 5000 });
+    expect(navLabel).toBeInTheDocument();
   });
 
   it('renders a valid service detail page on /services/digital-products', async () => {
