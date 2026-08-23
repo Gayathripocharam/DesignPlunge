@@ -36,7 +36,8 @@
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -56,13 +57,28 @@
 }
 
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
+.field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.emptySelect {
+  color: transparent !important;
+}
+
+.emptySelect:focus {
+  color: var(--text-h) !important;
+}
+
 .field input.invalid,
-.field textarea.invalid {
+.field textarea.invalid,
+.field select.invalid {
   border-color: #ef4444;
 }
 
@@ -79,7 +95,9 @@
 .field input:focus ~ label,
 .field input:not(:placeholder-shown) ~ label,
 .field textarea:focus ~ label,
-.field textarea:not(:placeholder-shown) ~ label {
+.field textarea:not(:placeholder-shown) ~ label,
+.field select:focus ~ label,
+.field select:not(.emptySelect) ~ label {
   top: 6px;
   font-size: 11px;
   color: var(--accent);
@@ -89,7 +107,8 @@
 }
 
 .field input.invalid ~ label,
-.field textarea.invalid ~ label {
+.field textarea.invalid ~ label,
+.field select.invalid ~ label {
   color: #ef4444;
 }
 

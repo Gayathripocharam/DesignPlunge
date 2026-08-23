@@ -18,16 +18,22 @@ describe('ContactForm', () => {
     return {
       nameInput: screen.getByLabelText(/Your name/i),
       emailInput: screen.getByLabelText(/Email address/i),
-      messageInput: screen.getByLabelText(/Tell us about the project/i),
+      buildInput: screen.getByLabelText(/What are you trying to build or improve\?/i),
+      problemInput: screen.getByLabelText(/What problem are you trying to solve\?/i),
+      stageSelect: screen.getByLabelText(/Where are you right now\?/i),
+      helpSelect: screen.getByLabelText(/What kind of help do you need\?/i),
       submitButton: screen.getByRole('button', { name: /Send message/i }),
     };
   };
 
   it('renders correctly', () => {
-    const { nameInput, emailInput, messageInput, submitButton } = setup();
+    const { nameInput, emailInput, buildInput, problemInput, stageSelect, helpSelect, submitButton } = setup();
     expect(nameInput).toBeInTheDocument();
     expect(emailInput).toBeInTheDocument();
-    expect(messageInput).toBeInTheDocument();
+    expect(buildInput).toBeInTheDocument();
+    expect(problemInput).toBeInTheDocument();
+    expect(stageSelect).toBeInTheDocument();
+    expect(helpSelect).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
 
@@ -39,8 +45,10 @@ describe('ContactForm', () => {
 
     expect(screen.getByText(/Tell us your name/i)).toBeInTheDocument();
     expect(screen.getByText(/Email is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/Pick what fits best/i)).toBeInTheDocument();
-    expect(screen.getByText(/Give us a few details/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please share a few details/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please share the problem/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please select a stage/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please select the type of help/i)).toBeInTheDocument();
   });
 
   it('validates email format', async () => {
@@ -53,18 +61,8 @@ describe('ContactForm', () => {
     expect(screen.getByText(/That email doesn't look right/i)).toBeInTheDocument();
   });
 
-  it('validates message minimum length', async () => {
-    const { messageInput, submitButton } = setup();
-    const user = userEvent.setup();
-
-    await user.type(messageInput, 'too short');
-    await user.click(submitButton);
-
-    expect(screen.getByText(/A little more detail helps \(20 char min\)/i)).toBeInTheDocument();
-  });
-
   it('submits successfully when fields are valid', async () => {
-    const { nameInput, emailInput, messageInput, submitButton } = setup();
+    const { nameInput, emailInput, buildInput, problemInput, stageSelect, helpSelect, submitButton } = setup();
     const user = userEvent.setup();
 
     let resolveFetch!: (value: unknown) => void;
@@ -76,8 +74,10 @@ describe('ContactForm', () => {
 
     await user.type(nameInput, 'Jane Doe');
     await user.type(emailInput, 'jane@example.com');
-    await user.click(screen.getByRole('button', { name: /Web App/i }));
-    await user.type(messageInput, 'This is a sufficiently long message to pass validation.');
+    await user.type(buildInput, 'Building a new dashboard');
+    await user.type(problemInput, 'Data is hard to understand');
+    await user.selectOptions(stageSelect, 'Exploring an idea');
+    await user.selectOptions(helpSelect, 'Product strategy');
 
     await user.click(submitButton);
 
@@ -107,15 +107,17 @@ describe('ContactForm', () => {
   });
 
   it('shows error state when submission fails', async () => {
-    const { nameInput, emailInput, messageInput, submitButton } = setup();
+    const { nameInput, emailInput, buildInput, problemInput, stageSelect, helpSelect, submitButton } = setup();
     const user = userEvent.setup();
 
     (globalThis.fetch as Mock).mockRejectedValueOnce(new Error('Network error'));
 
     await user.type(nameInput, 'Jane Doe');
     await user.type(emailInput, 'jane@example.com');
-    await user.click(screen.getByRole('button', { name: /Web App/i }));
-    await user.type(messageInput, 'This is a sufficiently long message to pass validation.');
+    await user.type(buildInput, 'Building a new dashboard');
+    await user.type(problemInput, 'Data is hard to understand');
+    await user.selectOptions(stageSelect, 'Exploring an idea');
+    await user.selectOptions(helpSelect, 'Product strategy');
 
     await user.click(submitButton);
 

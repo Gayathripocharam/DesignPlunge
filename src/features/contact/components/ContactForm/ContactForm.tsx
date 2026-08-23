@@ -3,11 +3,38 @@ import type { FormEvent } from 'react';
 import { track } from '@/analytics';
 import styles from './ContactForm.module.css';
 
-const projectTypes = [
-  { id: 'web', label: 'Web App', icon: 'fa-regular fa-browser' },
-  { id: 'ai', label: 'AI / Automation', icon: 'fa-regular fa-sparkles' },
-  { id: 'design-system', label: 'Design System', icon: 'fa-regular fa-layer-group' },
-  { id: 'unsure', label: 'Not sure yet', icon: 'fa-regular fa-circle-question' },
+const stageOptions = [
+  'Exploring an idea',
+  'Planning a new product',
+  'Improving an existing product',
+  'Scaling an existing system',
+  'Looking to integrate AI/automation',
+  'Not sure yet'
+];
+
+const helpOptions = [
+  'Product strategy',
+  'UX/UI',
+  'Design system',
+  'Engineering',
+  'AI / automation',
+  'End-to-end product development',
+  'Not sure yet'
+];
+
+const timelineOptions = [
+  'Exploring',
+  'Within 1–3 months',
+  'Within 3–6 months',
+  'Flexible'
+];
+
+const budgetOptions = [
+  'Prefer not to say',
+  'Under ₹5L',
+  '₹5L–₹15L',
+  '₹15L+',
+  'Not decided'
 ];
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
@@ -15,13 +42,26 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 interface FormState {
   name: string;
   email: string;
-  projectType: string;
-  message: string;
+  buildOrImprove: string;
+  problemToSolve: string;
+  stage: string;
+  helpNeeded: string;
+  timeline: string;
+  budget: string;
 }
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const initialState: FormState = { name: '', email: '', projectType: '', message: '' };
+const initialState: FormState = {
+  name: '',
+  email: '',
+  buildOrImprove: '',
+  problemToSolve: '',
+  stage: '',
+  helpNeeded: '',
+  timeline: '',
+  budget: ''
+};
 
 function validate(state: FormState): FormErrors {
   const errors: FormErrors = {};
@@ -31,12 +71,11 @@ function validate(state: FormState): FormErrors {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
     errors.email = "That email doesn't look right";
   }
-  if (!state.projectType) errors.projectType = 'Pick what fits best';
-  if (!state.message.trim()) {
-    errors.message = 'Give us a few details';
-  } else if (state.message.trim().length < 20) {
-    errors.message = 'A little more detail helps (20 char min)';
-  }
+  if (!state.buildOrImprove.trim()) errors.buildOrImprove = 'Please share a few details';
+  if (!state.problemToSolve.trim()) errors.problemToSolve = 'Please share the problem';
+  if (!state.stage) errors.stage = 'Please select a stage';
+  if (!state.helpNeeded) errors.helpNeeded = 'Please select the type of help';
+  
   return errors;
 }
 
@@ -152,6 +191,7 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
         </div>
       )}
 
+      {/* Contact information */}
       <div className={styles.row}>
         <div className={styles.field}>
           <input
@@ -179,36 +219,89 @@ export function ContactForm({ endpointConfigured, fallbackEmail }: ContactFormPr
         </div>
       </div>
 
+      {/* Product context */}
       <div className={styles.field}>
-        <span className={styles.groupLabel}>What are you building?</span>
-        <div className={styles.pillRow}>
-          {projectTypes.map((type) => (
-            <button
-              key={type.id}
-              type="button"
-              className={`${styles.typePill} ${form.projectType === type.id ? styles.typeActive : ''}`}
-              onClick={() => update('projectType', type.id)}
-            >
-              <i className={type.icon} aria-hidden="true" /> {type.label}
-            </button>
-          ))}
-        </div>
-        {errors.projectType && <span className={styles.errorText}>{errors.projectType}</span>}
+        <textarea
+          id="buildOrImprove"
+          placeholder=" "
+          rows={3}
+          value={form.buildOrImprove}
+          onChange={(e) => update('buildOrImprove', e.target.value)}
+          className={errors.buildOrImprove ? styles.invalid : ''}
+        />
+        <label htmlFor="buildOrImprove">What are you trying to build or improve?</label>
+        {errors.buildOrImprove && <span className={styles.errorText}>{errors.buildOrImprove}</span>}
       </div>
 
       <div className={styles.field}>
         <textarea
-          id="message"
+          id="problemToSolve"
           placeholder=" "
-          rows={5}
-          maxLength={600}
-          value={form.message}
-          onChange={(e) => update('message', e.target.value)}
-          className={errors.message ? styles.invalid : ''}
+          rows={3}
+          value={form.problemToSolve}
+          onChange={(e) => update('problemToSolve', e.target.value)}
+          className={errors.problemToSolve ? styles.invalid : ''}
         />
-        <label htmlFor="message">Tell us about the project</label>
-        <span className={styles.counter}>{form.message.length}/600</span>
-        {errors.message && <span className={styles.errorText}>{errors.message}</span>}
+        <label htmlFor="problemToSolve">What problem are you trying to solve?</label>
+        {errors.problemToSolve && <span className={styles.errorText}>{errors.problemToSolve}</span>}
+      </div>
+
+      {/* Engagement context */}
+      <div className={styles.field}>
+        <select
+          id="stage"
+          value={form.stage}
+          onChange={(e) => update('stage', e.target.value)}
+          className={`${errors.stage ? styles.invalid : ''} ${!form.stage ? styles.emptySelect : ''}`}
+        >
+          <option value="" disabled hidden></option>
+          {stageOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+        </select>
+        <label htmlFor="stage">Where are you right now?</label>
+        {errors.stage && <span className={styles.errorText}>{errors.stage}</span>}
+      </div>
+
+      <div className={styles.field}>
+        <select
+          id="helpNeeded"
+          value={form.helpNeeded}
+          onChange={(e) => update('helpNeeded', e.target.value)}
+          className={`${errors.helpNeeded ? styles.invalid : ''} ${!form.helpNeeded ? styles.emptySelect : ''}`}
+        >
+          <option value="" disabled hidden></option>
+          {helpOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+        </select>
+        <label htmlFor="helpNeeded">What kind of help do you need?</label>
+        {errors.helpNeeded && <span className={styles.errorText}>{errors.helpNeeded}</span>}
+      </div>
+
+      {/* Optional context */}
+      <div className={styles.row}>
+        <div className={styles.field}>
+          <select
+            id="timeline"
+            value={form.timeline}
+            onChange={(e) => update('timeline', e.target.value)}
+            className={!form.timeline ? styles.emptySelect : ''}
+          >
+            <option value="" disabled hidden></option>
+            {timelineOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+          </select>
+          <label htmlFor="timeline">Timeline (Optional)</label>
+        </div>
+
+        <div className={styles.field}>
+          <select
+            id="budget"
+            value={form.budget}
+            onChange={(e) => update('budget', e.target.value)}
+            className={!form.budget ? styles.emptySelect : ''}
+          >
+            <option value="" disabled hidden></option>
+            {budgetOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+          </select>
+          <label htmlFor="budget">Budget (Optional)</label>
+        </div>
       </div>
 
       <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>

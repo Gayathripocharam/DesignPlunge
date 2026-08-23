@@ -27,12 +27,12 @@ const ServicesCTA: React.FC = () => {
         <Link 
           to="/contact" 
           className={styles.primaryBtn}
-          onClick={() => track("cta_click", { ctaId: "services-cta-block", ctaLabel: "Start a conversation", page: location.pathname })}
+          onClick={() => track("cta_click", { ctaId: "services-cta-block", ctaLabel: "Talk through the problem", page: location.pathname })}
         >
-          Start a conversation →
+          Talk through the problem &rarr;
         </Link>
         <Link to="/work" className={styles.secondaryBtn}>
-          View our work
+          View Selected Work
         </Link>
       </div>
     </div>

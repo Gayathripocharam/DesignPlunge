@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getServiceBySlug } from '@/content/services';
 import { NotFoundPage } from '@/features/NotFoundPage';
 import { ServiceDetail } from '@/components/business/ServiceDetail/ServiceDetail';
+import { ContextualNav } from '@/components/business/ContextualNav/ContextualNav';
 import { Section } from '@/components/ui/Section';
 import { SEO } from '@/components/seo/SEO';
 import { organizationLD, serviceLD, serviceBreadcrumbs } from '@/seo/structuredData';
@@ -37,6 +38,14 @@ export const ServiceDetailPage = () => {
       <Section background="var(--bg)" spacingTop="large" spacingBottom="large">
         <ServiceDetail data={data.detail} />
       </Section>
+      <ContextualNav
+        title="Ready to get started?"
+        subtitle="Tell us what you're trying to build or improve. We'll review the context and come back with clear next steps."
+        buttonText={data.ctaLabel}
+        to="/contact"
+        spacingTop="none"
+        spacingBottom="large"
+      />
     </>
   );
 };

@@ -14,6 +14,7 @@ export interface Service {
   description: string;
   tags: string[]; // Used in detail page
   metadata: string[]; // Used in overview page
+  ctaLabel: string; // Used in ServiceDetailPage CTA
   iconFa: string; // FontAwesome icon class
   iconLucide: string; // Lucide icon name or internal identifier (e.g. 'Diamond')
   detail: ServiceDetailData; // The deep content for the detail page
@@ -28,6 +29,7 @@ export const services: Service[] = [
     description: 'End-to-end product design and engineering.',
     tags: ['Strategy', 'UX', 'UI'],
     metadata: ['PRODUCT STRATEGY', 'UX / UI', 'PROTOTYPING', 'ENGINEERING'],
+    ctaLabel: 'Talk through your product \u2192',
     iconFa: 'fa-regular fa-compass',
     iconLucide: 'Diamond',
     detail: {
@@ -61,6 +63,7 @@ export const services: Service[] = [
     description: 'Scalable, high-performance web platforms.',
     tags: ['Frontend', 'Backend', 'Systems'],
     metadata: ['ARCHITECTURE', 'FRONTEND', 'BACKEND', 'INTEGRATIONS'],
+    ctaLabel: 'Discuss your application \u2192',
     iconFa: 'fa-regular fa-code',
     iconLucide: 'Layout',
     detail: {
@@ -92,6 +95,7 @@ export const services: Service[] = [
     description: 'Intelligent automation and integrations.',
     tags: ['Workflows', 'Integrations', 'Intelligence'],
     metadata: ['AI WORKFLOWS', 'AUTOMATION', 'RAG', 'AGENTS'],
+    ctaLabel: 'Explore where AI can create leverage \u2192',
     iconFa: 'fa-regular fa-sparkles',
     iconLucide: 'Cpu',
     detail: {
@@ -123,6 +127,7 @@ export const services: Service[] = [
     description: 'Scalable UI foundations and component architecture.',
     tags: ['UI', 'Tokens', 'Architecture'],
     metadata: ['TOKENS', 'COMPONENTS', 'PATTERNS', 'PRODUCT UI'],
+    ctaLabel: 'Talk through your design-system problem \u2192',
     iconFa: 'fa-regular fa-layer-group',
     iconLucide: 'Layers',
     detail: {
