@@ -12,23 +12,18 @@ const CaseStudyDetail = React.lazy(() => import("@/components/business/CaseStudy
 const StudioPage = React.lazy(() => import("@/features/studio/StudioPage").then(m => ({ default: m.StudioPage })));
 const ContactPage = React.lazy(() => import("@/features/contact/ContactPage").then(m => ({ default: m.ContactPage })));
 
-const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
-  <Suspense fallback={null}>
-    {children}
-  </Suspense>
-);
 
 const router = createBrowserRouter([
   {
     element: <Shell />, // Shell provides Navbar, Footer, etc.
     children: [
-      { path: "/", element: <SuspenseWrapper><Home /></SuspenseWrapper> },
-      { path: "/services", element: <SuspenseWrapper><ServicesPage /></SuspenseWrapper> },
-      { path: "/services/:slug", element: <SuspenseWrapper><ServiceDetailPage /></SuspenseWrapper> },
-      { path: "/work", element: <SuspenseWrapper><WorkPage /></SuspenseWrapper> },
-      { path: "/work/:slug", element: <SuspenseWrapper><CaseStudyDetail /></SuspenseWrapper> },
-      { path: "/studio", element: <SuspenseWrapper><StudioPage /></SuspenseWrapper> },
-      { path: "/contact", element: <SuspenseWrapper><ContactPage /></SuspenseWrapper> },
+      { path: "/", element: <Suspense fallback={null}><Home /></Suspense> },
+      { path: "/services", element: <Suspense fallback={null}><ServicesPage /></Suspense> },
+      { path: "/services/:slug", element: <Suspense fallback={null}><ServiceDetailPage /></Suspense> },
+      { path: "/work", element: <Suspense fallback={null}><WorkPage /></Suspense> },
+      { path: "/work/:slug", element: <Suspense fallback={null}><CaseStudyDetail /></Suspense> },
+      { path: "/studio", element: <Suspense fallback={null}><StudioPage /></Suspense> },
+      { path: "/contact", element: <Suspense fallback={null}><ContactPage /></Suspense> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
