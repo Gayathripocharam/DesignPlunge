@@ -4,16 +4,10 @@ import styles from "./Testimonials.module.css";
 
 const testimonials = [
   {
-    quote: "\"The team at Design Plunge took our complex internal processes and built a platform that our entire company actually wants to use. Their ability to bridge design and engineering is rare.\"",
-    name: "Sarah Jenkins",
-    role: "VP of Product",
-    company: "TechFlow Systems"
-  },
-  {
-    quote: "\"We came to them with a vague idea for an AI integration. They didn't just build what we asked for—they helped us refine the product strategy and delivered something far more valuable.\"",
-    name: "David Chen",
-    role: "Founder",
-    company: "Nexus Health"
+    quote: "\"I couldn’t be happier with my choice of using DesignPlunge for my new website. Their team were easy to work with and helped me make a terrific website in a short amount of time.\"",
+    name: "Essam Al Ali",
+    role: "CEO",
+    company: "FeatherTouch-Tech"
   }
 ];
 

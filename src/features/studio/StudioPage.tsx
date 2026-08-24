@@ -7,6 +7,7 @@ import { CorePrinciples } from "../../components/business/CorePrinciples/CorePri
 
 import { HowWeWork } from "../../components/business/HowWeWork/HowWeWork";
 import { WorkingTogether } from "../../components/business/WorkingTogether/WorkingTogether";
+import { Testimonials } from "../../components/business/Testimonials/Testimonials";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/design/animations";
 import { SEO } from "@/components/seo/SEO";
@@ -40,6 +41,9 @@ export const StudioPage: React.FC = () => (
 
     {/* Working Together — engagement model */}
     <WorkingTogether />
+
+    {/* Testimonial */}
+    <Testimonials />
 
     {/* Who We Work With */}
     <Section background="var(--surface)" spacingTop="large" spacingBottom="large">
