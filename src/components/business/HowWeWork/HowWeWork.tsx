@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Users, Map, PenTool, Code2, Repeat } from 'lucide-react';
 
@@ -19,9 +19,22 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const panelVariants = {
-  enter: { opacity: 0, y: 16 },
+  enter: { opacity: 0, x: 20 },
+  center: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      duration: 0.4, 
+      ease: [0.16, 1, 0.3, 1] as const,
+      staggerChildren: 0.1
+    } 
+  },
+  exit: { opacity: 0, x: -20, transition: { duration: 0.25, ease: [0.65, 0, 0.35, 1] as const } },
+};
+
+const itemVariants = {
+  enter: { opacity: 0, y: 10 },
   center: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } },
-  exit: { opacity: 0, y: -12, transition: { duration: 0.25, ease: [0.65, 0, 0.35, 1] as const } },
 };
 
 /**
@@ -34,12 +47,28 @@ export interface HowWeWorkProps {
 
 export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spacingBottom = "medium" }) => {
   const [active, setActive] = useState(0);
+  const [isInteracting, setIsInteracting] = useState(false);
+
+  useEffect(() => {
+    if (isInteracting) return;
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % processSteps.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isInteracting]);
+
   const step = processSteps[active];
   const Icon = iconMap[step.id] ?? Search;
 
   return (
     <Section id="how-we-work" background="var(--bg)" spacingTop={spacingTop} spacingBottom={spacingBottom} className={styles.container}>
-      <div className={styles.inner}>
+      <div 
+        className={styles.inner}
+        onMouseEnter={() => setIsInteracting(true)}
+        onMouseLeave={() => setIsInteracting(false)}
+        onFocus={() => setIsInteracting(true)}
+        onBlur={() => setIsInteracting(false)}
+      >
         <div className={styles.header}>
           <p className="section-marker">
              PROCESS
@@ -60,6 +89,13 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spa
               >
                 <span className={styles.stepNum}>{String(i + 1).padStart(2, "0")}</span>
                 <span className={styles.stepLabel}>{s.title}</span>
+                {i === active && (
+                  <motion.div
+                    className={styles.tabHighlight}
+                    layoutId="howWeWorkHighlight"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -82,15 +118,20 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ spacingTop = "medium", spa
                 exit="exit"
                 className={styles.panelInner}
               >
-                <div className={styles.panelIcon}>
+                <motion.div variants={itemVariants} className={styles.panelIcon}>
                   <Icon size={22} strokeWidth={1.5} />
-                </div>
+                </motion.div>
                 <div className={styles.panelBody}>
-                  <p className={styles.panelDesc}>{step.desc}</p>
-                  <div className={styles.youGet}>
+                  <div className={styles.panelHeader}>
+                    <motion.p variants={itemVariants} className={styles.panelDesc}>{step.desc}</motion.p>
+                    <motion.div variants={itemVariants} className={styles.panelBadge}>
+                      {step.badge}
+                    </motion.div>
+                  </div>
+                  <motion.div variants={itemVariants} className={styles.youGet}>
                     <p className={styles.youGetLabel}>You get</p>
                     <p className={styles.youGetTags}>{step.tags.join(" · ")}</p>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </AnimatePresence>

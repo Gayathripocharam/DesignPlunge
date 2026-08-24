@@ -53,10 +53,21 @@
   flex-direction: column;
   gap: 4px;
   align-items: center;
+  position: relative;
 }
 
 .stepBtn:last-child {
   border-right: none;
+}
+
+.tabHighlight {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--accent);
+  z-index: 2;
 }
 
 .stepNum {
@@ -127,11 +138,32 @@
   flex: 1;
 }
 
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
 .panelDesc {
   font-size: clamp(18px, 2vw, 22px);
   color: var(--text-h);
-  margin: 0 0 16px;
+  margin: 0;
   max-width: 520px;
+}
+
+.panelBadge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(109, 93, 246, 0.1);
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .youGet {

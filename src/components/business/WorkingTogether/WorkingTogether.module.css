@@ -179,6 +179,17 @@
   font-family: var(--mono);
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleIcon {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
 .rowDesc {
   font-size: 17px;
   color: var(--text);

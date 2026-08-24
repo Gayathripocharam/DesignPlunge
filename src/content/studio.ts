@@ -10,11 +10,12 @@
 export interface TeamMember {
   name: string;
   role: string;
+  image?: string;
 }
 
 export const team: TeamMember[] = [
-  { name: 'Gayathri', role: 'Product & Design' },
-  { name: 'Pocha', role: 'Engineering & AI' },
+  { name: 'Gayathri', role: 'Product & Design', image: '/team/gayathri.png' },
+  { name: 'Pocha', role: 'Engineering & AI', image: '/team/pocha.png' },
 ];
 
 // ── Core Principles (How We Think) ────────────────────────────────────────────
@@ -39,6 +40,7 @@ export interface ProcessStep {
   title: string;
   desc: string;
   tags: string[];
+  badge: string;
 }
 
 export const processSteps: ProcessStep[] = [
@@ -47,36 +49,42 @@ export const processSteps: ProcessStep[] = [
     title: 'Research',
     desc: 'Understand the business, users, and constraints.',
     tags: ['Problem definition', 'Requirements', 'Opportunity map'],
+    badge: '1-2 weeks',
   },
   {
     id: 'alignment',
     title: 'Alignment',
     desc: 'Ensure everyone shares the same vision and goals.',
     tags: ['Stakeholder interviews', 'Shared understanding', 'Scope definition'],
+    badge: '1 week',
   },
   {
     id: 'strategy',
     title: 'Strategy',
     desc: 'Define the path from ambiguity to clear direction.',
     tags: ['Product roadmap', 'Technical architecture', 'UX strategy'],
+    badge: '1-2 weeks',
   },
   {
     id: 'design',
     title: 'Design',
     desc: 'Create and validate the experience.',
     tags: ['UX flows', 'UI system', 'Prototypes'],
+    badge: '2-4 weeks',
   },
   {
     id: 'engineering',
     title: 'Engineering',
     desc: 'Turn validated designs into production software.',
     tags: ['Frontend', 'Backend', 'Integrations'],
+    badge: '4-8 weeks',
   },
   {
     id: 'iteration',
     title: 'Iteration',
     desc: 'Ship, measure, and improve continuously.',
     tags: ['Deployment', 'Feedback loops', 'Optimization'],
+    badge: 'Ongoing',
   },
 ];
 

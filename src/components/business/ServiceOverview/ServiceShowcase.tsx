@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { Diamond, Layout, Cpu, Layers, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "./ServiceShowcase.module.css";
@@ -18,9 +18,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Layers: <Layers size={20} strokeWidth={1.5} />, // Design Systems
 };
 
-// Helper to calculate depth label for each service index
-const depthFor = (index: number, total: number) => `${Math.round((index / Math.max(total - 1, 1)) * 120)}m`;
-
+// Helper removed as depth indicator is no longer used
 
 
 const AUTOPLAY_MS = 4200;
@@ -43,7 +41,8 @@ const panelVariants = {
 export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) => {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [permanentlyPaused, setPermanentlyPaused] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const activeService = services[active];
   const t = active / Math.max(services.length - 1, 1);
@@ -53,14 +52,14 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
     setProgress(0);
   }, [active]);
 
-  // Autoplay timer – respects pause state on hover
+  // Autoplay timer – respects permanent pause
   useEffect(() => {
-    if (paused) return;
+    if (permanentlyPaused) return;
     const id = setInterval(() => {
       setProgress((p) => Math.min(100, p + (100 * TICK_MS) / AUTOPLAY_MS));
     }, TICK_MS);
     return () => clearInterval(id);
-  }, [active, paused]);
+  }, [active, permanentlyPaused]);
 
   // When progress reaches 100 % advance to next service
   useEffect(() => {
@@ -72,6 +71,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
   const selectTab = (i: number) => {
     setActive(i);
     setProgress(0);
+    setPermanentlyPaused(true);
   };
 
   // Parallax values for the visual area – subtle mouse‑driven motion
@@ -90,11 +90,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
 
 
   return (
-    <div
-      className={styles.showcase}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <div className={styles.showcase}>
       {/* Left panel – visual + meta */}
       <div className={styles.panelColumn}>
         <div className={styles.panelFrame}>
@@ -143,27 +139,68 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ services }) =>
           />
         </div>
         <ul className={styles.list}>
-          {services.map((s, i) => (
-            <li key={s.title}>
-              <button
-                type="button"
-                className={`${styles.item} ${i === active ? styles.itemActive : ""}`}
-                onClick={() => selectTab(i)}
-              >
-                <span className={styles.itemTop}>
-                  <span className={styles.itemNum}>{String(i + 1).padStart(2, "0")}</span>
-                  <span className={styles.itemTitle}>{s.shortTitle}</span>
-                  <span className={styles.itemDepth}>{depthFor(i, services.length)}</span>
-                </span>
-                <span className={styles.progressTrack}>
-                  <span
-                    className={styles.progressFill}
-                    style={{ width: i === active ? `${progress}%` : "0%" }}
-                  />
-                </span>
-              </button>
-            </li>
-          ))}
+          {services.map((s, i) => {
+            const isActive = i === active;
+            return (
+              <li key={s.title} className={styles.listItem}>
+                <button
+                  type="button"
+                  id={`accordion-btn-${i}`}
+                  aria-expanded={isActive}
+                  aria-controls={`accordion-panel-${i}`}
+                  className={`${styles.item} ${isActive ? styles.itemActive : ""}`}
+                  onClick={() => selectTab(i)}
+                >
+                  <span className={styles.itemTop}>
+                    <span className={styles.itemNum}>{String(i + 1).padStart(2, "0")}</span>
+                    <span className={styles.itemTitleWrapper}>
+                      <span className={styles.itemTitleIcon}>{iconMap[s.iconLucide]}</span>
+                      <span className={styles.itemTitle}>{s.shortTitle}</span>
+                    </span>
+                    <motion.span 
+                      className={styles.itemArrow}
+                      animate={{ rotate: isActive ? 90 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight size={18} strokeWidth={1.5} />
+                    </motion.span>
+                  </span>
+                  {!permanentlyPaused && (
+                    <span className={styles.progressTrack}>
+                      <span
+                        className={styles.progressFill}
+                        style={{ width: isActive ? `${progress}%` : "0%" }}
+                      />
+                    </span>
+                  )}
+                </button>
+                <motion.div
+                  id={`accordion-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`accordion-btn-${i}`}
+                  className={styles.accordionContent}
+                  initial={false}
+                  animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
+                  transition={{ 
+                    height: { duration: prefersReducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] },
+                    opacity: { duration: prefersReducedMotion ? 0 : 0.2, delay: isActive && !prefersReducedMotion ? 0.1 : 0 }
+                  }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className={styles.accordionInner}>
+                    <p className={styles.accordionDesc}>{s.accordionDesc}</p>
+                    <div className={styles.accordionCapabilities}>
+                      <p className={styles.capabilitiesLabel}>What this can involve</p>
+                      <p className={styles.capabilitiesList}>{s.capabilities.join(" · ")}</p>
+                    </div>
+                    <Link to={`/services/${s.slug}`} className={styles.accordionLink} tabIndex={isActive ? 0 : -1}>
+                      Explore service &rarr;
+                    </Link>
+                  </div>
+                </motion.div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

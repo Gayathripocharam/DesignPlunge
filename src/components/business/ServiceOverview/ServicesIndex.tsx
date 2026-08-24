@@ -21,9 +21,13 @@ const ServicesIndex: React.FC<ServicesIndexProps> = ({ services }) => (
           transition={{ duration: 0.4, delay: i * 0.08, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
+          <span className={styles.ghostNum} aria-hidden="true">{s.id}</span>
           <span className={styles.num}>{s.id}</span>
           <span className={styles.title}>{s.title}</span>
-          <span className={styles.arrow}>→</span>
+          <span className={styles.arrowContainer}>
+            <span className={styles.arrowCircle}></span>
+            <span className={styles.arrow}>→</span>
+          </span>
         </motion.a>
       ))}
     </nav>

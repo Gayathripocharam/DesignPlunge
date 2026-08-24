@@ -17,6 +17,8 @@ export interface Service {
   ctaLabel: string; // Used in ServiceDetailPage CTA
   iconFa: string; // FontAwesome icon class
   iconLucide: string; // Lucide icon name or internal identifier (e.g. 'Diamond')
+  accordionDesc: string; // Used in ServiceShowcase inline accordion
+  capabilities: string[]; // Used in ServiceShowcase inline accordion
   detail: ServiceDetailData; // The deep content for the detail page
 }
 
@@ -32,6 +34,8 @@ export const services: Service[] = [
     ctaLabel: 'Talk through your product \u2192',
     iconFa: 'fa-regular fa-compass',
     iconLucide: 'Diamond',
+    accordionDesc: 'End-to-end product design and engineering.',
+    capabilities: ['Product strategy', 'UX/UI design', 'Prototyping', 'Engineering'],
     detail: {
       id: 'service-01',
       index: '01',
@@ -70,6 +74,8 @@ export const services: Service[] = [
     ctaLabel: 'Discuss your application \u2192',
     iconFa: 'fa-regular fa-code',
     iconLucide: 'Layout',
+    accordionDesc: 'Scalable, high-performance web platforms.',
+    capabilities: ['React/Next.js', 'APIs', 'Cloud infrastructure'],
     detail: {
       id: 'service-02',
       index: '02',
@@ -106,6 +112,8 @@ export const services: Service[] = [
     ctaLabel: 'Explore where AI can create leverage \u2192',
     iconFa: 'fa-regular fa-sparkles',
     iconLucide: 'Cpu',
+    accordionDesc: 'Intelligent automation and integrations.',
+    capabilities: ['Custom AI Agents', 'Automated workflows', 'RAG pipelines'],
     detail: {
       id: 'service-03',
       index: '03',
@@ -142,6 +150,8 @@ export const services: Service[] = [
     ctaLabel: 'Talk through your design-system problem \u2192',
     iconFa: 'fa-regular fa-layer-group',
     iconLucide: 'Layers',
+    accordionDesc: 'Scalable UI foundations and component architecture.',
+    capabilities: ['Figma library', 'React components', 'Usage guidelines'],
     detail: {
       id: 'service-04',
       index: '04',

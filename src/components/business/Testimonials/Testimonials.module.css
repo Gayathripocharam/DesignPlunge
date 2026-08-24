@@ -27,28 +27,100 @@
   letter-spacing: -0.01em;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
+.carouselWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.cardContainer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  min-height: 380px; /* Ensure enough height for longest quote so container doesn't jump */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 
 .card {
-  background-color: var(--surface-alt);
-  padding: var(--spacing-xl);
-  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface-alt);
   border: 1px solid var(--border);
+  border-radius: var(--radii-xl);
+  padding: clamp(32px, 5vw, 48px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.arrowBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arrowBtn:hover {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.dots {
+  display: flex;
+  gap: 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+.quoteIcon {
+  color: var(--accent);
+  opacity: 0.2;
 }
 
 .quote {
-  font-size: 20px;
+  font-size: clamp(20px, 2.5vw, 24px);
   color: var(--text-h);
   line-height: 1.5;
   margin-bottom: var(--spacing-xl);
   font-style: italic;
+  font-weight: 500;
 }
 
 .author {
@@ -58,8 +130,8 @@
 }
 
 .avatar {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -68,7 +140,7 @@
   justify-content: center;
   color: var(--text);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .authorInfo h4 {
@@ -82,10 +154,4 @@
   margin: 0;
   color: var(--text);
   font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
