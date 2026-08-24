@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getServiceBySlug } from '@/content/services';
 import { NotFoundPage } from '@/features/NotFoundPage';
 import { ServiceDetail } from '@/components/business/ServiceDetail/ServiceDetail';
+import { AiServiceDetail } from '@/components/business/AiServiceDetail/AiServiceDetail';
 import { ContextualNav } from '@/components/business/ContextualNav/ContextualNav';
 import { Section } from '@/components/ui/Section';
 import { SEO } from '@/components/seo/SEO';
@@ -36,7 +37,11 @@ export const ServiceDetailPage = () => {
         ]}
       />
       <Section background="var(--bg)" spacingTop="large" spacingBottom="large">
-        <ServiceDetail data={data.detail} />
+        {data.slug === 'ai-systems' ? (
+          <AiServiceDetail data={data.detail} />
+        ) : (
+          <ServiceDetail data={data.detail} />
+        )}
       </Section>
       <ContextualNav
         title="Ready to get started?"
