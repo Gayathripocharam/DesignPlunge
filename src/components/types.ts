@@ -31,6 +31,10 @@ export interface ServiceDetailData {
   index: string;
   title: string;
   subtitle: string;
+  whenYouNeedIt: string;
+  theProblem: string;
+  whatWeDo: string;
+  whatChanges: string;
   flowLabel: string;
   flow: RailStage[];
   outputs?: string[];

@@ -36,6 +36,29 @@ export function ServiceDetail({ data }: ServiceDetailProps) {
 
       <div className={styles.serviceLayout}>
         <div className={styles.serviceMain}>
+          {/* P2.5 Editorial Narrative */}
+          <div className={styles.editorialNarrative}>
+            <div className={styles.narrativeBlock}>
+              <h3 className={styles.mono}>When you need us</h3>
+              <p className={styles.contextText}>{data.whenYouNeedIt}</p>
+            </div>
+            <div className={styles.narrativeBlock}>
+              <h3 className={styles.mono}>The problem</h3>
+              <p className={styles.problemText}>{data.theProblem}</p>
+            </div>
+            <div className={styles.narrativeBlock}>
+              <h3 className={styles.mono}>What we do</h3>
+              <p className={styles.responseText}>{data.whatWeDo}</p>
+            </div>
+            <div className={styles.narrativeBlock}>
+              <h3 className={styles.mono}>What changes</h3>
+              <p className={styles.outcomeText}>{data.whatChanges}</p>
+            </div>
+          </div>
+
+          <div className={styles.capabilitiesHeader}>
+            <h3 className={styles.mono}>Capabilities</h3>
+          </div>
           <ProcessRail stages={flow} size="compact" label={flowLabel} outputs={outputs} />
 
           <div className={styles.twoCol}>

@@ -62,7 +62,63 @@
 .serviceMain {
   display: flex;
   flex-direction: column;
+  gap: 64px;
+}
+
+/* P2.5 Editorial Narrative */
+.editorialNarrative {
+  display: flex;
+  flex-direction: column;
   gap: 40px;
+}
+
+.narrativeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.narrativeBlock .mono {
+  margin: 0;
+}
+
+.contextText {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.problemText {
+  font-family: var(--heading);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.responseText {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+
+.outcomeText {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0;
+}
+
+.capabilitiesHeader {
+  margin-bottom: -40px; /* offset process rail gap */
+}
+.capabilitiesHeader .mono {
+  margin: 0;
 }
 
 /* Solve / Get grid */
