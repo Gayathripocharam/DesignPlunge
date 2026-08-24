@@ -18,7 +18,7 @@ export const ContactPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Start a Project — Design Plunge" 
+        title="Talk through the problem — Design Plunge" 
         description="Tell us what you're trying to build, improve, or automate." 
         canonical="/contact"
         structuredData={[organizationLD()]}
@@ -53,7 +53,7 @@ export const ContactPage: React.FC = () => {
                 
                 {/* LEFT COLUMN: The new simplified form */}
                 <div className={styles.formColumn}>
-                  <h2 className={styles.infoSectionTitle}>START A PROJECT</h2>
+                  <h2 className={styles.infoSectionTitle}>TALK THROUGH THE PROBLEM</h2>
                   <ContactForm 
                     endpointConfigured={endpointConfigured} 
                     fallbackEmail="hello@designplunge.com" 

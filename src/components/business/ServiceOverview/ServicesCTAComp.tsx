@@ -15,7 +15,7 @@ const ServicesCTA: React.FC = () => {
     transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
   >
     <div className={styles.inner}>
-      <p className={styles.eyebrow}>START A PROJECT</p>
+      <p className={styles.eyebrow}>TALK THROUGH THE PROBLEM</p>
       <h2 className={styles.title}>
         Ready to turn a complex problem into something real?
       </h2>

@@ -55,7 +55,7 @@ describe('ServicesPage', () => {
     const ctaSection = screen.getByText(/Ready to turn a complex problem into something real/i);
     expect(ctaSection).toBeInTheDocument();
 
-    const contactLinks = screen.getAllByRole('link', { name: /Start a conversation/i });
+    const contactLinks = screen.getAllByRole('link', { name: /Talk through the problem/i });
     expect(contactLinks.length).toBeGreaterThan(0);
     expect(contactLinks[0]).toHaveAttribute('href', '/contact');
   });

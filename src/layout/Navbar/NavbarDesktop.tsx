@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
+import { track } from "@/analytics";
 import { navigation } from "@/config/navigation";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -166,8 +167,9 @@ const NavbarDesktop: React.FC = () => {
               e.currentTarget.style.background = "var(--accent)";
               e.currentTarget.style.transform = "translateY(0)";
             }}
+            onClick={() => track('cta_click', { ctaId: 'navbar-primary', ctaLabel: 'Talk through the problem', page: location.pathname })}
           >
-            Start a Project →
+            Talk through the problem →
           </Link>
         </motion.div>
       </div>

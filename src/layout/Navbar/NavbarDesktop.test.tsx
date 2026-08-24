@@ -17,6 +17,6 @@ describe('NavbarDesktop', () => {
     expect(screen.getByRole('link', { name: /Services/i })).toHaveAttribute('href', '/services');
     expect(screen.getByRole('link', { name: /Work/i })).toHaveAttribute('href', '/work');
     expect(screen.getByRole('link', { name: /Contact/i })).toHaveAttribute('href', '/contact');
-    expect(screen.getByRole('link', { name: /Start a project/i })).toHaveAttribute('href', '/contact');
+    expect(screen.getByRole('link', { name: /Talk through the problem/i })).toHaveAttribute('href', '/contact');
   });
 });

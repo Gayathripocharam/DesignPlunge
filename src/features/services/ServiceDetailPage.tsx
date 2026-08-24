@@ -44,7 +44,7 @@ export const ServiceDetailPage = () => {
         )}
       </Section>
       <ContextualNav
-        title="Ready to get started?"
+        title="Have a product problem to solve?"
         subtitle="Tell us what you're trying to build or improve. We'll review the context and come back with clear next steps."
         buttonText={data.ctaLabel}
         to="/contact"

@@ -64,7 +64,7 @@ export const servicesFaqs: FAQ[] = [
   },
   {
     category: 'GETTING STARTED',
-    question: 'How do we get started?',
+    question: 'How do we start a conversation?',
     answer:
       'Following our initial call, we prepare a tailored proposal covering scope, timeline, and pricing. Once approved, we kick off with an alignment workshop.',
   },

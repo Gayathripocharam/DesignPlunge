@@ -311,7 +311,7 @@ export const CaseStudyDetail: React.FC = () => {
 
         {/* ── CTA ── */}
         <ContextualNav 
-          label="LET'S BUILD" 
+          label="TALK THROUGH THE PROBLEM" 
           title="Working through a similar product problem?"
           subtitle=""
           buttonText="Let's talk about the approach &rarr;"

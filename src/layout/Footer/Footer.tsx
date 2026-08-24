@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             <div className={styles.column}>
               <span className={styles.colTitle}>Contact</span>
               <ul>
-                <li><Link to="/contact">Start a Project</Link></li>
+                <li><Link to="/contact">Talk through the problem</Link></li>
                 <li><a href="mailto:hello@designplunge.com">Email</a></li>
               </ul>
             </div>

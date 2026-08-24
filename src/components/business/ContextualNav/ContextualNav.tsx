@@ -35,7 +35,7 @@ interface ContextualNavProps {
 }
 
 export const ContextualNav: React.FC<ContextualNavProps> = ({
-  label = "LET'S BUILD",
+  label = "TALK THROUGH THE PROBLEM",
   title = "Have a complex product problem?",
   subtitle = "Tell us what you're trying to solve. We'll help you understand the right approach, what it will take to build, and where to start.",
   buttonText = "Talk through the problem \u2192",

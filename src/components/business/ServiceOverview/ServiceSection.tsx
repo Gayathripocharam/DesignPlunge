@@ -58,9 +58,9 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ service, index }) => {
           <Link 
             to="/contact" 
             className={styles.link}
-            onClick={() => track("cta_click", { ctaId: `service-${service.slug}`, ctaLabel: "Start a conversation", page: location.pathname })}
+            onClick={() => track("cta_click", { ctaId: `service-${service.slug}`, ctaLabel: "Talk through the problem", page: location.pathname })}
           >
-            Start a conversation →
+            Talk through the problem →
           </Link>
         </motion.div>
       </motion.div>

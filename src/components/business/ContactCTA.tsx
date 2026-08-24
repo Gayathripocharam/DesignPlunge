@@ -23,9 +23,9 @@ export const ContactCTA: React.FC = () => {
           Tell us what you're building, improving, or trying to automate. We'll review the context and come back with clear next steps.
         </p>
         <Button onClick={() => {
-          track("cta_click", { ctaId: "contact-cta-section", ctaLabel: "Start a Project", page: window.location.pathname });
+          track("cta_click", { ctaId: "contact-cta-section", ctaLabel: "Talk through the problem", page: window.location.pathname });
           navigate("/contact");
-        }}>Start a Project →</Button>
+        }}>Talk through the problem →</Button>
       </motion.div>
     </section>
   );
