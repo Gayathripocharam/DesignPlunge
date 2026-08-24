@@ -1,8 +1,44 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/ui/Section";
-import { whyPrinciples } from '@/content/studio';
 import styles from "./WhyDesignPlunge.module.css";
+
+export interface WhyPrinciple {
+  title: string;
+  subtitle: string;
+  flow: string[];
+  meansTitle: string;
+  meansDesc: string;
+  tags: string[];
+}
+
+export const whyPrinciples: WhyPrinciple[] = [
+  {
+    title: 'Design and engineering drift apart.',
+    subtitle: 'One team, not a handoff. We build integrated systems.',
+    flow: ['DESIGN', 'ENGINEERING'],
+    meansTitle: 'WHAT THIS MEANS',
+    meansDesc: 'Design decisions stay connected to technical reality from the beginning.',
+    tags: ['Integrated teams', 'Fewer handoffs', 'Faster iteration'],
+  },
+  {
+    title: 'Legacy architecture slows you down.',
+    subtitle: 'We architect for scale and evolution, not just the immediate launch.',
+    flow: ['PRODUCT', 'SYSTEM', 'SCALE'],
+    meansTitle: 'WHAT THIS MEANS',
+    meansDesc: 'We build foundations that remain useful and adaptable as the product evolves.',
+    tags: ['Architecture', 'Design systems', 'Maintainability'],
+  },
+  {
+    title: 'AI is hyped, but hard to integrate responsibly.',
+    subtitle: 'AI as an accelerant. We use it where it creates meaningful leverage, not just for the sake of it.',
+    flow: ['HUMAN', 'AI', 'OUTCOME'],
+    meansTitle: 'WHAT THIS MEANS',
+    meansDesc: 'We identify where AI can actually reduce friction or automate work effectively.',
+    tags: ['Automation', 'Practical AI', 'Intelligent workflows'],
+  },
+];
+
 
 const panelVariants = {
   enter: { opacity: 0, y: 16 },

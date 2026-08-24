@@ -14,19 +14,19 @@ export const WorkingTogether: React.FC = () => {
         
         <div className={styles.eyebrowWrapper}>
           <p className="section-marker">
-             COLLABORATION
+             PRINCIPLES
           </p>
-          <p className={styles.eyebrow}>WORKING TOGETHER</p>
+          <p className={styles.eyebrow}>WHAT WE VALUE</p>
         </div>
 
           <div className={styles.grid}>
             {/* Left Column */}
             <div className={styles.leftCol}>
               <h2 className={styles.headline}>
-                One team,<br/>not a handoff.
+                Built for<br/>the long term.
               </h2>
               <p className={styles.supportingCopy}>
-                Product, design and engineering stay connected from the first decision to the final build.
+                The operating philosophy behind every engagement. We prioritize lasting partnerships over transactional builds.
               </p>
             </div>
 
@@ -55,24 +55,24 @@ export const WorkingTogether: React.FC = () => {
           <div className={styles.footerSection}>
             <div className={styles.processVisual}>
               <div className={styles.processSteps}>
-                <span>DISCOVER</span>
+                <span>TRUST</span>
                 <span className={styles.processLine}></span>
-                <span>DESIGN</span>
+                <span>COLLABORATION</span>
                 <span className={styles.processLine}></span>
-                <span>BUILD</span>
+                <span>ROBUSTNESS</span>
                 <span className={styles.processLine}></span>
-                <span>EVOLVE</span>
+                <span>SUPPORT</span>
               </div>
             </div>
 
             <div className={styles.closingStatement}>
-              <p>The result isn't just a finished product. It's a team that understands why it exists, how it works, and where it goes next.</p>
+              <p>The result isn't just a finished product. It's a scalable system and a relationship you can rely on as you grow.</p>
               <Link 
-                to="/services" 
+                to="/contact" 
                 className={styles.closingLink}
-                onClick={() => track("cta_click", { ctaId: "working-together-services", ctaLabel: "See how we work", page: location.pathname })}
+                onClick={() => track("cta_click", { ctaId: "working-together-contact", ctaLabel: "Talk through the problem", page: location.pathname })}
               >
-                See how we work &rarr;
+                Talk through the problem &rarr;
               </Link>
             </div>
           </div>

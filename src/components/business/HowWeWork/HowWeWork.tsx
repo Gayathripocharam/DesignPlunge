@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, PenTool, Users, Code2, Rocket } from 'lucide-react';
+import { Search, Users, Map, PenTool, Code2, Repeat } from 'lucide-react';
 
 import { Section } from "@/components/ui/Section";
 import styles from "./HowWeWork.module.css";
@@ -10,11 +10,12 @@ import type { LucideIcon } from 'lucide-react';
 
 // Icon mapping stays in the component — content files must not import UI libraries
 const iconMap: Record<string, LucideIcon> = {
-  discover: Search,
-  define: PenTool,
-  design: Users,
-  build: Code2,
-  launch: Rocket,
+  research: Search,
+  alignment: Users,
+  strategy: Map,
+  design: PenTool,
+  engineering: Code2,
+  iteration: Repeat,
 };
 
 const panelVariants = {

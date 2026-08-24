@@ -4,7 +4,7 @@ import { organizationLD } from '@/seo/structuredData';
 import { Section } from "@/components/ui/Section";
 import { StudioHero } from "../../components/business/StudioHero/StudioHero";
 import { CorePrinciples } from "../../components/business/CorePrinciples/CorePrinciples";
-import { WhyDesignPlunge } from "../../components/business/WhyDesignPlunge/WhyDesignPlunge";
+
 import { HowWeWork } from "../../components/business/HowWeWork/HowWeWork";
 import { WorkingTogether } from "../../components/business/WorkingTogether/WorkingTogether";
 import { motion } from "framer-motion";
@@ -34,14 +34,23 @@ export const StudioPage: React.FC = () => (
     {/* Core Principles — horizontal path */}
     <CorePrinciples />
 
-    {/* Why Design Plunge — product thinking pillars */}
-    <WhyDesignPlunge />
 
     {/* How We Work — discover / design / build steps */}
     <HowWeWork />
 
     {/* Working Together — engagement model */}
     <WorkingTogether />
+
+    {/* Who We Work With */}
+    <Section background="var(--surface)" spacingTop="large" spacingBottom="large">
+      <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+        <p className="section-marker" style={{ justifyContent: "center" }}>— FIT</p>
+        <h2 style={{ fontFamily: "var(--heading)", fontSize: "clamp(2rem, 3vw, 3rem)", marginBottom: 24 }}>Who we work best with</h2>
+        <p style={{ fontSize: "clamp(1.1rem, 2vw, 1.25rem)", color: "var(--text)", lineHeight: 1.6 }}>
+          Teams that want a partner who can take the time to understand the problem, challenge assumptions, and stay close to both design and engineering from start to finish.
+        </p>
+      </div>
+    </Section>
 
     {/* Team */}
     <Section background="var(--bg)" spacingTop="medium" spacingBottom="large" className={styles.teamSection}>

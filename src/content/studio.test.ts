@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import {
   team,
   corePrinciples,
-  whyPrinciples,
   processSteps,
   engagementPrinciples,
 } from './studio';
@@ -34,20 +33,7 @@ describe('Studio content data', () => {
     });
   });
 
-  describe('whyPrinciples', () => {
-    it('is non-empty', () => {
-      expect(whyPrinciples.length).toBeGreaterThan(0);
-    });
 
-    it('every principle has required fields', () => {
-      for (const p of whyPrinciples) {
-        expect(p.title).toBeTruthy();
-        expect(p.subtitle).toBeTruthy();
-        expect(p.flow.length).toBeGreaterThan(0);
-        expect(p.tags.length).toBeGreaterThan(0);
-      }
-    });
-  });
 
   describe('processSteps', () => {
     it('is non-empty', () => {
