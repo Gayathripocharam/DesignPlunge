@@ -95,11 +95,12 @@ const Card = ({ item }: { item: typeof outcomesList[number] }) => {
           display: "flex",
           alignItems: "center",
           gap: 4,
+          flexWrap: "wrap",
         }}
       >
-        {item.num}&nbsp;&nbsp;{item.from}
-        <ArrowRight size={11} style={{ display: "inline", verticalAlign: "middle" }} />
-        {item.to}
+        <span style={{ whiteSpace: "nowrap" }}>{item.num}&nbsp;&nbsp;{item.from}</span>
+        <ArrowRight size={11} style={{ flexShrink: 0 }} />
+        <span style={{ whiteSpace: "nowrap" }}>{item.to}</span>
       </p>
       <h3
         style={{
