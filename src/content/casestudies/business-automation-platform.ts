@@ -44,6 +44,7 @@ export const businessAutomationPlatform: CaseStudy = {
   
   product: {
     description: 'The core product experience centers around a drag-and-drop canvas where users can connect triggers to actions. The interface abstracts away API complexity while maintaining powerful configuration options for advanced users.',
+    caption: 'Visual workflow builder and automation canvas',
     images: ['/src/assets/illustrations/automation-platform.jpg']
   },
   

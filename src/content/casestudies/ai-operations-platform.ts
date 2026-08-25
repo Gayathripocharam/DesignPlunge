@@ -42,7 +42,8 @@ export const aiOperationsPlatform: CaseStudy = {
   },
   
   product: {
-    description: 'We explored a dashboard-first architecture that surfaces model health, performance metrics, and deployment status in a single view. The design prioritizes clarity and actionable information, providing teams with instant insight into their entire model fleet.',
+    description: 'We designed a dark-mode optimized command center that brings model performance, resource utilization, and deployment pipelines into a single pane of glass.',
+    caption: 'Model training and deployment pipeline view',
     images: ['/src/assets/illustrations/ai-operations.jpg']
   },
   

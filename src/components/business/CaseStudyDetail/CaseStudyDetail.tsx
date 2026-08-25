@@ -276,14 +276,23 @@ export const CaseStudyDetail: React.FC = () => {
                 </div>
               </div>
               
-              <div className={styles.productImageWrapper}>
+              <motion.div 
+                className={styles.productImageWrapper}
+                initial={{ opacity: 0, scale: 1.03 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <img
                   src={imageMap[study.slug] || study.coverImage}
                   alt={study.title}
                   className={styles.productImage}
                   loading="lazy"
                 />
-              </div>
+              </motion.div>
+              {(study.product as any).caption && (
+                <p className={styles.productCaption}>{(study.product as any).caption}</p>
+              )}
             </div>
           </section>
         )}

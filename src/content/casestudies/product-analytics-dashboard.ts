@@ -44,6 +44,7 @@ export const productAnalyticsDashboard: CaseStudy = {
   
   product: {
     description: 'The dashboard features a composable chart system that adapts to the data being displayed. Instead of a blank canvas, users are guided through a series of "questions" they want answered about their product.',
+    caption: 'Product telemetry and user flow visualization',
     images: ['/src/assets/illustrations/product-dashboard.jpg']
   },
   

@@ -32,6 +32,7 @@ export interface BaseCaseStudy {
 
   product: {
     description: string;
+    caption?: string;
     images?: string[];
   };
 
