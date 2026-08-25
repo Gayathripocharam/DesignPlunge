@@ -346,7 +346,7 @@ export const CaseStudyDetail: React.FC = () => {
         {study.architecture && (
           <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.architectureInner}>
+              <div className={styles.sectionCard}>
                 <div className={styles.architectureHeader}>
                   <h2 className={styles.architectureTitle}>HOW IT WOULD WORK</h2>
                 </div>
@@ -417,9 +417,9 @@ export const CaseStudyDetail: React.FC = () => {
 
         {/* ── 05. Key Decisions ── */}
         {study.keyDecisions && study.keyDecisions.length > 0 && (
-          <section className={styles.section}>
+          <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.sectionInner}>
+              <div className={styles.sectionCard}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>KEY DECISIONS</h2>
                 </div>
@@ -462,9 +462,9 @@ export const CaseStudyDetail: React.FC = () => {
 
         {/* ── 06. Capabilities Demonstrated ── */}
         {study.type === 'concept' && study.demonstrates && study.demonstrates.length > 0 && (
-          <section className={styles.section}>
+          <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.sectionInner}>
+              <div className={styles.sectionCard}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>CAPABILITIES DEMONSTRATED</h2>
                 </div>

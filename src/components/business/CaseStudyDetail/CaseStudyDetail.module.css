@@ -431,13 +431,15 @@
 
 /* Architecture / System */
 .architectureSection {
-  padding-bottom: clamp(96px, 12vw, 144px);
+  padding: 0;
 }
 
-.architectureInner {
+.sectionCard {
   background-color: var(--surface-alt);
-  padding: clamp(32px, 5vw, 64px);
-  border-radius: 4px;
+  padding: clamp(40px, 6vw, 48px);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .architectureHeader {
@@ -599,19 +601,21 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: var(--accent);
+  background-color: var(--text-h);
+  opacity: 0.15;
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .decisionRow:hover,
 .decisionRow:focus-within {
-  background-color: rgba(109, 93, 246, 0.04);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .decisionRow:hover .decisionRowActiveDivider,
 .decisionRow:focus-within .decisionRowActiveDivider {
+  opacity: 0.4;
   transform: scaleY(1);
 }
 
