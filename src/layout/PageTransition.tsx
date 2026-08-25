@@ -60,7 +60,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children, varian
         initial={initial}
         animate={animate}
         exit={exit}
-        style={{ width: "100%" }}
+        style={{ width: "100%", minHeight: "100vh", background: "var(--bg)" }}
       >
         {children}
       </motion.div>

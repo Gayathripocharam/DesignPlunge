@@ -17,13 +17,13 @@ const router = createBrowserRouter([
   {
     element: <Shell />, // Shell provides Navbar, Footer, etc.
     children: [
-      { path: "/", element: <Suspense fallback={null}><Home /></Suspense> },
-      { path: "/services", element: <Suspense fallback={null}><ServicesPage /></Suspense> },
-      { path: "/services/:slug", element: <Suspense fallback={null}><ServiceDetailPage /></Suspense> },
-      { path: "/work", element: <Suspense fallback={null}><WorkPage /></Suspense> },
-      { path: "/work/:slug", element: <Suspense fallback={null}><CaseStudyDetail /></Suspense> },
-      { path: "/studio", element: <Suspense fallback={null}><StudioPage /></Suspense> },
-      { path: "/contact", element: <Suspense fallback={null}><ContactPage /></Suspense> },
+      { path: "/", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><Home /></Suspense> },
+      { path: "/services", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><ServicesPage /></Suspense> },
+      { path: "/services/:slug", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><ServiceDetailPage /></Suspense> },
+      { path: "/work", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><WorkPage /></Suspense> },
+      { path: "/work/:slug", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><CaseStudyDetail /></Suspense> },
+      { path: "/studio", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><StudioPage /></Suspense> },
+      { path: "/contact", element: <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}><ContactPage /></Suspense> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
