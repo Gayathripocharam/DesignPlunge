@@ -112,16 +112,86 @@
   margin-bottom: 8px;
 }
 
-.editorialSection {
-  padding-bottom: clamp(96px, 12vw, 160px);
+.narrativeContainer {
+  position: relative;
+  padding: clamp(64px, 8vw, 120px) 0;
+}
+
+.narrativeProgressTrack {
+  position: absolute;
+  top: clamp(64px, 8vw, 120px);
+  bottom: clamp(64px, 8vw, 120px);
+  left: 16px;
+  width: 2px;
+  background-color: var(--border);
+  z-index: 0;
+}
+
+.narrativeProgressLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent);
+  transform-origin: top;
+  z-index: 1;
+}
+
+.narrativeBlock {
+  position: relative;
+  margin-bottom: clamp(80px, 12vw, 160px);
+  padding-left: 48px;
+}
+
+.narrativeBlock:last-child {
+  margin-bottom: 0;
+}
+
+.watermark {
+  position: absolute;
+  top: -40px;
+  left: -24px;
+  font-size: clamp(80px, 15vw, 200px);
+  font-weight: 800;
+  color: var(--text-h);
+  opacity: 0.03;
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: -0.05em;
+}
+
+.stepOne {
+  margin-left: 0;
+}
+
+.stepTwo {
+  margin-left: clamp(24px, 4vw, 48px);
+}
+
+.stepThree {
+  margin-left: clamp(48px, 8vw, 96px);
+}
+
+.narrativeContent {
+  position: relative;
+  z-index: 1;
 }
 
 .editorialTitle {
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
-  color: var(--text-h);
-  margin: 0 0 40px 0;
+  margin: 0 0 32px 0;
   letter-spacing: -0.01em;
+}
+
+.labelNeutral {
+  color: var(--text-muted);
+}
+
+.labelAccent {
+  color: var(--accent);
 }
 
 .editorialContent {
@@ -139,10 +209,19 @@
   margin-bottom: 0;
 }
 
+.approachCard {
+  margin-top: 40px;
+  padding: 40px;
+  background-color: rgba(109, 93, 246, 0.04);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 12px;
+}
+
 .editorialList {
   list-style: none;
   padding: 0;
-  margin: 40px 0 0 0;
+  margin: 0;
 }
 
 .editorialList li {
@@ -150,6 +229,10 @@
   position: relative;
   font-size: inherit;
   line-height: 1.7;
+}
+
+.editorialList li:last-child {
+  margin-bottom: 0;
 }
 
 .sectionTitle {
