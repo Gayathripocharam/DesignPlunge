@@ -3,6 +3,7 @@ import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
 import { organizationLD, creativeWorkLD, caseStudyBreadcrumbs } from '@/seo/structuredData';
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { Code, Database, Cloud, Layers, Layout, PieChart, Workflow, Server, PenTool, CheckCircle, ArrowRight } from "lucide-react";
 import { getCaseStudyBySlug, allCaseStudies } from "@/content/casestudies";
 import { ContextualNav } from "@/components/business/ContextualNav/ContextualNav";
 import { track } from "@/analytics";
@@ -16,6 +17,20 @@ const imageMap: Record<string, string> = {
   "ai-operations-platform": aiOpsImg,
   "product-analytics-dashboard": dashboardImg,
   "business-automation-platform": autoImg,
+};
+
+const getIconForString = (str: string) => {
+  const lower = str.toLowerCase();
+  if (lower.includes('data') || lower.includes('sql') || lower.includes('postgres') || lower.includes('redis')) return <Database size={14} />;
+  if (lower.includes('react') || lower.includes('code') || lower.includes('node') || lower.includes('typescript')) return <Code size={14} />;
+  if (lower.includes('cloud') || lower.includes('webworker') || lower.includes('api')) return <Cloud size={14} />;
+  if (lower.includes('workflow') || lower.includes('automation') || lower.includes('process')) return <Workflow size={14} />;
+  if (lower.includes('visual') || lower.includes('chart') || lower.includes('dashboard')) return <PieChart size={14} />;
+  if (lower.includes('layout') || lower.includes('ui') || lower.includes('interface')) return <Layout size={14} />;
+  if (lower.includes('design') || lower.includes('css')) return <PenTool size={14} />;
+  if (lower.includes('layer') || lower.includes('disclosure')) return <Layers size={14} />;
+  if (lower.includes('system') || lower.includes('machine')) return <Server size={14} />;
+  return <CheckCircle size={14} />;
 };
 
 export const CaseStudyDetail: React.FC = () => {
@@ -311,18 +326,37 @@ export const CaseStudyDetail: React.FC = () => {
                   {study.architecture.technologies && (
                     <div className={styles.techList}>
                       {study.architecture.technologies.map((tech, idx) => (
-                        <span key={idx} className={styles.techTag}>{tech}</span>
+                        <span key={idx} className={styles.techTag}>
+                          {getIconForString(tech)}
+                          {tech}
+                        </span>
                       ))}
                     </div>
                   )}
 
                   {study.architecture.systemNotes && (
                     <div className={styles.systemNotes}>
-                      <ul>
+                      <motion.ul
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={{
+                          hidden: { opacity: 0 },
+                          show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+                        }}
+                      >
                         {study.architecture.systemNotes.map((note, idx) => (
-                          <li key={idx}>{note}</li>
+                          <motion.li 
+                            key={idx}
+                            variants={{
+                              hidden: { opacity: 0, x: -10 },
+                              show: { opacity: 1, x: 0, transition: { duration: 0.4 } }
+                            }}
+                          >
+                            {note}
+                          </motion.li>
                         ))}
-                      </ul>
+                      </motion.ul>
                     </div>
                   )}
                 </div>
@@ -366,11 +400,14 @@ export const CaseStudyDetail: React.FC = () => {
                   <h2 className={styles.sectionTitle}>CAPABILITIES DEMONSTRATED</h2>
                 </div>
                 <div className={styles.sectionContent}>
-                  <ul className={styles.principlesList}>
+                  <div className={styles.capabilitiesList}>
                     {study.demonstrates.map((cap, idx) => (
-                      <li key={idx}>{cap}</li>
+                      <div key={idx} className={styles.capabilityPill}>
+                        {getIconForString(cap)}
+                        <span>{cap}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -384,9 +421,14 @@ export const CaseStudyDetail: React.FC = () => {
               <div className={styles.nextConceptInner}>
                 <p className={styles.nextConceptLabel}>NEXT CONCEPT</p>
                 <Link to={`/work/${otherStudies[0].slug}`} className={styles.nextConceptLink}>
-                  <h2 className={styles.nextConceptTitle}>{otherStudies[0].title}</h2>
-                  <p className={styles.nextConceptThinking}>{otherStudies[0].thinking}</p>
-                  <span className={styles.viewNextLink}>View next concept &rarr;</span>
+                  <div className={styles.nextConceptContent}>
+                    <h2 className={styles.nextConceptTitle}>{otherStudies[0].title}</h2>
+                    <p className={styles.nextConceptThinking}>{otherStudies[0].thinking}</p>
+                    <span className={styles.viewNextLink}>View next concept <ArrowRight size={16} /></span>
+                  </div>
+                  <div className={styles.nextConceptImageWrap}>
+                    <img src={imageMap[otherStudies[0].slug] || otherStudies[0].coverImage} alt={otherStudies[0].title} />
+                  </div>
                 </Link>
               </div>
             </div>

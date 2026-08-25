@@ -136,28 +136,24 @@
   margin-bottom: 0;
 }
 
-/* Context / Approach Specifics */
-.principlesList {
-  list-style: none;
-  padding: 0;
-  margin: 32px 0 0 0;
+.capabilitiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
 }
 
-.principlesList li {
-  margin-bottom: 16px;
-  padding-left: 24px;
-  position: relative;
-}
-
-.principlesList li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--accent);
+.capabilityPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
 }
 
 /* Product Showcase */
@@ -252,6 +248,9 @@
 }
 
 .techTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--typography-mono);
   font-size: 13px;
   padding: 6px 12px;
@@ -272,6 +271,7 @@
   margin: 0;
   color: var(--text);
   line-height: 1.6;
+  border-left: 2px solid var(--accent);
 }
 
 .systemNotes li {
@@ -313,22 +313,53 @@
 }
 
 .decisionsList {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  padding-left: 24px;
+}
+
+.decisionsList::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 6px;
+  width: 1px;
+  background-color: var(--border);
+  z-index: 0;
 }
 
 .decisionRow {
+  position: relative;
   display: flex;
   gap: var(--spacing-lg);
-  border-top: 1px solid var(--border);
-  padding-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  border-left: 2px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 1;
+}
+
+.decisionRow:hover {
+  background-color: rgba(109, 93, 246, 0.04);
+  border-left-color: var(--accent);
 }
 
 .decisionNumber {
+  position: relative;
   font-family: var(--typography-mono);
   font-size: 16px;
   color: var(--text-muted);
+  background-color: var(--bg);
+  padding: 4px 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.decisionRow:hover .decisionNumber {
+  color: var(--accent);
+  transform: scale(1.05);
 }
 
 .decisionBody {
@@ -368,20 +399,56 @@
 
 .nextConceptLink {
   text-decoration: none;
-  display: block;
-  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  max-width: 900px;
 }
 
 .nextConceptLink:hover {
-  opacity: 0.8;
+  background-color: var(--surface-alt);
+  transform: translateY(-4px);
+}
+
+.nextConceptContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.nextConceptImageWrap {
+  width: 200px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.nextConceptImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .nextConceptTitle {
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text-h);
   margin: 0 0 var(--spacing-sm) 0;
+  transition: color 0.3s ease;
+}
+
+.nextConceptLink:hover .nextConceptTitle {
+  color: var(--accent);
 }
 
 .nextConceptThinking {
