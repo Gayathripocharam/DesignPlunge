@@ -214,65 +214,52 @@ export const CaseStudyDetail: React.FC = () => {
           </section>
         )}
 
-        {/* ── 01. Context & Problem ── */}
+        {/* ── Editorial Section: Context & Problem ── */}
         {study.context && (
-          <section className={styles.section}>
+          <section className={styles.editorialSection}>
             <div className="container">
-              <div className={styles.sectionInner}>
-                <div className={styles.sectionHeader}>
-                  <span className={styles.sectionNumber}>01</span>
-                  <h2 className={styles.sectionTitle}>THE PROBLEM</h2>
-                </div>
-                <div className={styles.sectionContent}>
-                  <p>{study.context.problem}</p>
-                  {study.context.audience && (
-                    <p><strong>Audience:</strong> {study.context.audience}</p>
-                  )}
-                  {study.context.whyItMatters && (
-                    <p><strong>Why it matters:</strong> {study.context.whyItMatters}</p>
-                  )}
-                </div>
+              <h2 className={styles.editorialTitle}>The Problem</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.context.problem}</p>
+                {(study.context.audience || study.context.whyItMatters) && (
+                  <p>
+                    {study.context.audience && (
+                      <span>Designed for {study.context.audience.charAt(0).toLowerCase() + study.context.audience.slice(1).replace(/\.$/, '')}. </span>
+                    )}
+                    {study.context.whyItMatters}
+                  </p>
+                )}
               </div>
             </div>
           </section>
         )}
 
-        {/* ── 02. The Hypothesis ── */}
+        {/* ── Editorial Section: The Hypothesis ── */}
         {study.type === 'concept' && study.hypothesis && (
-          <section className={styles.section}>
+          <section className={styles.editorialSection}>
             <div className="container">
-              <div className={styles.sectionInner}>
-                <div className={styles.sectionHeader}>
-                  <span className={styles.sectionNumber}>02</span>
-                  <h2 className={styles.sectionTitle}>THE HYPOTHESIS</h2>
-                </div>
-                <div className={styles.sectionContent}>
-                  <p>{study.hypothesis}</p>
-                </div>
+              <h2 className={styles.editorialTitle}>The Hypothesis</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.hypothesis}</p>
               </div>
             </div>
           </section>
         )}
 
-        {/* ── 03. Approach ── */}
+        {/* ── Editorial Section: Approach ── */}
         {study.approach && (
-          <section className={styles.section}>
+          <section className={styles.editorialSection}>
             <div className="container">
-              <div className={styles.sectionInner}>
-                <div className={styles.sectionHeader}>
-                  <span className={styles.sectionNumber}>03</span>
-                  <h2 className={styles.sectionTitle}>THE APPROACH</h2>
-                </div>
-                <div className={styles.sectionContent}>
-                  <p>{study.approach.idea}</p>
-                  {study.approach.principles && study.approach.principles.length > 0 && (
-                    <ul className={styles.principlesList}>
-                      {study.approach.principles.map((principle, idx) => (
-                        <li key={idx}>{principle}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+              <h2 className={styles.editorialTitle}>The Approach</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.approach.idea}</p>
+                {study.approach.principles && study.approach.principles.length > 0 && (
+                  <ul className={styles.editorialList}>
+                    {study.approach.principles.map((principle, idx) => (
+                      <li key={idx}>{principle}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </section>
