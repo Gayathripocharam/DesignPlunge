@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
 import { organizationLD, creativeWorkLD, caseStudyBreadcrumbs } from '@/seo/structuredData';
-import { motion } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { getCaseStudyBySlug, allCaseStudies } from "@/content/casestudies";
 import { ContextualNav } from "@/components/business/ContextualNav/ContextualNav";
 import { track } from "@/analytics";
@@ -24,7 +22,17 @@ export const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { pathname } = useLocation();
   const study = slug ? getCaseStudyBySlug(slug) : undefined;
+  
   const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 960);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Scroll to top on route change
   useEffect(() => {
@@ -42,24 +50,50 @@ export const CaseStudyDetail: React.FC = () => {
   }
 
   const otherStudies = allCaseStudies.filter(s => s.slug !== study.slug).slice(0, 2);
+  const studyIndex = allCaseStudies.findIndex(s => s.slug === study.slug);
+  const displayIndex = studyIndex >= 0 ? studyIndex : 0;
 
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  // Parallax logic for Hero
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"]
+  });
+  const yOffset = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  const transformY = isMobile || prefersReducedMotion ? 0 : yOffset;
 
-  const staggerContainer: Variants = {
+  // Staggered Animations setup
+  const staggerParent: any = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.15,
-      },
-    },
+      transition: { staggerChildren: 0.09 }
+    }
+  };
+
+  const getSlideUpVariant = (yDist: number, delayMs: number = 0): any => ({
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : yDist },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { 
+        duration: prefersReducedMotion ? 0.15 : 0.4, 
+        delay: delayMs / 1000, 
+        ease: [0.22, 1, 0.36, 1] 
+      }
+    }
+  });
+
+  const imageVariant: any = {
+    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 1.05 },
+    show: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { 
+        duration: prefersReducedMotion ? 0.15 : 0.5, 
+        delay: 0.1, 
+        ease: [0.22, 1, 0.36, 1] 
+      }
+    }
   };
 
   return (
@@ -76,31 +110,72 @@ export const CaseStudyDetail: React.FC = () => {
       />
 
       <div className={styles.page}>
-        {/* ── Hero ── */}
-        <section className={styles.hero}>
-          <div className="container">
-            <motion.div
-              className={styles.heroInner}
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-            >
-              <motion.span variants={fadeUp} className={styles.badge}>
-                {study.subtitle || "Selected Project"}
-              </motion.span>
-              <motion.h1 variants={fadeUp} className={styles.heroTitle}>
-                {study.title}
-              </motion.h1>
-              <motion.p variants={fadeUp} className={styles.description}>
-                {study.description}
-              </motion.p>
-            </motion.div>
+        {/* ── Split-Screen Hero ── */}
+        <section ref={heroRef} className={styles.projectSection}>
+          <div className={styles.projectGrid}>
+            
+            {/* Text Side */}
+            <div className={styles.textColumn}>
+              <motion.div
+                className={styles.textInner}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={staggerParent}
+              >
+                <span className={styles.ghostNum} aria-hidden="true">{String(displayIndex + 1).padStart(2, "0")}</span>
+                
+                <motion.div variants={getSlideUpVariant(12)} className={styles.projectMeta}>
+                  <span className={styles.projectNum}>{String(displayIndex + 1).padStart(2, "0")}</span>
+                  <span className={styles.projectLabel}>{study.subtitle || "Selected Project"}</span>
+                </motion.div>
+                
+                <motion.h1 variants={getSlideUpVariant(16, 50)} className={styles.projectTitle}>
+                  {study.title}
+                </motion.h1>
+                
+                <motion.p variants={getSlideUpVariant(12)} className={styles.projectProblem}>
+                  {study.description}
+                </motion.p>
+                
+                <motion.div variants={getSlideUpVariant(8)} className={styles.projectTags}>
+                  {('demonstrates' in study && study.demonstrates) ? study.demonstrates.map((tag: string) => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  )) : study.tags?.map((tag: string) => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
+                </motion.div>
+                
+                <motion.div variants={getSlideUpVariant(8)} className={styles.ctaWrapper}>
+                  <a href="#problem" className={styles.projectCta}>
+                    <span className={styles.ctaText}>Read Case Study</span>
+                    <span className={styles.ctaArrow}>&darr;</span>
+                  </a>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Image Side with Parallax */}
+            <div className={styles.imageColumn}>
+              <motion.div 
+                className={styles.imageWrapper}
+                style={{ y: transformY }}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={imageVariant}
+              >
+                <img src={imageMap[study.slug] || study.coverImage} alt={study.title} className={styles.projectImage} loading="lazy" />
+                <div className={styles.imageOverlay} />
+              </motion.div>
+            </div>
+            
           </div>
         </section>
 
         {/* ── Metadata Strip ── */}
         {study.metadata && (
-          <section className={styles.metadataStrip}>
+          <section id="problem" className={styles.metadataStrip}>
             <div className="container">
               <div className={styles.metadataInner}>
                 <div className={styles.metadataItem}>

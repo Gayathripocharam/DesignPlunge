@@ -426,3 +426,206 @@
   color: var(--text-h);
   margin: 0;
 }
+
+/* ── Split-Screen Hero ── */
+.projectSection {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.textColumn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: clamp(2rem, 8vw, 6rem);
+  min-height: 100%;
+  z-index: 2;
+}
+
+.textInner {
+  max-width: 600px;
+  position: relative;
+}
+
+.ghostNum {
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  font-family: var(--typography-mono);
+  font-size: clamp(120px, 15vw, 220px);
+  font-weight: 700;
+  color: var(--text);
+  opacity: 0.03;
+  line-height: 0.8;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.projectMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.projectNum {
+  font-family: var(--typography-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.projectLabel {
+  font-family: var(--typography-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.projectTitle {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-h);
+  margin: 0 0 24px 0;
+}
+
+.projectProblem {
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 32px 0;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.tag {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color 0.15s ease;
+}
+
+.tag:hover {
+  border-color: var(--border-strong, #d1d5db);
+}
+
+.ctaWrapper {
+  display: flex;
+}
+
+.projectCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--accent);
+  padding: 12px 24px;
+  border-radius: 99px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.projectCta:hover,
+.projectCta:focus-visible {
+  background: var(--accent);
+  color: #fff;
+}
+
+.ctaArrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.projectCta:hover .ctaArrow,
+.projectCta:focus-visible .ctaArrow {
+  transform: translateY(4px);
+}
+
+.imageColumn {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(2rem, 5vw, 4rem);
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  max-height: 800px;
+  border-radius: var(--radii-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+@media (max-width: 960px) {
+  .projectGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  
+  .textColumn {
+    padding: 2rem;
+    padding-top: 4rem;
+    align-items: flex-start;
+  }
+  
+  .imageColumn {
+    padding: 2rem;
+    min-height: auto;
+    height: auto;
+  }
+  
+  .imageWrapper {
+    height: 300px;
+  }
+  
+  .ghostNum {
+    top: -20px;
+    font-size: 100px;
+  }
+}
+
