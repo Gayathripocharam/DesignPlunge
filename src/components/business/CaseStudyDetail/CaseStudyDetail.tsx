@@ -346,11 +346,10 @@ export const CaseStudyDetail: React.FC = () => {
         {study.architecture && (
           <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.architectureHeader}>
-                <h2 className={styles.giantSectionTitle}>HOW IT WOULD WORK</h2>
-              </div>
-              <div className={styles.bracketFrame}>
-                <div className={styles.bracketFrameCorners} />
+              <div className={styles.sectionCard}>
+                <div className={styles.architectureHeader}>
+                  <h2 className={styles.architectureTitle}>HOW IT WOULD WORK</h2>
+                </div>
                 <div className={styles.architectureContent}>
                   <p>{study.architecture.overview}</p>
                   
@@ -420,12 +419,13 @@ export const CaseStudyDetail: React.FC = () => {
         {study.keyDecisions && study.keyDecisions.length > 0 && (
           <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.giantSectionTitle}>KEY DECISIONS</h2>
-              </div>
-              <div className={styles.sectionContent}>
+              <div className={styles.sectionCard}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>KEY DECISIONS</h2>
+                </div>
+                <div className={styles.sectionContent}>
                   <motion.div 
-                    className={styles.spineLayout}
+                    className={styles.decisionsList}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
@@ -438,12 +438,15 @@ export const CaseStudyDetail: React.FC = () => {
                       <motion.div 
                         key={idx} 
                         className={styles.decisionRow}
+                        tabIndex={0}
                         variants={{
-                          hidden: { opacity: 0, x: -15 },
-                          show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                          hidden: { opacity: 0, y: 15 },
+                          show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                         }}
                       >
-                        <span className={styles.spineRowNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
+                        <span className={styles.decisionRowActiveDivider} />
+                        <span className={styles.decisionRowNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
+                        <span className={styles.decisionGhostNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
                         <div className={styles.decisionBody}>
                           <h3 className={styles.decisionRowTitle}>{decision.title}</h3>
                           <p className={styles.decisionRowDesc}>{decision.explanation}</p>
@@ -453,6 +456,7 @@ export const CaseStudyDetail: React.FC = () => {
                   </motion.div>
                 </div>
               </div>
+            </div>
           </section>
         )}
 
@@ -460,12 +464,13 @@ export const CaseStudyDetail: React.FC = () => {
         {study.type === 'concept' && study.demonstrates && study.demonstrates.length > 0 && (
           <section className={styles.architectureSection}>
             <div className="container">
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.giantSectionTitle}>CAPABILITIES DEMONSTRATED</h2>
-              </div>
-              <div className={styles.sectionContent}>
-                <motion.div 
-                  className={styles.masonryTags}
+              <div className={styles.sectionCard}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>CAPABILITIES DEMONSTRATED</h2>
+                </div>
+                <div className={styles.sectionContent}>
+                  <motion.div 
+                    className={styles.capabilityTagRow}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
@@ -491,6 +496,7 @@ export const CaseStudyDetail: React.FC = () => {
                   </motion.div>
                 </div>
               </div>
+            </div>
           </section>
         )}
 
