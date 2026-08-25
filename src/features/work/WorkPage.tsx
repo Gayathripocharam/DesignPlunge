@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { createPortal } from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/design/animations";
 import { SEO } from "@/components/seo/SEO";
 import { organizationLD } from '@/seo/structuredData';
@@ -9,18 +8,6 @@ import styles from "./WorkPage.module.css";
 
 import { projects } from '@/content/projects';
 import type { Project } from '@/content/projects';
-
-
-interface PlungeState {
-  href: string;
-  slug: string;
-  image: string;
-  title: string;
-  x: number;
-  y: number;
-}
-
-const PLUNGE_DURATION = 640;
 
 // Progress Indicator Component
 const WorkProgressIndicator: React.FC<{ activeIndex: number; total: number }> = ({ activeIndex, total }) => {
@@ -37,9 +24,8 @@ const WorkProgressIndicator: React.FC<{ activeIndex: number; total: number }> = 
 const ProjectSection: React.FC<{ 
   project: Project; 
   index: number;
-  handleClick: (e: React.MouseEvent<HTMLAnchorElement>, p: Project) => void;
   onInView: (index: number) => void;
-}> = ({ project, index, handleClick, onInView }) => {
+}> = ({ project, index, onInView }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
@@ -149,7 +135,6 @@ const ProjectSection: React.FC<{
             <motion.div variants={getSlideUpVariant(8)} className={styles.ctaWrapper}>
               <Link
                 to={`/work/${project.slug}`}
-                onClick={(e) => handleClick(e, project)}
                 className={styles.projectCta}
               >
                 <span className={styles.ctaText}>Explore Concept</span>
@@ -180,30 +165,7 @@ const ProjectSection: React.FC<{
 };
 
 export const WorkPage: React.FC = () => {
-  const navigate = useNavigate();
-  const [plunge, setPlunge] = useState<PlungeState | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    if (!plunge) return;
-    const id = setTimeout(() => navigate(plunge.href), PLUNGE_DURATION);
-    return () => clearTimeout(id);
-  }, [plunge, navigate]);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, project: Project) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (plunge) return;
-    e.preventDefault();
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPlunge({
-      href: `/work/${project.slug}`,
-      slug: project.slug,
-      image: project.image,
-      title: project.title,
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
-    });
-  };
 
   return (
     <>
@@ -241,46 +203,12 @@ export const WorkPage: React.FC = () => {
             key={project.slug} 
             project={project} 
             index={i} 
-            handleClick={handleClick} 
             onInView={setActiveIndex} 
           />
         ))}
 
         <WorkProgressIndicator activeIndex={activeIndex} total={projects.length} />
       </main>
-
-      {createPortal(
-        <AnimatePresence>
-          {plunge && (
-            <motion.div
-              className={styles.plungeOverlay}
-              initial={{ clipPath: `circle(0% at ${plunge.x}px ${plunge.y}px)` }}
-              animate={{ clipPath: `circle(150% at ${plunge.x}px ${plunge.y}px)` }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: PLUNGE_DURATION / 1000, ease: [0.76, 0, 0.24, 1] }}
-            >
-              <motion.img
-                src={plunge.image}
-                alt=""
-                className={styles.plungeImage}
-                initial={{ scale: 1.05 }}
-                animate={{ scale: 1.18 }}
-                transition={{ duration: PLUNGE_DURATION / 1000, ease: "easeOut" }}
-              />
-              <div className={styles.plungeTint} />
-              <motion.p
-                className={styles.plungeLabel}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22, duration: 0.3 }}
-              >
-                Descending into {plunge.title}
-              </motion.p>
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body,
-      )}
     </>
   );
 };

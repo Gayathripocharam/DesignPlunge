@@ -326,37 +326,4 @@
 }
 
 
-/* Plunge overlay styles (unchanged) */
-.plungeOverlay {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.plungeImage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.plungeTint {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 6, 13, 0.75), rgba(8, 6, 13, 0.92));
-}
-
-.plungeLabel {
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #f8f7f3;
-}
+/* Removed plunge overlay styles */
