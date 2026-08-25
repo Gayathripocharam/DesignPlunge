@@ -163,8 +163,8 @@
 
 .productImageWrapper {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: var(--surface-alt);
+  aspect-ratio: 16 / 10;
+  background-color: #0e0e12; /* Dark background trick to prevent flash */
   border-radius: 12px;
   overflow: hidden;
   margin-top: 64px;
