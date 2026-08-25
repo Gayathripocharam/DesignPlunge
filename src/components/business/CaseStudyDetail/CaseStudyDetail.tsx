@@ -76,6 +76,13 @@ export const CaseStudyDetail: React.FC = () => {
   const yOffset = useTransform(heroScrollY, [0, 1], [-20, 20]);
   const transformY = isMobile || prefersReducedMotion ? 0 : yOffset;
 
+  // Narrative Progress Tracking
+  const narrativeRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: narrativeProgress } = useScroll({
+    target: narrativeRef,
+    offset: ["start center", "end center"]
+  });
+
   // Staggered Animations setup
   const staggerParent: any = {
     hidden: { opacity: 0 },
@@ -214,53 +221,75 @@ export const CaseStudyDetail: React.FC = () => {
           </section>
         )}
 
-        {/* ── Editorial Section: Context & Problem ── */}
-        {study.context && (
-          <section className={styles.editorialSection}>
-            <div className="container">
-              <h2 className={styles.editorialTitle}>The Problem</h2>
-              <div className={styles.editorialContent}>
-                <p>{study.context.problem}</p>
-                {(study.context.audience || study.context.whyItMatters) && (
-                  <p>
-                    {study.context.audience && (
-                      <span>Designed for {study.context.audience.charAt(0).toLowerCase() + study.context.audience.slice(1).replace(/\.$/, '')}. </span>
-                    )}
-                    {study.context.whyItMatters}
-                  </p>
-                )}
+        {/* ── Horizontal Stepper Narrative ── */}
+        {(study.context || ('hypothesis' in study && study.hypothesis) || study.approach) && (
+          <section className={styles.narrativeContainer} ref={narrativeRef}>
+            <div className="container" style={{ position: 'relative' }}>
+              
+              {/* Vertical Progress Track & Line */}
+              <div className={styles.narrativeProgressTrack}>
+                <motion.div 
+                  className={styles.narrativeProgressLine} 
+                  style={{ scaleY: narrativeProgress }} 
+                />
               </div>
-            </div>
-          </section>
-        )}
 
-        {/* ── Editorial Section: The Hypothesis ── */}
-        {study.type === 'concept' && study.hypothesis && (
-          <section className={styles.editorialSection}>
-            <div className="container">
-              <h2 className={styles.editorialTitle}>The Hypothesis</h2>
-              <div className={styles.editorialContent}>
-                <p>{study.hypothesis}</p>
-              </div>
-            </div>
-          </section>
-        )}
+              {/* ── Step 01: Problem ── */}
+              {study.context && (
+                <div className={`${styles.narrativeBlock} ${styles.stepOne}`}>
+                  <span className={styles.watermark}>PROBLEM</span>
+                  <div className={styles.narrativeContent}>
+                    <h2 className={`${styles.editorialTitle} ${styles.labelNeutral}`}>The Problem</h2>
+                    <div className={styles.editorialContent}>
+                      <p>{study.context.problem}</p>
+                      {(study.context.audience || study.context.whyItMatters) && (
+                        <p>
+                          {study.context.audience && (
+                            <span>Designed for {study.context.audience.charAt(0).toLowerCase() + study.context.audience.slice(1).replace(/\.$/, '')}. </span>
+                          )}
+                          {study.context.whyItMatters}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
 
-        {/* ── Editorial Section: Approach ── */}
-        {study.approach && (
-          <section className={styles.editorialSection}>
-            <div className="container">
-              <h2 className={styles.editorialTitle}>The Approach</h2>
-              <div className={styles.editorialContent}>
-                <p>{study.approach.idea}</p>
-                {study.approach.principles && study.approach.principles.length > 0 && (
-                  <ul className={styles.editorialList}>
-                    {study.approach.principles.map((principle, idx) => (
-                      <li key={idx}>{principle}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              {/* ── Step 02: Hypothesis ── */}
+              {study.type === 'concept' && study.hypothesis && (
+                <div className={`${styles.narrativeBlock} ${styles.stepTwo}`}>
+                  <span className={styles.watermark}>HYPOTHESIS</span>
+                  <div className={styles.narrativeContent}>
+                    <h2 className={`${styles.editorialTitle} ${styles.labelAccent}`}>The Hypothesis</h2>
+                    <div className={styles.editorialContent}>
+                      <p>{study.hypothesis}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ── Step 03: Approach ── */}
+              {study.approach && (
+                <div className={`${styles.narrativeBlock} ${styles.stepThree}`}>
+                  <span className={styles.watermark}>APPROACH</span>
+                  <div className={styles.narrativeContent}>
+                    <h2 className={`${styles.editorialTitle} ${styles.labelAccent}`}>The Approach</h2>
+                    <div className={styles.editorialContent}>
+                      <p>{study.approach.idea}</p>
+                      {study.approach.principles && study.approach.principles.length > 0 && (
+                        <div className={styles.approachCard}>
+                          <ul className={styles.editorialList}>
+                            {study.approach.principles.map((principle, idx) => (
+                              <li key={idx}>{principle}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
             </div>
           </section>
         )}
@@ -325,19 +354,36 @@ export const CaseStudyDetail: React.FC = () => {
                   <p>{study.architecture.overview}</p>
                   
                   {study.architecture.technologies && (
-                    <div className={styles.techList}>
+                    <motion.div 
+                      className={styles.techPillRow}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true, amount: 0.2 }}
+                      variants={{
+                        hidden: { opacity: 0 },
+                        show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+                      }}
+                    >
                       {study.architecture.technologies.map((tech, idx) => (
-                        <span key={idx} className={styles.techTag}>
-                          {getIconForString(tech)}
+                        <motion.span 
+                          key={idx} 
+                          className={styles.techPill}
+                          variants={{
+                            hidden: { opacity: 0, y: 10 },
+                            show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                          }}
+                        >
+                          <span className={styles.techPillIcon}>{getIconForString(tech)}</span>
                           {tech}
-                        </span>
+                        </motion.span>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
 
                   {study.architecture.systemNotes && (
                     <div className={styles.systemNotes}>
                       <motion.ul
+                        className={styles.howItWorksBullets}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true, amount: 0.2 }}
@@ -349,12 +395,14 @@ export const CaseStudyDetail: React.FC = () => {
                         {study.architecture.systemNotes.map((note, idx) => (
                           <motion.li 
                             key={idx}
+                            className={styles.howItWorksBullet}
                             variants={{
                               hidden: { opacity: 0, x: -10 },
                               show: { opacity: 1, x: 0, transition: { duration: 0.4 } }
                             }}
                           >
-                            {note}
+                            <span className={styles.howItWorksBulletDot} />
+                            <span>{note}</span>
                           </motion.li>
                         ))}
                       </motion.ul>
@@ -375,17 +423,34 @@ export const CaseStudyDetail: React.FC = () => {
                   <h2 className={styles.sectionTitle}>KEY DECISIONS</h2>
                 </div>
                 <div className={styles.sectionContent}>
-                  <div className={styles.decisionsList}>
+                  <motion.div 
+                    className={styles.decisionsList}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={{
+                      hidden: { opacity: 0 },
+                      show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+                    }}
+                  >
                     {study.keyDecisions.map((decision, idx) => (
-                      <div key={idx} className={styles.decisionRow}>
-                        <span className={styles.decisionNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
+                      <motion.div 
+                        key={idx} 
+                        className={styles.decisionRow}
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                        }}
+                      >
+                        <span className={styles.decisionRowActiveDivider} />
+                        <span className={styles.decisionRowNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
                         <div className={styles.decisionBody}>
-                          <h3 className={styles.decisionTitle}>{decision.title}</h3>
-                          <p className={styles.decisionExplanation}>{decision.explanation}</p>
+                          <h3 className={styles.decisionRowTitle}>{decision.title}</h3>
+                          <p className={styles.decisionRowDesc}>{decision.explanation}</p>
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -401,14 +466,30 @@ export const CaseStudyDetail: React.FC = () => {
                   <h2 className={styles.sectionTitle}>CAPABILITIES DEMONSTRATED</h2>
                 </div>
                 <div className={styles.sectionContent}>
-                  <div className={styles.capabilitiesList}>
+                  <motion.div 
+                    className={styles.capabilityTagRow}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={{
+                      hidden: { opacity: 0 },
+                      show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+                    }}
+                  >
                     {study.demonstrates.map((cap, idx) => (
-                      <div key={idx} className={styles.capabilityPill}>
-                        {getIconForString(cap)}
+                      <motion.div 
+                        key={idx} 
+                        className={styles.capabilityTag}
+                        variants={{
+                          hidden: { opacity: 0, y: 10 },
+                          show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                        }}
+                      >
+                        <span className={styles.capabilityTagIcon}>{getIconForString(cap)}</span>
                         <span>{cap}</span>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
