@@ -478,11 +478,26 @@
   border: 1px solid var(--border);
   color: var(--text-h);
   border-radius: 99px;
+  transition: outline 0.2s ease;
+  cursor: default;
+}
+
+.techPill:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .techPillIcon {
   display: flex;
   color: var(--accent);
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.techPill:hover .techPillIcon,
+.techPill:focus-visible .techPillIcon {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 .howItWorksBullets {
@@ -590,12 +605,19 @@
   transition: transform 0.3s ease;
 }
 
-.decisionRow:hover {
+.decisionRow:hover,
+.decisionRow:focus-within {
   background-color: rgba(109, 93, 246, 0.04);
 }
 
-.decisionRow:hover .decisionRowActiveDivider {
+.decisionRow:hover .decisionRowActiveDivider,
+.decisionRow:focus-within .decisionRowActiveDivider {
   transform: scaleY(1);
+}
+
+.decisionRow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .decisionRowNumber {
@@ -603,18 +625,42 @@
   font-family: var(--typography-mono);
   font-size: 16px;
   color: var(--text-muted);
-  background-color: var(--bg);
+  background-color: transparent;
   padding: 4px 0;
   transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 2;
 }
 
-.decisionRow:hover .decisionRowNumber {
+.decisionRow:hover .decisionRowNumber,
+.decisionRow:focus-within .decisionRowNumber {
   color: var(--accent);
   transform: scale(1.05);
 }
 
+.decisionGhostNumber {
+  position: absolute;
+  right: 16px;
+  bottom: -24px;
+  font-size: 140px;
+  font-weight: 800;
+  color: var(--text-h);
+  opacity: 0.02;
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  z-index: 0;
+  line-height: 1;
+}
+
+.decisionRow:hover .decisionGhostNumber,
+.decisionRow:focus-within .decisionGhostNumber {
+  opacity: 0.05;
+  transform: scale(1.05) translateY(-5px);
+}
+
 .decisionBody {
   max-width: 600px;
+  z-index: 2;
+  position: relative;
 }
 
 /* Capabilities Demonstrated */
@@ -636,11 +682,31 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text-h);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, outline 0.2s ease;
+  cursor: default;
+}
+
+.capabilityTag:hover,
+.capabilityTag:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(109, 93, 246, 0.15);
+  border-color: rgba(109, 93, 246, 0.3);
+}
+
+.capabilityTag:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .capabilityTagIcon {
   display: flex;
   color: var(--accent);
+  transition: transform 0.4s ease;
+}
+
+.capabilityTag:hover .capabilityTagIcon,
+.capabilityTag:focus-visible .capabilityTagIcon {
+  transform: rotate(5deg) scale(1.1);
 }
 
 /* What We'd Build Next */

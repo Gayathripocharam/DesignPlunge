@@ -368,6 +368,7 @@ export const CaseStudyDetail: React.FC = () => {
                         <motion.span 
                           key={idx} 
                           className={styles.techPill}
+                          tabIndex={0}
                           variants={{
                             hidden: { opacity: 0, y: 10 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
@@ -437,6 +438,7 @@ export const CaseStudyDetail: React.FC = () => {
                       <motion.div 
                         key={idx} 
                         className={styles.decisionRow}
+                        tabIndex={0}
                         variants={{
                           hidden: { opacity: 0, y: 15 },
                           show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -444,6 +446,7 @@ export const CaseStudyDetail: React.FC = () => {
                       >
                         <span className={styles.decisionRowActiveDivider} />
                         <span className={styles.decisionRowNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
+                        <span className={styles.decisionGhostNumber}>{(idx + 1).toString().padStart(2, '0')}</span>
                         <div className={styles.decisionBody}>
                           <h3 className={styles.decisionRowTitle}>{decision.title}</h3>
                           <p className={styles.decisionRowDesc}>{decision.explanation}</p>
@@ -480,6 +483,7 @@ export const CaseStudyDetail: React.FC = () => {
                       <motion.div 
                         key={idx} 
                         className={styles.capabilityTag}
+                        tabIndex={0}
                         variants={{
                           hidden: { opacity: 0, y: 10 },
                           show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
