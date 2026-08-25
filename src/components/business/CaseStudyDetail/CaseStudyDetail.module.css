@@ -165,7 +165,7 @@
   position: relative;
   width: 100%;
   max-width: 480px;
-  margin: 64px auto 0 auto;
+  margin: 64px 0 0 0;
 }
 
 .productImageGlow {
@@ -290,26 +290,12 @@
 }
 
 .productCaption {
-  text-align: center;
+  text-align: left;
   font-family: var(--typography-mono);
   font-size: 13px;
   color: var(--text-muted);
   margin-top: 16px;
   letter-spacing: 0.5px;
-}
-
-.sectionTitleCenter {
-  font-size: clamp(24px, 3vw, 32px);
-  font-weight: 500;
-  color: var(--text-h);
-  text-align: center;
-  margin: 0;
-}
-
-.sectionContentCenter {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .productClimaxText {
