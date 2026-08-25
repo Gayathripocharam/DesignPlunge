@@ -292,18 +292,32 @@ export const CaseStudyDetail: React.FC = () => {
               </div>
               
               <motion.div 
-                className={styles.productImageWrapper}
-                initial={{ opacity: 0, scale: 1.03 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                className={styles.productShowcaseContainer}
+                initial={{ opacity: 0, scale: 0.92, y: 28 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >
-                <img
-                  src={imageMap[study.slug] || study.coverImage}
-                  alt={study.title}
-                  className={styles.productImage}
-                  loading="lazy"
-                />
+                <div className={styles.productImageGlow} />
+                <div className={styles.productImageWrapper}>
+                  <div className={styles.browserChrome}>
+                    <div className={styles.browserDots}>
+                      <span className={styles.dot} style={{ backgroundColor: '#ff5f56' }} />
+                      <span className={styles.dot} style={{ backgroundColor: '#ffbd2e' }} />
+                      <span className={styles.dot} style={{ backgroundColor: '#27c93f' }} />
+                    </div>
+                    <div className={styles.browserUrlBar}>
+                      <span className={styles.browserUrlText}>{study.slug}.app</span>
+                    </div>
+                  </div>
+                  <img
+                    src={imageMap[study.slug] || study.coverImage}
+                    alt={study.title}
+                    className={styles.productImage}
+                    loading="lazy"
+                  />
+                  <div className={styles.imageHighlight} />
+                </div>
               </motion.div>
               {(study.product as any).caption && (
                 <p className={styles.productCaption}>{(study.product as any).caption}</p>
