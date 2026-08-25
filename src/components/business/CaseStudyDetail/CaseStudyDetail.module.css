@@ -180,10 +180,11 @@
 }
 
 .editorialTitle {
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 500;
-  margin: 0 0 32px 0;
-  letter-spacing: -0.01em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
 }
 
 .labelNeutral {
@@ -195,14 +196,14 @@
 }
 
 .editorialContent {
-  font-size: clamp(18px, 2.5vw, 24px);
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.6;
   color: var(--text);
-  max-width: 800px;
+  max-width: 720px;
 }
 
 .editorialContent p {
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
 }
 
 .editorialContent p:last-child {
