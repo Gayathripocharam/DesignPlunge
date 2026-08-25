@@ -76,13 +76,6 @@ export const CaseStudyDetail: React.FC = () => {
   const yOffset = useTransform(heroScrollY, [0, 1], [-20, 20]);
   const transformY = isMobile || prefersReducedMotion ? 0 : yOffset;
 
-  // Narrative Progress Tracking
-  const narrativeRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: narrativeProgress } = useScroll({
-    target: narrativeRef,
-    offset: ["start center", "end center"]
-  });
-
   // Staggered Animations setup
   const staggerParent: any = {
     hidden: { opacity: 0 },
@@ -221,75 +214,53 @@ export const CaseStudyDetail: React.FC = () => {
           </section>
         )}
 
-        {/* ── Horizontal Stepper Narrative ── */}
-        {(study.context || ('hypothesis' in study && study.hypothesis) || study.approach) && (
-          <section className={styles.narrativeContainer} ref={narrativeRef}>
-            <div className="container" style={{ position: 'relative' }}>
-              
-              {/* Vertical Progress Track & Line */}
-              <div className={styles.narrativeProgressTrack}>
-                <motion.div 
-                  className={styles.narrativeProgressLine} 
-                  style={{ scaleY: narrativeProgress }} 
-                />
+        {/* ── Editorial Section: Context & Problem ── */}
+        {study.context && (
+          <section className={styles.editorialSection}>
+            <div className="container">
+              <h2 className={styles.editorialTitle}>The Problem</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.context.problem}</p>
+                {(study.context.audience || study.context.whyItMatters) && (
+                  <p>
+                    {study.context.audience && (
+                      <span>Designed for {study.context.audience.charAt(0).toLowerCase() + study.context.audience.slice(1).replace(/\.$/, '')}. </span>
+                    )}
+                    {study.context.whyItMatters}
+                  </p>
+                )}
               </div>
+            </div>
+          </section>
+        )}
 
-              {/* ── Step 01: Problem ── */}
-              {study.context && (
-                <div className={`${styles.narrativeBlock} ${styles.stepOne}`}>
-                  <span className={styles.watermark}>PROBLEM</span>
-                  <div className={styles.narrativeContent}>
-                    <h2 className={`${styles.editorialTitle} ${styles.labelNeutral}`}>The Problem</h2>
-                    <div className={styles.editorialContent}>
-                      <p>{study.context.problem}</p>
-                      {(study.context.audience || study.context.whyItMatters) && (
-                        <p>
-                          {study.context.audience && (
-                            <span>Designed for {study.context.audience.charAt(0).toLowerCase() + study.context.audience.slice(1).replace(/\.$/, '')}. </span>
-                          )}
-                          {study.context.whyItMatters}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
+        {/* ── Editorial Section: The Hypothesis ── */}
+        {study.type === 'concept' && study.hypothesis && (
+          <section className={styles.editorialSection}>
+            <div className="container">
+              <h2 className={styles.editorialTitle}>The Hypothesis</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.hypothesis}</p>
+              </div>
+            </div>
+          </section>
+        )}
 
-              {/* ── Step 02: Hypothesis ── */}
-              {study.type === 'concept' && study.hypothesis && (
-                <div className={`${styles.narrativeBlock} ${styles.stepTwo}`}>
-                  <span className={styles.watermark}>HYPOTHESIS</span>
-                  <div className={styles.narrativeContent}>
-                    <h2 className={`${styles.editorialTitle} ${styles.labelAccent}`}>The Hypothesis</h2>
-                    <div className={styles.editorialContent}>
-                      <p>{study.hypothesis}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 03: Approach ── */}
-              {study.approach && (
-                <div className={`${styles.narrativeBlock} ${styles.stepThree}`}>
-                  <span className={styles.watermark}>APPROACH</span>
-                  <div className={styles.narrativeContent}>
-                    <h2 className={`${styles.editorialTitle} ${styles.labelAccent}`}>The Approach</h2>
-                    <div className={styles.editorialContent}>
-                      <p>{study.approach.idea}</p>
-                      {study.approach.principles && study.approach.principles.length > 0 && (
-                        <div className={styles.approachCard}>
-                          <ul className={styles.editorialList}>
-                            {study.approach.principles.map((principle, idx) => (
-                              <li key={idx}>{principle}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-
+        {/* ── Editorial Section: Approach ── */}
+        {study.approach && (
+          <section className={styles.editorialSection}>
+            <div className="container">
+              <h2 className={styles.editorialTitle}>The Approach</h2>
+              <div className={styles.editorialContent}>
+                <p>{study.approach.idea}</p>
+                {study.approach.principles && study.approach.principles.length > 0 && (
+                  <ul className={styles.editorialList}>
+                    {study.approach.principles.map((principle, idx) => (
+                      <li key={idx}>{principle}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </section>
         )}
